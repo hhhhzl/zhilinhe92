@@ -1,5 +1,6 @@
 import './publication-preview.css';
 
+const SWITCH_INTERVAL = 3000;
 const isVideo = (item) => item.type === 'video' || /\.(mp4|webm)(?:[?#]|$)/i.test(item.src);
 function node(tag, className, text) {
   const result = document.createElement(tag);
@@ -43,82 +44,200 @@ function release(media) {
   media.load();
 }
 
-/** One method figure and one simultaneous experiment montage. No slide rotation. */
-function createPreview(paper, { resolveUrl, paused, onStateChange, open }) {
+/** A fixed window alternates the method and complete montage, never individual clips. */
+function createPreview(paper, { resolveUrl, initial, onStateChange, open }) {
   const label = (typeof paper.abbr === 'object' ? paper.abbr.label : paper.abbr) || paper.title;
-  const visuals = [paper.method, paper.montage].filter((item) => item && resolveUrl(item.src));
+  const visuals = [
+    paper.method && { item: paper.method, kind: 'Method' },
+    paper.montage && { item: paper.montage, kind: isVideo(paper.montage) ? 'Experiments' : 'Results' },
+  ].filter((entry) => entry && resolveUrl(entry.item.src));
   if (!visuals.length) {
     const fallback = typeof paper.preview === 'string' ? { src: paper.preview } : paper.preview;
-    if (fallback && resolveUrl(fallback.src)) visuals.push(fallback);
+    if (fallback && resolveUrl(fallback.src)) visuals.push({ item: fallback, kind: 'Figure' });
   }
   if (!visuals.length) return null;
+
   const container = node('div', 'publication-preview publication-showcase');
   container.setAttribute('role', 'group');
-  container.setAttribute('aria-label', label + ' method and experiments');
+  container.setAttribute('aria-label', label + ' research preview');
   container.dataset.count = String(visuals.length);
-  const players = [];
-  let mediaPaused = paused;
+  const panel = node('div', 'preview-panel');
+  panel.id = 'preview-panel-' + paper.id;
+  const stage = node('button', 'preview-stage');
+  stage.type = 'button';
+  const expand = node('span', 'preview-expand', '↗');
+  expand.setAttribute('aria-hidden', 'true');
+  panel.append(stage);
+  const toolbar = node('div', 'preview-caption');
+  const tabs = node('div', 'preview-tabs');
+  const tabButtons = [];
+  if (visuals.length > 1) {
+    tabs.setAttribute('role', 'tablist');
+    tabs.setAttribute('aria-label', label + ' preview selection');
+    panel.setAttribute('role', 'tabpanel');
+    visuals.forEach(({ kind }, index) => {
+      const tab = node('button', 'preview-tab', kind);
+      tab.type = 'button';
+      tab.id = `preview-tab-${paper.id}-${index}`;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', panel.id);
+      tab.addEventListener('click', () => select(index, true));
+      tab.addEventListener('keydown', (event) => {
+        let target;
+        if (event.key === 'ArrowRight') target = (index + 1) % visuals.length;
+        else if (event.key === 'ArrowLeft') target = (index + visuals.length - 1) % visuals.length;
+        else if (event.key === 'Home') target = 0;
+        else if (event.key === 'End') target = visuals.length - 1;
+        if (target !== undefined) {
+          event.preventDefault();
+          select(target, true);
+          tabButtons[target].focus();
+        }
+      });
+      tabButtons.push(tab);
+      tabs.append(tab);
+    });
+  } else tabs.append(node('span', 'preview-kind', visuals[0].kind));
+  const animated = visuals.length > 1 || visuals.some(({ item }) => isVideo(item));
+  const toggle = control('Pause ' + label + ' preview', 'Ⅱ', 'preview-toggle');
+  toolbar.append(tabs);
+  if (animated) toolbar.append(toggle);
+  const announcement = node('span', 'sr-only');
+  announcement.setAttribute('role', 'status');
+  announcement.setAttribute('aria-live', 'polite');
+  container.append(panel, toolbar, announcement);
+
+  let index = Math.min(Math.max(initial.index || 0, 0), visuals.length - 1);
+  let mediaPaused = initial.paused;
+  let holdSelection = initial.holdSelection || false;
   let covered = false;
   let visible = false;
-
-  function sync() {
-    for (const { media, toggle } of players) {
-      if (visible && !mediaPaused && !covered && !document.hidden) media.play().catch(() => {});
-      else media.pause();
-      const action = (mediaPaused ? 'Play ' : 'Pause ') + label + ' experiment montage';
-      toggle.textContent = mediaPaused ? '▷' : 'Ⅱ';
-      toggle.setAttribute('aria-label', action);
-      toggle.title = action;
-      toggle.setAttribute('aria-pressed', String(mediaPaused));
-    }
-  }
-  for (const [index, item] of visuals.entries()) {
-    const kind = item === paper.method ? 'Method' : item === paper.montage ? (isVideo(item) ? 'Experiments' : 'Results') : 'Figure';
-    const figure = node('figure', 'publication-visual publication-visual-' + kind.toLowerCase());
-    const stage = node('button', 'preview-stage');
-    stage.type = 'button';
-    stage.setAttribute('aria-label', 'Enlarge ' + label + ' ' + kind.toLowerCase());
+  let hovered = false;
+  let pointerFocus = false;
+  let destroyed = false;
+  let remaining = SWITCH_INTERVAL;
+  let timer;
+  let started = 0;
+  // Keep the video cached while its method figure is shown, so each visit resumes
+  // the montage instead of repeatedly showing only its first three seconds.
+  const mediaNodes = visuals.map(({ item }, itemIndex) => {
     const media = makeMedia(item, resolveUrl);
-    const expand = node('span', 'preview-expand', '↗');
-    expand.setAttribute('aria-hidden', 'true');
-    stage.append(media, expand);
-    stage.addEventListener('click', () => open(item, label + ' / ' + kind, mediaPaused, media));
-    const caption = node('figcaption', 'preview-caption');
-    caption.append(node('span', 'preview-kind', String(index + 1).padStart(2, '0') + ' / ' + kind));
-    if (isVideo(item)) {
-      const toggle = control('Pause ' + label + ' experiment montage', 'Ⅱ', 'preview-toggle');
-      toggle.addEventListener('click', () => { mediaPaused = !mediaPaused; sync(); onStateChange(mediaPaused); });
-      caption.append(toggle);
-      players.push({ media, toggle });
+    const time = initial.mediaTimes?.[itemIndex];
+    if (isVideo(item) && time > 0) media.addEventListener('loadedmetadata', () => {
+      if (!destroyed && Number.isFinite(media.duration)) media.currentTime = Math.min(time, media.duration);
+    }, { once: true });
+    return media;
+  });
+  const state = () => ({
+    paused: mediaPaused, index, holdSelection,
+    mediaTimes: mediaNodes.map((media, itemIndex) => media.tagName === 'VIDEO'
+      ? (media.readyState ? media.currentTime : initial.mediaTimes?.[itemIndex] || media.currentTime) : 0),
+  });
+  const remember = () => onStateChange(state());
+
+  function stopTimer() {
+    if (timer !== undefined) {
+      clearTimeout(timer);
+      remaining = Math.max(0, remaining - (performance.now() - started));
+      timer = undefined;
     }
-    figure.append(stage, caption);
-    container.append(figure);
   }
+  function sync() {
+    if (destroyed) return;
+    const canPlay = visible && !mediaPaused && !covered && !document.hidden;
+    mediaNodes.forEach((media, itemIndex) => {
+      if (media.tagName !== 'VIDEO') return;
+      if (canPlay && itemIndex === index) media.play().catch(() => {});
+      else media.pause();
+    });
+    const advancing = canPlay && visuals.length > 1 && !holdSelection && !hovered;
+    container.dataset.playing = String(advancing);
+    container.dataset.paused = String(mediaPaused);
+    if (advancing && timer === undefined) {
+      started = performance.now();
+      timer = setTimeout(() => { timer = undefined; select((index + 1) % visuals.length); }, remaining);
+    } else if (!advancing) stopTimer();
+    const action = (mediaPaused ? 'Play ' : 'Pause ') + label + ' preview';
+    toggle.textContent = mediaPaused ? '▷' : 'Ⅱ';
+    toggle.setAttribute('aria-label', action);
+    toggle.title = action;
+    toggle.setAttribute('aria-pressed', String(mediaPaused));
+  }
+  function select(next, manual = false) {
+    stopTimer();
+    index = next;
+    remaining = SWITCH_INTERVAL;
+    if (manual) holdSelection = true;
+    const { kind } = visuals[index];
+    // Pause before detaching the old video: at most the visible media may play.
+    mediaNodes.forEach((media) => { if (media.tagName === 'VIDEO') media.pause(); });
+    stage.replaceChildren(mediaNodes[index], expand);
+    stage.dataset.kind = kind.toLowerCase();
+    stage.setAttribute('aria-label', 'Enlarge ' + label + ' ' + kind.toLowerCase());
+    container.dataset.index = String(index);
+    container.dataset.kind = kind.toLowerCase();
+    tabButtons.forEach((tab, itemIndex) => {
+      tab.setAttribute('aria-selected', String(itemIndex === index));
+      tab.tabIndex = itemIndex === index ? 0 : -1;
+    });
+    if (tabButtons.length) panel.setAttribute('aria-labelledby', tabButtons[index].id);
+    if (manual) announcement.textContent = label + ': ' + kind;
+    remember();
+    sync();
+  }
+  function setPaused(value) {
+    stopTimer();
+    mediaPaused = value;
+    if (!value) { holdSelection = false; remaining = SWITCH_INTERVAL; }
+    remember();
+    sync();
+  }
+  toggle.addEventListener('click', () => setPaused(!mediaPaused));
+  stage.addEventListener('click', () => open(visuals[index].item, label + ' / ' + visuals[index].kind, mediaPaused, mediaNodes[index]));
+  container.addEventListener('pointerenter', () => { hovered = true; sync(); });
+  container.addEventListener('pointerleave', () => { hovered = false; pointerFocus = false; sync(); });
+  container.addEventListener('pointerdown', () => { pointerFocus = true; });
+  container.addEventListener('pointerup', () => { pointerFocus = false; });
+  container.addEventListener('pointercancel', () => { pointerFocus = false; });
+  container.addEventListener('focusin', (event) => {
+    if (!pointerFocus && !container.contains(event.relatedTarget)) {
+      holdSelection = true;
+      remember();
+      sync();
+    }
+  });
   document.addEventListener('visibilitychange', sync);
-  const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: 0 });
+  const observer = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting && entry.intersectionRatio >= .15;
+    sync();
+  }, { threshold: .15 });
   observer.observe(container);
-  sync();
+  select(index);
   return {
-    element: container,
-    animated: players.length > 0,
+    element: container, animated,
     get paused() { return mediaPaused; },
-    setPaused(value) { mediaPaused = value; sync(); },
+    getState: state,
+    setPaused,
     cover(value) { covered = value; sync(); },
     destroy() {
+      remember();
+      destroyed = true;
+      stopTimer();
       observer.disconnect();
       document.removeEventListener('visibilitychange', sync);
-      players.forEach(({ media }) => release(media));
+      mediaNodes.forEach(release);
     },
   };
 }
 
-/** Shared motion preference and a full-size viewer for the two publication visuals. */
+/** Shared preference, filter-persistent state and one full-size media viewer. */
 export function createPublicationPreviews(resolveUrl, button) {
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   const previews = new Set();
-  const paperPauseStates = new Map();
+  const paperStates = new Map();
   let paused = preference.matches;
   let expanded;
+  let expandedSource;
   let expandedWasPlaying = false;
   const dialog = node('dialog', 'publication-viewer');
   dialog.setAttribute('aria-label', 'Full-size publication figure');
@@ -142,6 +261,8 @@ export function createPublicationPreviews(resolveUrl, button) {
     download.download = '';
     download.textContent = item.gif ? 'Download GIF ↓' : isVideo(item) ? 'Download video ↓' : 'Download figure ↓';
     expanded = makeMedia(item, resolveUrl, true);
+    expandedSource = source;
+    expandedWasPlaying = false;
     stage.replaceChildren(expanded);
     previews.forEach((preview) => preview.cover(true));
     dialog.showModal();
@@ -155,8 +276,13 @@ export function createPublicationPreviews(resolveUrl, button) {
     }
   };
   const finish = () => {
+    if (expanded?.tagName === 'VIDEO' && expandedSource?.tagName === 'VIDEO' && Number.isFinite(expanded.currentTime)) {
+      try { expandedSource.currentTime = expanded.currentTime; } catch { /* A filtered preview may already be released. */ }
+    }
     release(expanded);
     expanded = null;
+    expandedSource = null;
+    expandedWasPlaying = false;
     stage.replaceChildren();
     document.documentElement.classList.remove('publication-viewer-open');
     previews.forEach((preview) => preview.cover(false));
@@ -178,16 +304,17 @@ export function createPublicationPreviews(resolveUrl, button) {
   const allPaused = () => animated().length ? animated().every((preview) => preview.paused) : paused;
   const updateButton = () => {
     if (!button) return;
-    button.textContent = allPaused() ? 'Play demos ▷' : 'Pause demos Ⅱ';
+    button.textContent = allPaused() ? 'Play previews ▷' : 'Pause previews Ⅱ';
     button.setAttribute('aria-pressed', String(allPaused()));
-    button.setAttribute('aria-label', (allPaused() ? 'Play' : 'Pause') + ' all publication demos');
+    button.setAttribute('aria-label', (allPaused() ? 'Play' : 'Pause') + ' all publication previews');
+    button.disabled = animated().length === 0;
   };
   const setPaused = (value) => {
     paused = value;
-    paperPauseStates.clear();
+    paperStates.clear();
     previews.forEach((preview) => preview.setPaused(value));
     if (expanded?.tagName === 'VIDEO') {
-      if (value) expanded.pause();
+      if (value) { expandedWasPlaying = false; expanded.pause(); }
       else if (!document.hidden) expanded.play().catch(() => {});
     }
     updateButton();
@@ -198,6 +325,7 @@ export function createPublicationPreviews(resolveUrl, button) {
     if (dialog.open) { dialog.close(); finish(); }
     previews.forEach((preview) => preview.destroy());
     previews.clear();
+    updateButton();
   };
   button?.addEventListener('click', toggle);
   preference.addEventListener('change', reduce);
@@ -205,8 +333,8 @@ export function createPublicationPreviews(resolveUrl, button) {
   return {
     create(paper) {
       const preview = createPreview(paper, {
-        resolveUrl, paused: paperPauseStates.get(paper.id) ?? paused, open,
-        onStateChange(value) { paperPauseStates.set(paper.id, value); updateButton(); },
+        resolveUrl, initial: paperStates.get(paper.id) || { paused }, open,
+        onStateChange(value) { paperStates.set(paper.id, value); updateButton(); },
       });
       if (preview) previews.add(preview);
       updateButton();

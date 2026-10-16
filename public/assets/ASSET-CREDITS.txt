@@ -1,8 +1,8 @@
 Unitree G1 mesh and kinematic model: MuJoCo Menagerie, Google DeepMind and Unitree Robotics. BSD-3-Clause; see UNITREE-G1-LICENSE.txt.
 Human performer: Microsoft Rocketbox, Male_Adult_02. MIT; see ROCKETBOX-LICENSE.md. Source: https://github.com/microsoft/Microsoft-Rocketbox/tree/master/Assets/Avatars/Adults/Male_Adult_02
-Atelier, material adaptation and Echo choreography: built for zhilinhe92. Echo is an authored artistic animation, not a dynamics simulation, research result, captured motion, or deployable robot controller. The human is a photo-referenced approximate digital likeness of Zhilin He, not a 3D scan.
+Atelier, material adaptation and Echo choreography: built for zhilinhe92. Echo is an authored artistic animation, not a dynamics simulation, research result, captured motion, or deployable robot controller. The human is an intentionally stylized character of Zhilin He: selected ImageGen art direction translated into full native 3D geometry and skinned onto the licensed body rig. It is not a 3D scan.
 
 Research portraits: the two photographs supplied by Zhilin He, published at the author’s request.
 Laboratory MP4/GIF/poster derived from user-provided footage. GIF excerpt 5–9 s, 480x222, 9 fps.
 Paper preview image provenance and CC BY 4.0 attribution: assets/publications/CREDITS.txt.
-Photo-referenced skin and transparent hair-card texture atlases: generated with built-in ImageGen for this site; likeness references supplied and authorized by Zhilin He. Geometry adaptation, hair placement and PBR baking are authored in Blender; prompts are included in blender/.
+Stylized character art direction: built-in ImageGen character concept derived from the owner’s supplied photographs, followed by complete native 3D modeling of the face, eyes, solid wave hair and clothing. Concept and prompts are in blender/concepts/. The scene uses no photographic face atlas or alpha hair cards.

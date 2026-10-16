@@ -631,14 +631,6 @@ export const publications = [
       "theme": "blue"
     },
     "bibtex": "@inproceedings{he2026mdoc,\n  title = {Model-Based Diffusion Optimal Control for Multi-Robot Motion Planning},\n  author = {Zhilin He and Yorai Shaoul and Jiaoyang Li},\n  year = {2026},\n  booktitle = {Robotics: Science and Systems (RSS)},\n  eprint = {2607.12423},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.15607/RSS.2026.XXII.041},\n  url = {https://arxiv.org/abs/2607.12423}\n}",
-    "method": {
-      "type": "image",
-      "src": "./assets/publications/methods/mdoc.png",
-      "alt": "The original MDOC and MDOC-CBS algorithm boxes, cropped from paper page 4 and placed side by side without changing their pseudocode.",
-      "caption": "Original method algorithms: MDOC performs CBF-constrained diffusion rollouts; MDOC-CBS coordinates robots through conflict-based search.",
-      "width": 2600,
-      "height": 1673
-    },
     "montage": {
       "type": "video",
       "src": "./assets/publications/gallery/mdoc-experiments.mp4",
@@ -730,14 +722,6 @@ export const publications = [
       "caption": "Heterogeneous-cluster system model: antivirus communication and node-state transitions across three network clusters.",
       "width": 2018,
       "height": 922
-    },
-    "montage": {
-      "type": "image",
-      "src": "./assets/publications/gallery/acc-results-composite.png",
-      "width": 840,
-      "height": 584,
-      "alt": "Original antivirus-routing experiment plots displayed together.",
-      "caption": "Original experiment results from the author repository. The source provides static plots, presented here without synthetic animation."
     }
   }
 ];

@@ -1,7 +1,7 @@
 """Import the MIT Rocketbox performer and author the human side of Echo.
 
-This is an authored artistic performance with a photo-referenced approximate likeness.
-Original texture detail, facial rig, hands and skin weights are retained.
+The body uses the licensed Rocketbox rig and stable authored Echo movement.
+A new native stylized head and clean clothing follow the selected character sheet.
 """
 from pathlib import Path
 import os, math, json, shutil
@@ -22,7 +22,7 @@ def build_human(here,out):
     human=bpy.data.objects.new('Human',None);bpy.context.collection.objects.link(human)
     human.location=(0,.95,0)
     human['source']='Microsoft Rocketbox / Male_Adult_02 (MIT)'
-    human['identity']='Licensed generic performer; not a likeness of Zhilin He'
+    human['identity']='Stylized interpretation of Zhilin He; selected concept translated into full 3D'
     human['performance']='Authored artistic gesture; not captured research motion'
     asset=bpy.data.objects.new('Human_Asset',None);bpy.context.collection.objects.link(asset);asset.parent=human
     # Source FBX is correctly upright and looks along Blender -Y after import.
@@ -63,53 +63,8 @@ def build_human(here,out):
             center=sum((human.matrix_world.inverted() @ o.matrix_world @ v.co for v in vertices),Vector())/len(vertices)
             torso_hem=center.z>.86 and abs(center.x)<.255 and sw<.15
             if (cw>.40 and sw<.55) or torso_hem:p.material_index=navy_index
-    texdir=here/'textures';texdir.mkdir(exist_ok=True)
     texture_audit=[]
-    texture_cache={}
-    def load_texture(stem,kind):
-        if (stem,kind) in texture_cache:return texture_cache[stem,kind]
-        path=(here/'textures'/'zhilin-head-albedo.png') if stem=='m003_head_color' else avatar/'Textures'/(stem+'.tga')
-        image=bpy.data.images.load(str(path),check_existing=False)
-        if kind=='normal':image.colorspace_settings.name='Non-Color'
-        max_side=2048 if kind=='color' and 'body' in stem else 1024
-        if max(image.size)>max_side:
-            factor=max_side/max(image.size);image.scale(round(image.size[0]*factor),round(image.size[1]*factor))
-        output_format='PNG' if kind in ['normal','alpha'] else 'JPEG'
-        image.filepath_raw=str(texdir/(stem+('.png' if output_format=='PNG' else '.jpg')))
-        image.file_format=output_format
-        image.save();image.pack()
-        texture_audit.append({'name':stem,'size':list(image.size),'format':image.file_format})
-        texture_cache[stem,kind]=image
-        return image
-    for m in {m for o in meshes for m in o.data.materials}:
-        is_head='head' in m.name;is_alpha='opacity' in m.name
-        stem='m003_opacity' if is_alpha else ('m003_head' if is_head else 'm003_body')
-        m.name='Human navy knitted sweater' if m in navy_materials else {'m003_opacity':'Human hair and lashes','m003_head':'Human photographed skin','m003_body':'Human trousers shoes and hands'}[stem]
-        m.use_nodes=True;n=m.node_tree.nodes;n.clear();links=m.node_tree.links
-        output=n.new('ShaderNodeOutputMaterial');p=n.new('ShaderNodeBsdfPrincipled');links.new(p.outputs['BSDF'],output.inputs['Surface'])
-        p.inputs['Roughness'].default_value=.58 if is_head else .90
-        p.inputs['Specular IOR Level'].default_value=.30 if is_head else .24
-        p.inputs['Metallic'].default_value=0
-        c=n.new('ShaderNodeTexImage');c.image=load_texture(stem+'_color','alpha' if is_alpha else 'color')
-        if m in navy_materials:
-            tint=n.new('ShaderNodeMix');tint.data_type='RGBA';tint.blend_type='MULTIPLY';tint.inputs[0].default_value=1
-            tint.inputs[7].default_value=(.06,.115,.23,1)
-            links.new(c.outputs['Color'],tint.inputs[6]);links.new(tint.outputs[2],p.inputs['Base Color'])
-        elif is_alpha:
-            tint=n.new('ShaderNodeMix');tint.data_type='RGBA';tint.blend_type='MULTIPLY';tint.inputs[0].default_value=1
-            tint.inputs[7].default_value=(.12,.14,.17,1);links.new(c.outputs['Color'],tint.inputs[6]);links.new(tint.outputs[2],p.inputs['Base Color'])
-        else:links.new(c.outputs['Color'],p.inputs['Base Color'])
-        if is_alpha:
-            threshold=n.new('ShaderNodeMath');threshold.operation='GREATER_THAN';threshold.inputs[1].default_value=.42
-            links.new(c.outputs['Alpha'],threshold.inputs[0]);links.new(threshold.outputs[0],p.inputs['Alpha'])
-            m.surface_render_method='DITHERED';m.use_transparency_overlap=False
-        else:
-            t=n.new('ShaderNodeTexImage');t.image=load_texture(stem+'_normal','normal')
-            normal=n.new('ShaderNodeNormalMap');normal.inputs['Strength'].default_value=.30 if is_head else .85
-            links.new(t.outputs['Color'],normal.inputs['Color']);links.new(normal.outputs['Normal'],p.inputs['Normal'])
-        m.use_backface_culling=False
-    bpy.context.view_layer.update()
-    from avatar_custom import customize
+    from stylized_actor import customize
     customize(human,rig,meshes,here)
     bpy.context.view_layer.update()
     # Record actual imported rest transforms; FBX bone tails are display widgets,

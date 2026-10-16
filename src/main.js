@@ -96,10 +96,10 @@ try{
   const key=new THREE.RectAreaLight('#ffd0b9',5.2,3,3);key.position.set(-3.4,3.6,1.0);key.lookAt(0,1.35,-.95);scene.add(key);
   const fill=new THREE.RectAreaLight('#8797ee',1.8,3.5,3);fill.position.set(3.8,2.3,.4);fill.lookAt(0,1.35,-.95);scene.add(fill);
   const rim=new THREE.DirectionalLight('#bcc1f6',1.25);rim.position.set(2,4,6);scene.add(rim);
-  const gltf=await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/atelier.glb?look=cinematic-polo-v3`);
+  const gltf=await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/atelier.glb?look=cartoon-polo-v4`);
   robot=gltf.scene.getObjectByName('Robot');human=gltf.scene.getObjectByName('Human');
   if(!robot||!human)throw new Error('The scene is missing a subject root.');
-  // Keep the actor's authored skin, hair, and fabric PBR maps intact.
+  // Preserve the character's authored matte surfaces and the factory lighting.
   gltf.scene.traverse(o=>{if(o.isLight||o.isCamera)o.visible=false;if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=true;for(const m of Array.isArray(o.material)?o.material:[o.material]){if(m.transparent||/glass|glow|sky/i.test(o.name+m.name))o.castShadow=false;if(/floor/i.test(o.name)){m.roughness=.72;m.metalness=.06;}if(m.map)m.map.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());}});
   scene.add(gltf.scene);
   const hall=new THREE.Group();scene.add(hall);[...gltf.scene.children].filter(o=>/^(Architecture_|Floor)/.test(o.name)).forEach(o=>hall.attach(o));hall.rotation.y=.24;

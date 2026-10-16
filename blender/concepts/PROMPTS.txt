@@ -1,0 +1,23 @@
+Built-in ImageGen • 2026-10-16
+Final image: zhilin-cartoon-sheet.png
+Identity references: the two user-supplied photographs of Zhilin He.
+Purpose: artistic reference for the fully three-dimensional, rigged Scene performer; not a background or billboard.
+
+Initial character-study prompt (result was too photographic; not shipped):
+Use case: stylized-concept / identity-preserving style transfer.
+Asset type: professional character-design reference sheet for a real interactive 3D animated character, not a website screenshot.
+Input images: image 1 is the authorized frontal identity reference; image 2 is supporting side-profile and hair-volume reference. Depict the SAME adult man, not a generic person. Transform his likeness into an appealing deliberately CARTOON 3D feature-animation character.
+
+Art direction: sophisticated adult stylized animation with clear sculpted shapes and restrained painterly color, polished art-directed 3D character design. Warm matte peach skin, subtle sculptural planar changes, gentle expressions, satin dark blue-black hair organized into a few flowing asymmetric WAVY sculpted locks. No photographic skin, no pores, no realistic hair cards, no uncanny skin, no anime or chibi, no toy-plastic finish. Recognizable identity through softly full lower cheeks, broad rounded chin, short rounded nose, dark slightly arched brows, almond-shaped brown eyes only modestly larger than real life, thin champagne round glasses, voluminous off-center-parted wavy black hair with a distinctive curled forelock. Friendly quiet intelligence, a small relaxed closed-mouth smile. Adult body with approximately 6.5 heads of height, not a baby or giant-headed mascot.
+Outfit: tasteful relaxed blue-and-ivory broad horizontal striped long-sleeve POLO with an integrated soft ivory collar and small opening, no logos, charcoal loose straight-leg jeans, simple off-white sneakers. Clean convincing silhouette, simple large folds, natural five-finger hands, anatomically plausible wrists and elbows.
+Composition: on an unobtrusive warm off-white studio background, one full-body three-quarter view on the left, a large straight-on head-and-shoulders view at upper right, and a clean side-profile head-and-shoulders view at lower right. All three are exactly the same character and outfit. Full-body figure in relaxed neutral stance with arms slightly separated so the clothing silhouette is clear. Head views large enough to communicate actual modeling shapes.
+Lighting: soft studio light with an indigo fill and restrained peach key, clean legible forms; retain actual warm skin color. Crisp silhouette, attractive facial proportions, no deep eye sockets. No environment, no robot, no text, labels, logos or watermark. This is an art reference for making a complete three-dimensional character, not a flat cutout.
+
+Final style-transfer prompt:
+STYLE TRANSFER EDIT. Transform this entire character sheet into an unmistakable PIXAR-STYLE 3D CARTOON CHARACTER DESIGN. The source is currently photographic: the result must be visibly ANIMATED AND SCULPTED, NOT a photograph, NOT a realistic digital double. Art-direct a charming adult animated-film character.
+
+Keep this man's identity cues: round champagne glasses, fuller lower cheeks and rounded chin, short rounded nose, asymmetric dark wavy hair. Keep the same blue/ivory striped long-sleeve polo, charcoal wide straight trousers and ivory sneakers. Keep three views on a warm ivory sheet (full-body three-quarter, large front head, side head).
+
+STRONGLY SIMPLIFY: smooth sculpted peach skin with NO pores, clear stylized almond eyes 25 percent larger with simple brown irises, gentle broad eyebrows as sculpted shapes, simple small curved closed-mouth smile with NO photographic lips, rounded stylized ears, broad clean cheek planes. Head-to-body ratio about 1:6, ADULT proportions rather than toddler. Hair is 10–15 large flowing opaque sculpted waves with pleasing asymmetry and one curling forelock: NO individual hairs, NO strands, NO noisy hair texture. Clothes have clean flat color bands and a few large rounded folds, NO textile weave or photo detail. Five natural but simplified fingers per hand.
+
+Rendered as a premium cartoon CG character maquette with crisp silhouettes and gentle cel-like shadow shapes, warm peach key and muted indigo fill. Attractive cohesive 3D animated character, not anime, not chibi, not a plastic toy, not a voxel or low-poly person. Keep the model appealing and clearly CARTOON at thumbnail scale. No words or watermark.

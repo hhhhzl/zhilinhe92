@@ -8,7 +8,8 @@ and Assets/Avatars/Adults/Male_Adult_02/{Export,Textures}/. Source defaults are
 documented below and in human_actor.py; the saved .blend packs runtime textures.
 Native coordinates: Z up; Human y=.95 faces -Y; Robot y=-.95 faces +Y.
 G1 geometry and kinematics are imported from the BSD-3-Clause MuJoCo Menagerie.
-The human uses a licensed rig with a photo-referenced approximate likeness of the owner.
+The stylized human uses a licensed body rig with newly modeled cartoon head,
+solid wave hair and clean materials based on the selected concept sheet.
 """
 from pathlib import Path
 import math, json, shutil, os, sys, xml.etree.ElementTree as ET
@@ -326,7 +327,15 @@ audit={'coordinates':'Blender Z up; export glTF +Y up (x,z,-y)', 'human_bounds':
 shutil.copy2(G1/'LICENSE',OUT/'UNITREE-G1-LICENSE.txt')
 credits_path=OUT/'ASSET-CREDITS.txt'
 extra_credits=credits_path.read_text().partition('\n\n')[2].strip() if credits_path.exists() else ''
-credits_path.write_text('Unitree G1 mesh and kinematic model: MuJoCo Menagerie, Google DeepMind and Unitree Robotics. BSD-3-Clause; see UNITREE-G1-LICENSE.txt.\nHuman performer: Microsoft Rocketbox, Male_Adult_02. MIT; see ROCKETBOX-LICENSE.md. Source: https://github.com/microsoft/Microsoft-Rocketbox/tree/master/Assets/Avatars/Adults/Male_Adult_02\nAtelier, material adaptation and Echo choreography: built for zhilinhe92. Echo is an authored artistic animation, not a dynamics simulation, research result, captured motion, or deployable robot controller. The human is a photo-referenced approximate digital likeness of Zhilin He, not a 3D scan.\n'+ ('\n'+extra_credits+'\n' if extra_credits else ''))
+credits_path.write_text('Unitree G1 mesh and kinematic model: MuJoCo Menagerie, Google DeepMind and Unitree Robotics. BSD-3-Clause; see UNITREE-G1-LICENSE.txt.\nHuman performer: Microsoft Rocketbox, Male_Adult_02. MIT; see ROCKETBOX-LICENSE.md. Source: https://github.com/microsoft/Microsoft-Rocketbox/tree/master/Assets/Avatars/Adults/Male_Adult_02\nAtelier, material adaptation and Echo choreography: built for zhilinhe92. Echo is an authored artistic animation, not a dynamics simulation, research result, captured motion, or deployable robot controller. The human is an intentionally stylized character of Zhilin He: selected ImageGen art direction translated into full native 3D geometry and skinned onto the licensed body rig. It is not a 3D scan.\n'+ ('\n'+extra_credits+'\n' if extra_credits else ''))
+bpy.context.preferences.filepaths.save_version=0
+for obj in list(bpy.data.objects):
+    if obj.type!='MESH':continue
+    used={poly.material_index for poly in obj.data.polygons}
+    for index in reversed(range(len(obj.data.materials))):
+        if index not in used:obj.data.materials.pop(index=index)
+bpy.data.orphans_purge(do_recursive=True)
+bpy.ops.file.pack_all()
 bpy.ops.wm.save_as_mainfile(filepath=str(HERE/('robot-study.blend' if ROBOT_STUDY else 'zhilinhe92.blend')))
 bpy.ops.export_scene.gltf(filepath=str((HERE/'robot-study.glb') if ROBOT_STUDY else (OUT/'atelier.glb')),export_format='GLB',export_yup=True,export_cameras=False,export_lights=False,export_animations=True,export_animation_mode='ACTIVE_ACTIONS',export_nla_strips_merged_animation_name='Echo',export_frame_range=True,export_force_sampling=True,export_apply=True,export_extras=True,export_materials='EXPORT')
 print('SCENE_AUDIT '+json.dumps({k:audit[k] for k in ['mesh_objects','triangles','human_bounds','robot_bounds','human_eye_blender','robot_eye_blender']}))

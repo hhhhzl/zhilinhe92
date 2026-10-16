@@ -1,6 +1,6 @@
 # zhilinhe92 — Zhilin He
 
-这是一个 Vite 静态个人网站：默认进入 Research，另有独立的 3D Scene 和 Projects 页面。Films 暂时不展示。论文通过 JavaScript 数据文件维护，其余内容直接编辑 HTML；目前没有博客 CMS 或管理后台。内容包括六篇论文（不含书稿）、每篇论文左侧的机制图与实验同步拼贴、Generative Dynamics 与 Tennis Buddy 项目、本人照片、CV 和 Research Statement。
+这是一个 Vite 静态个人网站：默认进入 Research，另有独立的 3D Scene 和 Projects 页面。Films 暂时不展示。论文通过 JavaScript 数据文件维护，其余内容直接编辑 HTML；目前没有博客 CMS 或管理后台。内容包括六篇论文（不含书稿）、每篇论文左侧的单画框预览（机制图 / 实验同步拼贴）、Generative Dynamics 与 Tennis Buddy 项目、本人照片、CV 和 Research Statement。
 
 ## 日常使用
 
@@ -72,13 +72,13 @@ npm run preview
 
 必须提供 `id`、`title`、`authors`、`year`、`summary`。作者的 `self: true` 用于突出本人；可用 `annotation: '*'` 标记共同一作，用论文级 `annotation` 解释。`authorLimit` 控制折叠前显示的人数（默认 6）。会议填 `booktitle`，期刊填 `journal`，学位论文可填 `school`；`venueUrl` 是会议信息的链接，`abbr` 是简短标签。录用后请同步更新真实 venue 与 BibTeX。
 
-每篇论文左侧固定显示两项：`method` 是原论文机制图，`montage` 是把该篇全部实验同时拼进同一画面的合成动画。两张图均可点击放大，不再自动切换实验，也不生成单独的媒体墙。
+每篇论文左侧只有一个固定比例的画框。有 `method` 和 `montage` 两项时，机制图与完整实验拼贴每 **3 秒**在同一位置交替；下方的 Method / Experiments 标签可手动选择，选择后停留在该项。`montage` 内的全部实验始终同时可见，不再逐个轮播。只有一项时直接显示，不留空白占位：MDOC 只显示实验拼贴，ACC 只显示机制图；没有真实机制图时省略 `method`，不要用算法框代替。点击当前画面可放大。
 
 网页用 H.264 MP4 播放拼贴，以减少流量并支持暂停；`gif` 字段链接到同画面的真实 GIF，放大后可下载。`poster` 是静态首帧，`width` / `height` 是合成画面尺寸。只有静态结果的论文用 `type: 'image'` 的结果拼图作为 `montage`，无需制造动画。
 
 原始 `media` 数组保留作为合成输入及来源档案，不直接渲染。已有论文的拼贴生成脚本为 `scripts/build-publication-composites.py`，来源记录为 `public/assets/publications/gallery/composites-manifest.json`；更新实验时重新合成，再更新 `montage` 路径。脚本依赖 Python/Pillow、Node.js 和 ffmpeg；例如 `python3 scripts/build-publication-composites.py --only mga` 只重建 MGA。没有 `method` / `montage` 时兼容旧的单个 `preview`；没有图片时显示文字卡片。`video` 字段仍是资源栏中的 Video 链接。
 
-只有进入视野的拼贴会播放，离开视野、打开大图或切到后台时暂停。页面提供全局 Pause / Play，每篇也可以单独暂停，并遵循系统减少动态效果设置。放大后可用 Escape 关闭，焦点返回原图。
+只有当前显示且进入视野的拼贴会播放；切到机制图时暂停视频并保存播放位置，下次切回继续。离开视野、打开大图或切到后台时，页面中的视频和自动切换都会暂停。页面提供全局 Pause / Play，每篇也可单独暂停；搜索或过滤后仍保留单篇暂停状态。鼠标悬停暂缓自动切换，键盘进入或手动选择标签后停留；Pause 后再 Play 可恢复三秒交替。系统减少动态效果默认关闭自动切换和视频播放。放大后可用 Escape 关闭，焦点返回原图。
 
 填入有效地址后，相应按钮自动出现：`pdf`、`code`、`website`、`video`、`blog`、`html`、`poster`、`slides`、`supp`、`doi`、`arxiv`、`hal`。没有资源就省略字段，不必补空按钮；DOI、arXiv、HAL 可以填写 ID，其余使用真实 URL 或 `./assets/...` 路径。`abstract` 有内容才显示 Abstract。BibTeX 默认从记录生成，也可通过 `bibtex` 字段提供原始引用字符串；正式会议 / 期刊建议提供准确的 BibTeX 类型与出版信息。`award`、`badges` 仅在填写后显示，指标不会联网自动抓取。
 
@@ -137,13 +137,13 @@ git push origin main
 ## The interactive Scene page
 
 - Black, softly feathered eye housings establish the robot’s first-person view. Enlarged openings frame the human’s head, chest and gestures. A compact header provides navigation; all scene titles, explanatory copy and on-screen progress controls are removed.
-- A real, textured and skinned human model replaces the former procedural figure. The Unitree G1 model retains its actual mesh and joint structure.
+- A deliberately stylized adult character follows the selected cartoon concept: a newly modeled rounded face, expressive almond eyes, sculpted wave hair, champagne glasses and blue/ivory polo. The licensed body rig and stable motion are retained. The Unitree G1 model keeps its actual mesh and joint structure.
 - The two bodies stand approximately 1.9 m apart. The five-second **Echo** source sequence plays at 0.8× speed (6.25 seconds per loop), moving from chest to outward palm to open arms with a small breathing motion. The robot's 0.12-second authored response delay becomes 0.15 seconds in playback. Camera transitions keep their original timing. It is authored choreography, not a running imitation policy or a claim about GeneDynamics results.
 - Hands retain neutral wrist alignment with relaxed fingers. Stable elbow targets, at least 15° of human elbow flexion, and continuous quaternion keyframes remove wrist flips and smooth the return to standing.
 - Drag **left** to rotate from the robot toward the human, and right to return. Dragging has a short inertial settle; horizontal trackpad gestures also work. Focus the canvas to use Left/Right, Home/End. The camera follows an asymmetric shoulder/hand/three-quarter path with varying elevation, lens, and slight roll.
 - Space pauses/resumes movement while the canvas is focused. OS reduced-motion settings pause character animation and make camera changes immediate. Background tabs suspend rendering.
 - Indigo architecture, peach light, depth of field, layered dark lens edges, subtle film grain and restrained color separation create an optical, cinematic view. The focus distance follows the actual subjects during the orbit; it no longer targets empty space between them. A smaller warm key and cooler fill preserve facial form.
-- Skin uses baked micro-normal and roughness maps; the striped cotton has its own weave normal. Layered alpha-masked photographic hair cards replace the uniform tube hairstyle, and the original textured eyeballs have a separate material. The runtime retains these authored PBR settings rather than flattening every skin material to one roughness value.
+- The character uses clean opaque PBR surfaces and full native 3D geometry, with a continuous eye surface for the iris and sclera, solid fused hair waves, and a soft folded collar. The broad polo stripes are UV baked; photo face projection, pores, alpha hair cards and a transmission cornea are removed. This is an authored cartoon redesign, not a toon filter on the previous reconstruction.
 
 ## Pages and editing
 
@@ -154,7 +154,7 @@ git push origin main
 | `research.html` | Compatibility redirect to Research, preserving search and hash |
 | `src/publication-data.js` | Verified publication records and documented optional fields |
 | `src/publications.js` | Publication renderer, search, filters, resources and citations |
-| `src/publication-preview.js`, `src/publication-preview.css` | Method figure + simultaneous experiment montage, with pause and full-size viewer |
+| `src/publication-preview.js`, `src/publication-preview.css` | One fixed frame alternating method/montage every 3 seconds, persistent pause, and full-size viewer |
 | `src/portrait.js`, `src/research-about.css` | Click-to-switch portrait and About layout |
 | `src/profile-data.js` | CV, Research Statement, academic and social profile URLs |
 | `src/profile.js`, `src/profile.css` | About document controls and accessible monochrome logo links |
@@ -167,7 +167,7 @@ git push origin main
 
 The About section includes CV and Research Statement controls, followed by monochrome profile logos with keyboard-focus and hover labels. Set the two document URLs and exact account/channel URLs in `src/profile-data.js`. Local PDF paths (for example `./assets/documents/cv.pdf`) work under a GitHub Pages subdirectory. The supplied CV and Research Statement are available as local PDFs. Social accounts without a configured URL are hidden. Email, GitHub and LinkedIn use destinations from the CV. Supported logos are Email, Google Scholar, GitHub, LinkedIn, YouTube, Bilibili and X; the local SVGs and their license are under `public/assets/icons/`.
 
-Each paper shows exactly two visuals in its left column: the original method figure and one simultaneous experiment montage. All of that paper’s clips are visible together; there is no carousel or additional media wall. The montage has identical MP4 and downloadable GIF versions; ACC uses a static results composite because its source material contains still plots. Click either visual to open a full-size dialog. Inline videos pause offscreen, while a dialog is open, and in background tabs. PDF, Code, HTML, DOI, arXiv, Abstract and BibTeX share one horizontal control strip; disclosures expand below it. On small screens the control strip scrolls horizontally without widening the page. `src/research-resources.css` owns this layout.
+Each paper has one fixed preview frame. MGA, 2GO, FedGuide and MD-COAS alternate their original method figure and complete simultaneous experiment montage every three seconds. MDOC shows only its experiment montage; ACC shows only its model figure. No missing visual is replaced with an empty panel or algorithm box. Manual Method / Experiments tabs hold the selected visual. All experiment clips are visible together within the montage, with MP4 playback and a downloadable GIF; individual experiments never rotate. Videos resume their previous playback position when revisited. Global/per-paper pause and per-paper selections survive filtering. Click the current visual for the full-size dialog. Inline videos and automatic switching pause offscreen, while a dialog is open, and in background tabs; reduced motion starts them paused. PDF, Code, HTML, DOI, arXiv, Abstract and BibTeX share one horizontal control strip; disclosures expand below it. On small screens the control strip scrolls horizontally without widening the page. `src/research-resources.css` owns this layout.
 
 The research renderer follows al-folio’s publication model: authors and self highlighting, author homepage links, annotations and long-list expansion; journal/booktitle/school, month, year, location, notes; venue labels and links; selected/year/text filters; image, GIF, and video previews; full-size figures; abstract and BibTeX disclosures; citation copying and bibliography export. Direct query links such as `index.html?q=MDOC` are supported.
 
@@ -177,7 +177,7 @@ Six records follow the supplied CV: MGA and 2GO submissions; FedGuide (CoRL Spot
 
 ### Personal portraits and Scene performer
 
-The Research page shows the supplied headshot, with the second photograph revealed on click. The Scene performer retains a rig derived from the MIT-licensed Microsoft Rocketbox avatar, with facial appearance adapted from the supplied portrait and a relaxed blue-and-white striped polo. This is an artistic digital approximation, not a photogrammetric scan. The choreography is independent of the publication results.
+The Research page shows the supplied headshot, with the second photograph revealed on click. The Scene performer is an intentionally stylized adult interpretation of Zhilin He, designed from the supplied portraits through a selected ImageGen character sheet and then modeled as complete 3D geometry. The rounded face, small nose, smile, almond eyes, solid wave hair and glasses are newly modeled; the body and animation rig derive from the MIT-licensed Microsoft Rocketbox avatar. The relaxed blue-and-white polo, wide trousers and ivory sneakers follow the character design. This is an artistic interpretation, not a photogrammetric scan or exact likeness. The choreography is independent of the publication results.
 
 The `.blend` file includes packed image textures. Rebuilding from source also requires the original G1 asset directory and Rocketbox FBX/textures; set `G1_ASSET_DIR` to the MuJoCo Menagerie `unitree_g1` directory and `HUMAN_ASSET_DIR` to the Rocketbox library root containing `Assets/` and `LICENSE.md`. Run Blender 4.5 LTS with `--background --python blender/build_scene.py`. The exported `atelier.glb` includes all runtime meshes, textures and the single `Echo` clip.
 
@@ -185,7 +185,7 @@ The `.blend` file includes packed image textures. Rebuilding from source also re
 
 - Unitree G1: user’s MuJoCo Menagerie checkout, BSD-3-Clause; included license.
 - Microsoft Rocketbox Male_Adult_02: official library, MIT; included license and source manifest. Converted FBX to GLB, retained one LOD and authored new animation.
-- Research portraits: photographs supplied by Zhilin He, used with permission for this personal website. Scene appearance: supplied face reference and the requested blue-and-white polo; avatar implementation and texture provenance in `blender/`.
+- Research portraits: photographs supplied by Zhilin He, used with permission for this personal website. Scene appearance: selected cartoon character sheet derived from the supplied face references and requested blue-and-white polo. The full 3D implementation, art prompts and material provenance are in `blender/`.
 - Hall: authored interpretation of the user’s laboratory footage, not a surveyed reconstruction.
 - `lab-study.mp4`: user-provided `zone_a_1.mov`, 1280×592 H.264, 24 fps, 22.54 seconds, silent; available in Projects. The Research in Motion block has been removed from Research.
 - Publication and project media: original figures, videos and photographs from the six papers, their project sites, and author-supplied local source assets; source records accompany the files.

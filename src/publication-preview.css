@@ -1,9 +1,14 @@
-/* Exactly two visual plates in the paper's original image column. */
-#publication-list .publication-showcase { width: 100%; overflow: visible; display: grid; gap: 18px; }
-.publication-visual { margin: 0; min-width: 0; }
-.preview-stage { display: block; position: relative; width: 100%; padding: 0; overflow: hidden; background: #fff; border: 1px solid #ded7d7; cursor: zoom-in; }
-#publication-list .publication-showcase .publication-preview-media { display: block; width: 100%; height: auto; max-height: none; aspect-ratio: auto; object-fit: contain; background: #fff; border: 0; }
-#publication-list .publication-visual-method .publication-preview-media { height: 170px; padding: 9px; }
+/* One stable frame: the method and the complete montage alternate in place. */
+#publication-list .publication-showcase { width: 100%; overflow: visible; }
+.preview-panel { width: 100%; min-width: 0; }
+.preview-stage { display: block; position: relative; width: 100%; aspect-ratio: 4 / 3; padding: 0; overflow: hidden; background: #fff; border: 1px solid #ded7d7; cursor: zoom-in; }
+#publication-list .publication-showcase .publication-preview-media { display: block; width: 100%; height: 100%; max-height: none; aspect-ratio: auto; object-fit: contain; background: #fff; border: 0; animation: preview-reveal 170ms ease-out; }
+#publication-list .preview-stage[data-kind="method"] .publication-preview-media { padding: 8px; }
+.preview-tabs { display: flex; align-items: center; gap: 15px; min-height: 28px; }
+.preview-tab { min-height: 28px; padding: 7px 0 5px; border: 0; border-bottom: 1px solid transparent; background: none; color: #968a96; font: inherit; font-size: 8px; line-height: 1.4; letter-spacing: .11em; text-transform: uppercase; cursor: pointer; }
+.preview-tab[aria-selected="true"] { border-bottom-color: #9b819e; color: #4f4059; }
+.preview-tab:hover { color: #4f4059; }
+@keyframes preview-reveal { from { opacity: .45; } to { opacity: 1; } }
 .preview-expand { display: grid; place-items: center; position: absolute; right: 6px; bottom: 6px; height: 24px; width: 24px; color: #403b4a; background: #f5f1eaed; border: 1px solid #c7bec47a; font-size: 15px; opacity: 0; transform: translateY(3px); transition: opacity .2s, transform .2s; }
 .preview-stage:hover .preview-expand, .preview-stage:focus-visible .preview-expand { opacity: 1; transform: none; }
 .preview-caption { display: flex; align-items: center; justify-content: space-between; min-height: 24px; padding-top: 5px; color: #786c78; }
@@ -26,8 +31,6 @@
 .viewer-download { flex-shrink: 0; border-bottom: 1px solid #b4a3b6; font-size: 11px; line-height: 1.8; }
 @media (hover: none) { .preview-expand { opacity: 1; transform: none; } }
 @media (max-width: 680px) {
-  #publication-list .publication-showcase { gap: 13px; }
-  #publication-list .publication-visual-method .publication-preview-media { height: auto; max-height: 220px; min-height: 110px; }
   .preview-kind { font-size: 9px; }
   .preview-control { width: 32px; height: 32px; }
   .publication-viewer { width: calc(100vw - 20px); max-height: calc(100dvh - 28px); }
@@ -35,4 +38,4 @@
   .viewer-footer { flex-direction: column; }
   .viewer-stage .publication-preview-media { max-height: calc(100dvh - 250px); }
 }
-@media (prefers-reduced-motion: reduce) { .publication-showcase *, .publication-viewer * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { .publication-showcase *, .publication-viewer * { transition: none !important; animation: none !important; } }
