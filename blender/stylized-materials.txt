@@ -7,36 +7,60 @@ This is an artistic character interpretation, not a scan or a claim of exact
 photographic likeness. The reference sheet is not used as a billboard or as
 projected face texture in the scene.
 
-Geometry: the adult face, small rounded nose, modeled smile, ears, almond eyes,
-sculpted brows, champagne glasses and solid asymmetrical wave hair are new native
-meshes. The eye white, iris and pupil share a continuous opaque surface. Hair is
-closed solid geometry with fused broad waves, not alpha-masked cards. The
-licensed Microsoft Rocketbox body and rig supply the hands, underlying body,
-skin weights and stable authored movement. The original face and hair
-have been removed. The shirt opening is bridged to its actual mesh boundary;
-its new vertices interpolate the body skin weights. Continuous cuffs cover the
-source garment boundary.
+Head: head_refinement.py constructs the wider rounded cheeks and chin, short
+rounded nose, integrated lip volumes, soft smile, ears and sculpted brows.
+Actual eye openings are bridged into the head topology with continuous skin
+surfaces; all new lid vertices follow the original Head bone. Brown irises and
+pupils are mapped to true spherical opaque eyes. The lid openings overlap the
+iris rather than leaving a white ring around it. Thin champagne glasses remain
+full geometry. The eye anchors and the existing choreography are unchanged.
 
-Materials: Human Stylized warm peach skin; Human Stylized ivory sclera;
-Human Stylized chestnut iris; Human Stylized pupil; Human Stylized solid waves 0;
+Hair: hair_refinement.py constructs a continuous scalp foundation and twelve
+asymmetric swept S/C-wave locks. Clump roots and undersides embed into the
+foundation; fine directional relief defines the flow without alpha cards or
+floating rings. These are deliberately sculpted cartoon waves, not a claim to
+match individual strands in the concept illustration. Native vertex colors
+supply restrained warm/cool variation through glTF COLOR_0 with a white factor.
+
+Body and clothing: the licensed Microsoft Rocketbox body and rig supply hands,
+underlying body, weights and stable authored movement. Original head/hair are
+removed. garment_refinement.py adds bounded cloth smoothing and broad folds
+while preserving skin/hand anchors and interpolating weights on subdivision.
+The new continuous rolled collar, rounded lapels and fitted narrow placket
+replace the old trim. A thin navy facing bridges the neck/collar clearance,
+blending Neck/Spine2 weights. Polo and trousers receive FabricUV coordinates.
+
+Runtime maps (all packed into .blend and embedded into the GLB):
+- concept-skin-tone.png: native Blender color bake, 2048 px; softly authored
+  cheek/nose/lip/orbit coloration, no photographic projection or pore texture.
+- concept-eye-left.png and concept-eye-right.png: native Blender color bakes,
+  1024 px; sclera, layered brown iris and pupil on each spherical eye.
+- stylized-polo-stripes.png: native Blender broad-stripe color bake, 4096 px.
+- cloth-cotton-normal.png / cloth-cotton-roughness.png: 512 px garment maps.
+- cloth-twill-normal.png / cloth-twill-roughness.png: 512 px trouser maps.
+Normal/roughness textures bind directly to glTF PBR slots on FabricUV. Color
+maps are baked in Blender; cloth maps use deterministic numerical weave patterns
+saved through Blender image data. No photo editing or external texture is used.
+Bake targets isolate a single material slot to avoid clearing unrelated maps.
+The exporter may combine roughness into a metallic-roughness image (G channel).
+
+Key materials: Human Concept softly colored skin; Human Concept brown eye -1;
+Human Concept brown eye 1; Human Concept layered espresso waves;
 Human Stylized champagne frames; Human Stylized blue ivory polo;
-Human Stylized soft ivory collar; Human Stylized continuous blue neckline;
-Human Stylized charcoal trousers; Human Stylized ivory sneakers.
-All character surfaces use standard opaque glTF PBR materials. No transmission
-cornea, alpha hair, facial photo projection, skin pore map or fabric micro-normal
-is used. Only the native procedural broad-stripe polo color is UV baked to a
-4096-pixel PNG, packed into the .blend and embedded in the GLB. Baking isolates
-one material slot so no unrelated image can be cleared.
+Human Stylized soft ivory collar; Human Stylized charcoal trousers.
+Skin roughness 0.66, eye roughness 0.23, hair roughness 0.57 are intentional
+constants. All character surfaces use opaque standard PBR; no transmission
+cornea, alpha hair, runtime toon filter or flat material override is needed.
+Only architectural glass uses transparency.
 
 Animation: one five-second Echo source clip, unchanged from the neutral-wrist
-revision. Wrist rotations remain neutral, fingers relaxed, feet planted;
-quaternion signs are continuous and the loop closes. The robot's source delay
-is 0.12 seconds. Runtime playback speed is set by the website separately.
+revision. Wrists stay neutral, fingers relaxed, feet planted; quaternion signs
+are continuous and the loop closes. Robot source delay is 0.12 seconds.
+Runtime playback speed is set by the website separately.
 
 Lighting: retain the site's indigo/peach hall lighting and subject-tracked focus.
-No extra runtime toon filter or flat material override is required. The soft
-surface response and simplified colors are authored into the 3D material set.
+Neutral comparison and original scene renders use the same near-face camera.
 
 Sources: Microsoft Rocketbox Male_Adult_02 (MIT), body and rig; MuJoCo Menagerie
-Unitree G1 (BSD-3-Clause), robot geometry/kinematics. See the public asset license
-files. Original choreography and cartoon appearance are authored for this site.
+Unitree G1 (BSD-3-Clause), robot geometry/kinematics. See public asset licenses.
+Original choreography and cartoon appearance are authored for this site.

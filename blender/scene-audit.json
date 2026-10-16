@@ -2,14 +2,14 @@
   "coordinates": "Blender Z up; export glTF +Y up (x,z,-y)",
   "human_bounds": {
     "min": [
-      -0.28715240955352783,
-      0.754551887512207,
-      0.0003910520754288882
+      -0.29180967807769775,
+      0.7545518279075623,
+      0.00039105210453271866
     ],
     "max": [
-      0.2894808053970337,
-      1.098829984664917,
-      1.7834279537200928
+      0.2925289273262024,
+      1.094151496887207,
+      1.8089195489883423
     ]
   },
   "robot_bounds": {
@@ -24,8 +24,8 @@
       1.322845458984375
     ]
   },
-  "mesh_objects": 54,
-  "triangles": 570666,
+  "mesh_objects": 55,
+  "triangles": 747636,
   "g1_visual_meshes": 35,
   "g1_source": "/Users/zhilinhe/Desktop/hhhhzl/EduGetRicher/CMU/projects/enerdynamics/third_party/mujoco_menagerie/unitree_g1",
   "human_eye_blender": [
@@ -305,5 +305,7 @@
     },
     "wrist_policy": "All six wrist hinge angles are 0 rad in every pose; no end-effector orientation optimization",
     "interpolation": "Smoothstep authoring, quaternion hemisphere continuity, linear baked samples"
-  }
+  },
+  "head_refinement": "Rounded cheeks, short nose, integrated eyelid topology, spherical UV-colored brown eyes, twelve layered solid hair clumps",
+  "collar_facing": "480 vertices; thin continuous navy inner facing with Neck/Spine2 blended weights"
 }

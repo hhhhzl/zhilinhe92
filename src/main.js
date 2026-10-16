@@ -96,7 +96,7 @@ try{
   const key=new THREE.RectAreaLight('#ffd0b9',5.2,3,3);key.position.set(-3.4,3.6,1.0);key.lookAt(0,1.35,-.95);scene.add(key);
   const fill=new THREE.RectAreaLight('#8797ee',1.8,3.5,3);fill.position.set(3.8,2.3,.4);fill.lookAt(0,1.35,-.95);scene.add(fill);
   const rim=new THREE.DirectionalLight('#bcc1f6',1.25);rim.position.set(2,4,6);scene.add(rim);
-  const gltf=await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/atelier.glb?look=cartoon-polo-v4`);
+  const gltf=await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/atelier.glb?look=concept-polo-v5`);
   robot=gltf.scene.getObjectByName('Robot');human=gltf.scene.getObjectByName('Human');
   if(!robot||!human)throw new Error('The scene is missing a subject root.');
   // Preserve the character's authored matte surfaces and the factory lighting.

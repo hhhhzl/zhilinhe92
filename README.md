@@ -143,7 +143,7 @@ git push origin main
 - Drag **left** to rotate from the robot toward the human, and right to return. Dragging has a short inertial settle; horizontal trackpad gestures also work. Focus the canvas to use Left/Right, Home/End. The camera follows an asymmetric shoulder/hand/three-quarter path with varying elevation, lens, and slight roll.
 - Space pauses/resumes movement while the canvas is focused. OS reduced-motion settings pause character animation and make camera changes immediate. Background tabs suspend rendering.
 - Indigo architecture, peach light, depth of field, layered dark lens edges, subtle film grain and restrained color separation create an optical, cinematic view. The focus distance follows the actual subjects during the orbit; it no longer targets empty space between them. A smaller warm key and cooler fill preserve facial form.
-- The character uses clean opaque PBR surfaces and full native 3D geometry, with a continuous eye surface for the iris and sclera, solid fused hair waves, and a soft folded collar. The broad polo stripes are UV baked; photo face projection, pores, alpha hair cards and a transmission cornea are removed. This is an authored cartoon redesign, not a toon filter on the previous reconstruction.
+- The character uses full native 3D geometry: wider rounded cheeks, a short nose and integrated smile, eyelids joined to the face, spherical brown eyes, and twelve layered solid S/C-wave hair clumps. Skin and iris color are UV baked; cloth has exported cotton/twill normal and roughness maps, broad modeled folds, a soft rolled collar and a fitted inner facing. Photo projection, pores, alpha hair cards and a transmission cornea are absent. These are deliberately sculpted cartoon forms, not an exact reproduction of individual strands in the concept illustration.
 
 ## Pages and editing
 
@@ -162,10 +162,11 @@ git push origin main
 | `src/style.css` | Shared visual system and responsive layouts |
 | `blender/zhilinhe92.blend` | Editable, packed scene and Echo animation |
 | `blender/build_scene.py` | Reproducible scene construction |
+| `blender/head_refinement.py`, `hair_refinement.py`, `garment_refinement.py` | Native head/eyes, layered wave hair, and skinned cloth refinement |
 
 ### Research capabilities
 
-The About section includes CV and Research Statement controls, followed by monochrome profile logos with keyboard-focus and hover labels. Set the two document URLs and exact account/channel URLs in `src/profile-data.js`. Local PDF paths (for example `./assets/documents/cv.pdf`) work under a GitHub Pages subdirectory. The supplied CV and Research Statement are available as local PDFs. Social accounts without a configured URL are hidden. Email, GitHub and LinkedIn use destinations from the CV. Supported logos are Email, Google Scholar, GitHub, LinkedIn, YouTube, Bilibili and X; the local SVGs and their license are under `public/assets/icons/`.
+The About section includes CV and Research Statement controls, followed by monochrome profile logos with keyboard-focus and hover labels. Set the two document URLs and exact account/channel URLs in `src/profile-data.js`. Local PDF paths (for example `./assets/documents/cv.pdf`) work under a GitHub Pages subdirectory. The supplied CV and Research Statement are available as local PDFs. Social accounts without a configured URL are hidden. Email, GitHub and LinkedIn use destinations from the CV; Google Scholar uses the exact profile URL supplied by the owner. Supported logos are Email, Google Scholar, GitHub, LinkedIn, YouTube, Bilibili and X; the local SVGs and their license are under `public/assets/icons/`.
 
 Each paper has one fixed preview frame. MGA, 2GO, FedGuide and MD-COAS alternate their original method figure and complete simultaneous experiment montage every three seconds. MDOC shows only its experiment montage; ACC shows only its model figure. No missing visual is replaced with an empty panel or algorithm box. Manual Method / Experiments tabs hold the selected visual. All experiment clips are visible together within the montage, with MP4 playback and a downloadable GIF; individual experiments never rotate. Videos resume their previous playback position when revisited. Global/per-paper pause and per-paper selections survive filtering. Click the current visual for the full-size dialog. Inline videos and automatic switching pause offscreen, while a dialog is open, and in background tabs; reduced motion starts them paused. PDF, Code, HTML, DOI, arXiv, Abstract and BibTeX share one horizontal control strip; disclosures expand below it. On small screens the control strip scrolls horizontally without widening the page. `src/research-resources.css` owns this layout.
 
@@ -173,7 +174,7 @@ The research renderer follows al-folio’s publication model: authors and self h
 
 Resources are conditional: PDF, code, website, video, blog, HTML, poster, slides, supplement, DOI, arXiv and HAL. Awards and badges display only when explicitly supplied. Badge values are curated data, not a live Altmetric/Dimensions/Scholar integration. This is a custom publication interface, not a migration of every al-folio plugin or its Jekyll CMS.
 
-Six records follow the supplied CV: MGA and 2GO submissions; FedGuide (CoRL Spotlight), MD-COAS (IROS), MDOC (RSS), and antivirus routing (ACC). Submission status stays distinct from accepted venues. No citation counts or unverified Scholar profile are shown. Paper figure and demo source records live in `public/assets/publications/`.
+Six records follow the supplied CV: MGA and 2GO submissions; FedGuide (CoRL Spotlight), MD-COAS (IROS), MDOC (RSS), and antivirus routing (ACC). Submission status stays distinct from accepted venues. Citation counts are not displayed. The About section links to the owner-provided Google Scholar profile. Paper figure and demo source records live in `public/assets/publications/`.
 
 ### Personal portraits and Scene performer
 

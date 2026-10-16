@@ -6,3 +6,5 @@ Research portraits: the two photographs supplied by Zhilin He, published at the 
 Laboratory MP4/GIF/poster derived from user-provided footage. GIF excerpt 5–9 s, 480x222, 9 fps.
 Paper preview image provenance and CC BY 4.0 attribution: assets/publications/CREDITS.txt.
 Stylized character art direction: built-in ImageGen character concept derived from the owner’s supplied photographs, followed by complete native 3D modeling of the face, eyes, solid wave hair and clothing. Concept and prompts are in blender/concepts/. The scene uses no photographic face atlas or alpha hair cards.
+
+Scene character refinement: new rounded head and integrated eyelids, spherical UV-colored eyes, layered solid wave hair, and skinned cotton/twill clothing; native geometry and deterministic Blender material maps. See blender/stylized-materials.txt and the reproducible head_refinement.py, hair_refinement.py and garment_refinement.py sources. No face photograph is projected onto the final cartoon model.

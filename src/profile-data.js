@@ -8,7 +8,7 @@ export const profileDocuments = [
 // Unconfigured social accounts stay hidden. Add your exact profile/channel URLs.
 export const profileLinks = [
   { id: 'email', label: 'Email', url: 'mailto:hectorh@andrew.cmu.edu' },
-  { id: 'google-scholar', label: 'Google Scholar', url: null },
+  { id: 'google-scholar', label: 'Google Scholar', url: 'https://scholar.google.com/citations?user=1KXa-WkAAAAJ&hl=en' },
   { id: 'github', label: 'GitHub', url: 'https://github.com/hhhhzl' },
   { id: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/zhilin-hector-he/' },
   { id: 'youtube', label: 'YouTube', url: null },

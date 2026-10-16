@@ -119,151 +119,8 @@ def customize(human,rig,meshes,here):
         ramp=N.new('ShaderNodeValToRGB');ramp.color_ramp.interpolation='CONSTANT'
         ramp.color_ramp.elements[0].color=(.055,.090,.17,1);ramp.color_ramp.elements[1].position=.5;ramp.color_ramp.elements[1].color=(.76,.735,.66,1)
         L.new(mod.outputs[0],ramp.inputs[0]);bake_color(o,ji,polo,ramp.outputs[0],here,'stylized-polo-stripes',4096)
-    # Smooth silhouette profile: a grown-up oval with full cheeks and round chin.
-    rows=[(1.516,.008,.012,-.015),(1.526,.035,.036,-.017),(1.542,.060,.055,-.010),(1.565,.073,.074,-.005),(1.595,.086,.090,-.004),(1.625,.091,.097,-.003),(1.650,.088,.100,-.001),(1.680,.086,.100,.003),(1.709,.084,.093,.010),(1.735,.073,.078,.013),(1.754,.050,.053,.016),(1.765,.005,.007,.017)]
-    def profile(z):
-        for i in range(len(rows)-1):
-            if rows[i][0]<=z<=rows[i+1][0]:
-                t=(z-rows[i][0])/(rows[i+1][0]-rows[i][0]);a=rows[max(0,i-1)];b=rows[i];c=rows[i+1];d=rows[min(len(rows)-1,i+2)]
-                return [(.5*((2*b[k])+(-a[k]+c[k])*t+(2*a[k]-5*b[k]+4*c[k]-d[k])*t*t+(-a[k]+3*b[k]-3*c[k]+d[k])*t*t*t)) for k in range(1,4)]
-        return list(rows[0 if z<rows[0][0] else -1][1:])
-    def face_y(x,z):
-        rx,ry,cy=profile(z);y=cy-ry*math.sqrt(max(.001,1-(x/rx)**2))
-        y-=.025*gauss(x,0,.019)*gauss(z,1.617,.017) # small broad nose, continuous with face
-        y-=.0045*gauss(x,0,.013)*gauss(z,1.642,.029) # gentle bridge
-        y-=.0065*(gauss(x,-.051,.023)+gauss(x,.051,.023))*gauss(z,1.609,.027)
-        y+=.009*(gauss(x,-.037,.020)+gauss(x,.037,.020))*gauss(z,1.648,.014)
-        y-=.003*gauss(x,0,.038)*gauss(z,1.578,.014)
-        return y
-    verts=[];faces=[];nz=104;nt=128
-    for i in range(nz+1):
-        z=rows[0][0]+(rows[-1][0]-rows[0][0])*i/nz;rx,ry,cy=profile(z)
-        for j in range(nt):
-            a=2*math.pi*j/nt;x=rx*math.sin(a);y=cy-ry*math.cos(a)
-            if math.cos(a)>0:
-                base=cy-ry*math.sqrt(max(.001,1-(x/rx)**2));y+=(face_y(x,z)-base)*smooth(0,.5,math.cos(a))
-            verts.append((x,y,z))
-            if i:faces.append(((i-1)*nt+j,(i-1)*nt+(j+1)%nt,i*nt+(j+1)%nt,i*nt+j))
-    faces.append(tuple(reversed(range(nt))));faces.append(tuple(nz*nt+j for j in range(nt)))
-    head=G.mesh('Human sculpted animated face',verts,faces,skin)
-    # Replace the entire old neck, including its cut boundary, with one smooth
-    # tapered surface. A soft bone-weight blend follows the existing head tilt.
-    nv=[];nf=[];neckrows=[(1.435,.060,.052,.012),(1.465,.050,.046,.010),(1.495,.043,.043,.005),(1.525,.042,.044,.002),(1.550,.041,.044,.001)]
-    for i,(z,rx,ry,cy) in enumerate(neckrows):
-        for j in range(64):
-            a=2*math.pi*j/64;nv.append((rx*math.sin(a),cy-ry*math.cos(a),z))
-            if i:nf.append(((i-1)*64+j,(i-1)*64+(j+1)%64,i*64+(j+1)%64,i*64+j))
-    neck=G.mesh('Human continuous stylized neck',nv,nf,skin,'Bip01 Neck')
-    neck.vertex_groups.clear();ng=neck.vertex_groups.new(name='Bip01 Neck');hg=neck.vertex_groups.new(name='Bip01 Head')
-    for v in neck.data.vertices:
-        w=smooth(1.49,1.54,v.co.z);ng.add([v.index],1-w,'REPLACE');hg.add([v.index],w,'REPLACE')
-    sub=neck.modifiers.new('Smooth neck connection','SUBSURF');sub.levels=2
-    bpy.context.view_layer.objects.active=neck;bpy.ops.object.modifier_move_to_index(modifier=sub.name,index=0);bpy.ops.object.modifier_apply(modifier=sub.name)
-    # Ears are full geometry, with a recessed colored concha and a soft helix.
-    for sign in [-1,1]:
-        G.ellipsoid('Human rounded ear',(sign*.090,.005,1.625),(.019,.014,.030),skin)
-        G.ellipsoid('Human recessed ear',(sign*.098,-.006,1.626),(.010,.006,.020),earinner)
-        G.ellipsoid('Human ear tragus',(sign*.089,-.009,1.617),(.006,.005,.010),skin)
-    # One continuous eye surface contains the pupil, iris and white. No
-    # stacked ellipsoids can detach the iris or produce a button-eye silhouette.
-    for sign in [-1,1]:
-        cx=sign*.037;cz=1.648;ey=face_y(cx,cz)-.0035;w=.021;h=.011
-        vs=[(cx,ey,cz)];fs=[];indices=[];steps=64
-        radial=[.0015,.003,.0046,.0058,.007,.0085,.25,.5,.75,1.]
-        border=[]
-        for r,rr in enumerate(radial):
-            for j in range(steps):
-                a=2*math.pi*j/steps;xx=w*math.cos(a);zz=(h if math.sin(a)>0 else .008)*math.sin(a)*(.72+.28*abs(math.sin(a)))+sign*xx*.055
-                if r<6:
-                    xoff=rr*math.cos(a);zoff=rr*math.sin(a);blend=(rr/.021)**2
-                else:
-                    xoff=(.0085*math.cos(a))*(1-rr)+xx*rr;zoff=(.0085*math.sin(a))*(1-rr)+zz*rr;blend=(.4+.6*rr)**2
-                x=cx+xoff;z=cz+zoff;edge=face_y(cx+xx,cz+zz)-.001
-                y=ey*(1-blend)+edge*blend;vs.append((x,y,z))
-                if r==0:fs.append((0,1+j,1+(j+1)%steps))
-                else:
-                    a0=1+(r-1)*steps;a1=1+r*steps
-                    fs.append((a0+j,a1+j,a1+(j+1)%steps,a0+(j+1)%steps))
-                indices.append(2 if r<3 else 1 if r<6 else 0)
-                if r==len(radial)-1:border.append((x,y-.0006,z))
-        eye=G.mesh('Human continuous almond eye',vs,fs,white);eye.data.materials.append(iris);eye.data.materials.append(pupil)
-        for poly,mi in zip(eye.data.polygons,indices):poly.material_index=mi
-        G.ellipsoid('Human tiny reflected light',(cx-.0025,ey-.0007,cz+.003),(.00085,.0003,.00085),highlight,rings=8,sectors=12)
-        upper=border[:33];lower=border[32:]+border[:1]
-        G.tube('Human upper eyelid',upper,[.0014+.0006*math.sin(math.pi*i/(len(upper)-1)) for i in range(len(upper))],skin,sides=10)
-        G.tube('Human lower eyelid',lower,[.0012]*len(lower),skin,sides=10)
-        lash=[(x,y-.0003,z-.0002) for x,y,z in upper]
-        G.tube('Human upper lash edge',lash,[.00025+.00035*math.sin(math.pi*i/(len(lash)-1)) for i in range(len(lash))],brow,sides=8)
-        # A shaped brow tapers toward the temple, softly raised at the outside.
-        bp=[];br=[]
-        for i in range(25):
-            t=i/24;x=sign*(.015+.047*t);z=1.674+.004*math.sin(math.pi*t)-.005*t
-            bp.append((x,face_y(x,z)-.003,z));br.append(.0022+.0020*math.sin(math.pi*t)**.5)
-        G.tube('Human expressive brow',bp,br,brow,sides=12,flatten=.55)
-    # A broad quiet smile: a recessed curved line with soft integrated lip volume.
-    pts=[];r=[]
-    for i in range(61):
-        t=-1+2*i/60;x=t*.031;z=1.578+.0055*t*t
-        pts.append((x,face_y(x,z)-.0015,z));r.append(.00045+.00045*(1-t*t))
-    G.tube('Human calm smile',pts,r,mouth,sides=8)
-    for lower in [False,True]:
-        vs=[];fs=[]
-        for i in range(61):
-            t=-1+2*i/60;x=.031*t;z=1.578+.0055*t*t
-            for k in range(6):
-                u=k/5;zz=z+(-1 if lower else 1)*(.004 if lower else .0027)*math.sin(math.pi*(t+1)/2)*u
-                yy=face_y(x,zz)-.0006-.0015*math.sin(math.pi*u)*(1-t*t)
-                vs.append((x,yy,zz))
-            if i:
-                for k in range(5):fs.append(((i-1)*6+k,(i-1)*6+k+1,i*6+k+1,i*6+k))
-        G.mesh('Human softly modeled lip',vs,fs,lip)
-    # Eyeglasses are clean thin gold, kept close to the face and open at the lens.
-    for sign in [-1,1]:
-        cx=sign*.037;cz=1.645;points=[]
-        for i in range(81):
-            a=2*math.pi*i/80;points.append((cx+.029*math.cos(a),-.113+.003*math.cos(a)**2,cz+.027*math.sin(a)))
-        G.tube('Human gold round frame',points,[.00115]*len(points),gold,sides=10)
-        G.tube('Human gold temple',[(sign*.066,-.111,1.650),(sign*.084,-.075,1.651),(sign*.093,.005,1.640),(sign*.091,.025,1.625)],[.00125]*4,gold,sides=10)
-    G.tube('Human gold bridge',[(-.008,-.114,1.651),(0,-.122,1.657),(.008,-.114,1.651)],[.00115]*3,gold,sides=10)
-    # Closed continuous base with two asymmetrical large wave masses. Shallow
-    # lofts intersect the base and are fused to it, so curls never float apart.
-    hair_objects=[];vs=[];fs=[];nr=44;ns=112
-    for i in range(nr+1):
-        for j in range(ns):
-            a=2*math.pi*j/ns;front=max(0,math.cos(a));bottom=1.596+.115*front**3
-            bottom+=.005*math.sin(2*a)*front
-            theta=(i/nr)*math.acos(max(-1.,min(1.,(bottom-1.682)/.101)))
-            wav=.0025*math.sin(4*a+3.1*i/nr)*math.sin(theta)
-            vs.append(((.097+wav)*math.sin(theta)*math.sin(a),.010-(.108+wav)*math.sin(theta)*math.cos(a),1.682+.101*math.cos(theta)))
-            if i:fs.append(((i-1)*ns+j,(i-1)*ns+(j+1)%ns,i*ns+(j+1)%ns,i*ns+j))
-    fs.append(tuple(reversed([nr*ns+j for j in range(ns)])))
-    hair_objects.append(G.mesh('Human continuous dark scalp',vs,fs,hair[0]))
-    locks=[
-      ([(-.004,-.021,1.777),(-.043,-.077,1.800),(-.090,-.109,1.755),(-.073,-.082,1.704)],.034,.013,0),
-      ([(-.025,.016,1.775),(-.081,-.028,1.792),(-.108,-.080,1.739),(-.096,-.016,1.694)],.028,.011,0),
-      ([(.011,-.018,1.776),(.047,-.075,1.792),(.079,-.111,1.731),(.100,-.062,1.731)],.031,.013,0),
-      ([(.024,.019,1.774),(.086,-.020,1.787),(.103,-.065,1.714),(.101,.012,1.693)],.028,.011,0),
-      ([(-.038,.039,1.770),(-.092,.100,1.753),(-.103,.097,1.672),(-.049,.081,1.614)],.031,.012,0),
-      ([(.039,.040,1.769),(.093,.102,1.749),(.098,.100,1.673),(.044,.084,1.611)],.031,.012,0),
-      ([(0,.048,1.773),(.012,.119,1.749),(-.005,.119,1.670),(-.002,.091,1.610)],.034,.011,0),
-      ([(-.027,-.093,1.747),(-.011,-.111,1.722),(-.009,-.114,1.699),(-.026,-.101,1.698)],.005,.004,0),
-    ]
-    for i,(controls,w,d,m) in enumerate(locks):
-        controls=[(x*.87,.010+(y-.010)*.88,z) for x,y,z in controls]
-        hair_objects.append(G.bezier_lock('Human sculpted S wave '+str(i),controls,w*.89,d*.85,hair[m]))
-    hair_objects.append(G.ellipsoid('Human left continuous wave mass',(-.040,-.043,1.744),(.049,.057,.044),hair[0],rings=24,sectors=48))
-    hair_objects.append(G.ellipsoid('Human right continuous wave mass',(.039,-.037,1.744),(.048,.057,.043),hair[0],rings=24,sectors=48))
-    bpy.ops.object.select_all(action='DESELECT')
-    for o in hair_objects:o.select_set(True)
-    bpy.context.view_layer.objects.active=hair_objects[0];bpy.ops.object.join();ho=hair_objects[0]
-    for o in hair_objects[1:]:G.objects.remove(o)
-    ho.modifiers.clear();ho.vertex_groups.clear()
-    rem=ho.modifiers.new('Fuse broad sculpted waves','REMESH');rem.mode='VOXEL';rem.voxel_size=.0018;rem.use_smooth_shade=True
-    bpy.ops.object.modifier_apply(modifier=rem.name)
-    sm=ho.modifiers.new('Soft clay wave transitions','SMOOTH');sm.factor=.65;sm.iterations=4;bpy.ops.object.modifier_apply(modifier=sm.name)
-    dec=ho.modifiers.new('Retain sculpted silhouette efficiently','DECIMATE');dec.ratio=.46;bpy.ops.object.modifier_apply(modifier=dec.name)
-    vg=ho.vertex_groups.new(name='Bip01 Head');vg.add(list(range(len(ho.data.vertices))),1.,'REPLACE')
-    ar=ho.modifiers.new('Original performer skeleton','ARMATURE');ar.object=rig;ho.select_set(False)
+    from head_refinement import build_head
+    human['head_refinement']=str(build_head(G,here,skin))
     # A connected folded collar wraps the neck and rests against the shoulders.
     original=meshes[0];M=A@original.matrix_world
     torso=[M@v.co for v in original.data.vertices if abs((M@v.co).x)<.28]
@@ -301,6 +158,9 @@ def customize(human,rig,meshes,here):
         if i:fs.append(((i-1)*2,(i-1)*2+1,i*2+1,i*2))
     G.mesh('Human ivory polo placket',vs,fs,cream,'Bip01 Spine2')
     for z in [1.409,1.371]:G.ellipsoid('Human polo button',(0,front_y(0,z)-.004,z),(.003,.0016,.003),cream,'Bip01 Spine2',rings=10,sectors=16)
+    from garment_refinement import refine_clothing
+    garment_audit=refine_clothing(human,rig,meshes,G,here,{'polo':polo,'cream':cream,'navy':navy,'pants':pants,'shoes':shoes,'skin':skin})
+    human['garment_refinement']=str(garment_audit)
     G.join_by_material()
     human['identity']='Stylized adult character of Zhilin He, designed from selected imagegen concept and supplied photos; deliberately animated, not a scan'
     human['art_direction']='Adult animation proportions; sculpted full cheeks and smile; almond eyes; champagne frames; asymmetric solid S-wave hair; blue/ivory broad-stripe polo'
