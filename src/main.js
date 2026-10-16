@@ -91,14 +91,14 @@ try{
   const key=new THREE.RectAreaLight('#ffd0b9',4,9,4);key.position.set(-4.5,3.4,-.3);key.lookAt(0,1,0);scene.add(key);
   const fill=new THREE.RectAreaLight('#8797ee',2.8,9,5);fill.position.set(4.5,3,0);fill.lookAt(0,1,0);scene.add(fill);
   const rim=new THREE.DirectionalLight('#bcc1f6',1.25);rim.position.set(2,4,6);scene.add(rim);
-  const gltf=await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/atelier.glb`);
+  const gltf=await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/atelier.glb?look=blue-white-polo-v2`);
   robot=gltf.scene.getObjectByName('Robot');human=gltf.scene.getObjectByName('Human');
   if(!robot||!human)throw new Error('The scene is missing a subject root.');
   gltf.scene.traverse(o=>{if(o.isLight||o.isCamera)o.visible=false;if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=true;for(const m of Array.isArray(o.material)?o.material:[o.material]){if(m.transparent||/glass|glow|sky/i.test(o.name+m.name))o.castShadow=false;if(/floor/i.test(o.name)){m.roughness=.72;m.metalness=.06;}if(/head|skin/i.test(m.name)){m.roughness=.72;m.metalness=0;}if(m.map)m.map.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());}});
   scene.add(gltf.scene);
   const hall=new THREE.Group();scene.add(hall);[...gltf.scene.children].filter(o=>/^(Architecture_|Floor)/.test(o.name)).forEach(o=>hall.attach(o));hall.rotation.y=.24;
   floorFinish();
-  if(gltf.animations.length){mixer=new THREE.AnimationMixer(gltf.scene);for(const clip of gltf.animations)mixer.clipAction(clip).play();mixer.setTime(.85);}
+  if(gltf.animations.length){mixer=new THREE.AnimationMixer(gltf.scene);for(const clip of gltf.animations)mixer.clipAction(clip).play();mixer.setTime(.85);mixer.timeScale=.8;}
   const renderTarget=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:2});
   composer=new EffectComposer(renderer,renderTarget);composer.addPass(new RenderPass(scene,camera));
   bokeh=new BokehPass(scene,camera,{focus:1.9,aperture:.00125,maxblur:.009});composer.addPass(bokeh);

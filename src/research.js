@@ -1,7 +1,10 @@
 import './shared.js';
 import './research-resources.css';
 import './research-gallery.css';
+import './research-about.css';
+import { initPortrait } from './portrait.js';
 import { initPublications } from './publications.js';
 import { initProfile } from './profile.js';
 initProfile();
+initPortrait();
 initPublications();

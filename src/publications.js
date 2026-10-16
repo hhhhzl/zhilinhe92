@@ -1,4 +1,4 @@
-import { createDemoPlayback } from './research-media.js';
+import { createPublicationPreviews } from './publication-preview.js';
 import { publications, publicationBibTeX, allBibTeX } from './publication-data.js';
 
 const resourceLabels = {
@@ -54,97 +54,20 @@ function resourceUrl(type, value) {
   return ['doi', 'arxiv', 'hal'].includes(type) ? null : safeUrl(raw);
 }
 
-function preview(paper) {
+function preview(paper, showcases) {
+  const showcase = showcases.create(paper);
+  if (showcase) return showcase;
   const container = element('div', 'publication-preview');
-  const media = typeof paper.preview === 'string' ? { src: paper.preview } : paper.preview;
-  const source = media && safeUrl(media.src);
-  if (source) {
-    const isVideo = media.type === 'video' || /\.(mp4|webm|ogg|mov)(?:[?#]|$)/i.test(media.src);
-    const node = element(isVideo ? 'video' : 'img', 'publication-preview-media');
-    node.src = source;
-    if (isVideo) {
-      node.controls = true;
-      node.playsInline = true;
-      node.preload = 'none';
-      node.setAttribute('aria-label', media.alt || `${paperLabel(paper)} research video`);
-      const poster = safeUrl(media.poster);
-      if (poster) node.poster = poster;
-    } else {
-      node.alt = media.alt || `${paperLabel(paper)} research preview`;
-      node.loading = 'lazy';
-      node.decoding = 'async';
-    }
-    if (isVideo) container.append(node);
-    else {
-      const fullSize = anchor('', source, 'publication-preview-link');
-      fullSize.target = '_blank';
-      fullSize.rel = 'noopener noreferrer';
-      fullSize.setAttribute('aria-label', `Open ${paperLabel(paper)} figure at full size`);
-      fullSize.append(node);
-      container.append(fullSize);
-    }
-  } else {
-    const card = element('div', 'publication-monogram');
-    card.dataset.theme = paper.monogram?.theme || 'blue';
-    card.setAttribute('aria-hidden', 'true');
-    card.append(element('span', 'monogram-kicker', 'RESEARCH / ' + paper.year));
-    card.append(element('span', 'monogram-orbit monogram-orbit-one'));
-    card.append(element('span', 'monogram-orbit monogram-orbit-two'));
-    card.append(element('strong', 'monogram-label', paper.monogram?.label || paperLabel(paper)));
-    card.append(element('span', 'monogram-caption', paper.tags?.[0] || 'Research'));
-    container.append(card);
-  }
+  const card = element('div', 'publication-monogram');
+  card.dataset.theme = paper.monogram?.theme || 'blue';
+  card.setAttribute('aria-hidden', 'true');
+  card.append(element('span', 'monogram-kicker', 'RESEARCH / ' + paper.year));
+  card.append(element('span', 'monogram-orbit monogram-orbit-one'));
+  card.append(element('span', 'monogram-orbit monogram-orbit-two'));
+  card.append(element('strong', 'monogram-label', paper.monogram?.label || paperLabel(paper)));
+  card.append(element('span', 'monogram-caption', paper.tags?.[0] || 'Research'));
+  container.append(card);
   return container;
-}
-
-function gallery(paper) {
-  if (!Array.isArray(paper.media) || !paper.media.length) return null;
-  const grid = element('div', 'publication-gallery');
-  grid.dataset.count = String(paper.media.length);
-  grid.setAttribute('aria-label', `${paperLabel(paper)} experiments and figures`);
-  for (const media of paper.media) {
-    const src = safeUrl(media.src);
-    if (!src) continue;
-    const tile = element('figure', 'demo-tile');
-    const isVideo = media.type === 'video' || /\.(mp4|webm)(?:[?#]|$)/i.test(media.src);
-    const node = element(isVideo ? 'video' : 'img');
-    node.src = src;
-    if (isVideo) {
-      node.muted = true;
-      node.defaultMuted = true;
-      node.loop = true;
-      node.playsInline = true;
-      node.controls = true;
-      node.preload = 'none';
-      node.dataset.demo = '';
-      node.controls = false;
-      node.tabIndex = 0;
-      const showControls = () => { node.controls = true; };
-      const hideControls = () => { if (document.activeElement !== node) node.controls = false; };
-      node.addEventListener('pointerenter', showControls);
-      node.addEventListener('pointerdown', showControls);
-      node.addEventListener('focus', showControls);
-      node.addEventListener('pointerleave', hideControls);
-      node.addEventListener('blur', hideControls);
-      node.setAttribute('aria-label', media.alt || media.caption || `${paperLabel(paper)} demonstration`);
-      const poster = safeUrl(media.poster);
-      if (poster) node.poster = poster;
-      tile.append(node);
-    } else {
-      node.alt = media.alt || media.caption || `${paperLabel(paper)} figure`;
-      node.loading = 'lazy';
-      node.decoding = 'async';
-      const link = anchor('', src);
-      link.target = '_blank';
-      link.rel = 'noopener';
-      link.setAttribute('aria-label', `Open full figure: ${node.alt}`);
-      link.append(node);
-      tile.append(link);
-    }
-    if (media.caption) tile.append(element('figcaption', '', media.caption));
-    grid.append(tile);
-  }
-  return grid;
 }
 
 function disclosure(label, className, paper) {
@@ -185,12 +108,12 @@ async function copyText(text) {
   return success;
 }
 
-function renderPaper(paper, announce) {
+function renderPaper(paper, announce, showcases) {
   const article = element('article', 'publication');
   article.id = `publication-${paper.id}`;
   article.dataset.selected = String(Boolean(paper.selected));
   article.setAttribute('aria-labelledby', `${article.id}-title`);
-  article.append(preview(paper));
+  article.append(preview(paper, showcases));
   const info = element('div', 'publication-info');
   const meta = element('div', 'publication-meta');
   if (abbreviation(paper)) {
@@ -306,8 +229,6 @@ function renderPaper(paper, announce) {
   info.append(actions, expandedPanels);
   if (badges.childElementCount) info.append(badges);
   article.append(info);
-  const demos = gallery(paper);
-  if (demos) article.append(demos);
   return article;
 }
 
@@ -366,14 +287,14 @@ export function initPublications({ root = document, papers = publications } = {}
       .forEach((value) => year.append(new Option(String(value), String(value))));
     if ([...year.options].some((option) => option.value === previousYear)) year.value = previousYear;
   }
-  const playback = createDemoPlayback(list, root.querySelector('#media-motion-toggle'));
+  const showcases = createPublicationPreviews(safeUrl, root.querySelector('#media-motion-toggle'));
   const render = () => {
+    showcases.clear();
     const results = filterPublications(papers, { query: search?.value, year: year?.value, selected: selected?.checked });
     const fragment = document.createDocumentFragment();
-    if (results.length) results.forEach((paper) => fragment.append(renderPaper(paper, announce)));
+    if (results.length) results.forEach((paper) => fragment.append(renderPaper(paper, announce, showcases)));
     else fragment.append(element('p', 'publication-empty', 'No publications match these filters. Try another search or clear the filters.'));
     list.replaceChildren(fragment);
-    playback.refresh();
     if (total) total.textContent = String(papers.length).padStart(2, '0');
     if (count) count.textContent = `${results.length} of ${papers.length} publication${papers.length === 1 ? '' : 's'}`;
     return results;
@@ -394,7 +315,7 @@ export function initPublications({ root = document, papers = publications } = {}
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     announce(`Downloaded BibTeX for all ${papers.length} publications.`);
   });
-  const controller = { render, destroy() { playback.destroy(); listeners.forEach((remove) => remove()); initialized.delete(list); } };
+  const controller = { render, destroy() { showcases.destroy(); listeners.forEach((remove) => remove()); initialized.delete(list); } };
   initialized.set(list, controller);
   render();
   return controller;

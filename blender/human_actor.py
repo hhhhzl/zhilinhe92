@@ -105,7 +105,7 @@ def build_human(here,out):
             m.surface_render_method='DITHERED';m.use_transparency_overlap=False
         else:
             t=n.new('ShaderNodeTexImage');t.image=load_texture(stem+'_normal','normal')
-            normal=n.new('ShaderNodeNormalMap');normal.inputs['Strength'].default_value=.65 if is_head else .85
+            normal=n.new('ShaderNodeNormalMap');normal.inputs['Strength'].default_value=.30 if is_head else .85
             links.new(t.outputs['Color'],normal.inputs['Color']);links.new(normal.outputs['Normal'],p.inputs['Normal'])
         m.use_backface_culling=False
     bpy.context.view_layer.update()
@@ -187,7 +187,7 @@ def build_human(here,out):
                 degrees=([5,8,5] if digit==0 else [12,20,10])[k]
                 if digit>0:degrees*=.85+.10*(digit-1)
                 fingers[name]=(axis_local,math.radians(degrees))
-    animated=['Bip01 '+s+' '+n for s in ['R','L'] for n in ['UpperArm','Forearm','Hand']]+['Bip01 Head','Bip01 Neck']+list(fingers)
+    animated=['Bip01 '+s+' '+n for s in ['R','L'] for n in ['UpperArm','Forearm','Hand']]+['Bip01 Head','Bip01 Neck','Bip01 Spine1']+list(fingers)
     previous={}
     for frame in range(int(FPS*DURATION)+1):
         t=frame/FPS
@@ -208,6 +208,10 @@ def build_human(here,out):
             axis=rest[name].to_quaternion().inverted() @ Vector((1,0,0))
             rig.pose.bones[name].rotation_mode='QUATERNION'
             rig.pose.bones[name].rotation_quaternion=Quaternion(axis,values[suffix.lower()])
+        # Very small upper-body breathing keeps the planted feet unchanged.
+        breathing=rig.pose.bones['Bip01 Spine1'];breathing.rotation_mode='QUATERNION'
+        breath_axis=rest['Bip01 Spine1'].to_quaternion().inverted() @ Vector((1,0,0))
+        breathing.rotation_quaternion=Quaternion(breath_axis,.0035*math.sin(2*math.pi*t/DURATION))
         for name,(axis,angle) in fingers.items():
             bone=rig.pose.bones[name];bone.rotation_mode='QUATERNION'
             bone.rotation_quaternion=Quaternion(axis,angle*values['curl'])

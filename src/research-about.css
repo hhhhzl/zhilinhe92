@@ -1,0 +1,32 @@
+.research-intro { grid-template-columns: minmax(0, 1fr) 29%; gap: 9%; padding-top: 64px; }
+.about-copy h1 { font-size: clamp(62px, 6.5vw, 94px); }
+.about-copy > p:not([class]) + p { margin-top: 15px; }
+.about-copy > p a { color: var(--ink); border-bottom: 1px solid #ae96aa; }
+.about-affiliation { max-width: 520px; line-height: 1.8; }
+.portrait-toggle { margin-top: 42px; }
+.portrait-toggle:before { inset: -14px 20px 43px -14px; }
+.portrait-switch { display: block; position: relative; width: 100%; padding: 0; cursor: pointer; background: transparent; border: 0; }
+.portrait-frame { display: block; position: relative; aspect-ratio: 1; overflow: hidden; background: #b5b3a7; }
+.portrait-toggle .portrait-photo { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: 1; object-fit: cover; transition: opacity .45s ease, transform .65s ease; }
+.portrait-photo-primary { transform: scale(1.065); }
+.portrait-toggle .portrait-photo-alternate { object-position: 62% 35%; opacity: 0; transform: scale(1.025); }
+.portrait-switch.is-alternate .portrait-photo-primary { opacity: 0; }
+.portrait-switch.is-alternate .portrait-photo-alternate { opacity: 1; transform: scale(1); }
+.portrait-switch-icon { position: absolute; right: 12px; bottom: 12px; display: grid; place-items: center; width: 31px; height: 31px; background: #f1eee8eb; color: var(--ink); border: 1px solid #ffffff75; border-radius: 50%; font-size: 19px; transition: transform .3s ease; }
+.portrait-switch:hover .portrait-switch-icon { transform: rotate(35deg); }
+.portrait-switch:focus-visible { outline: 2px solid #867692; outline-offset: 6px; }
+.portrait-toggle figcaption { padding-top: 15px; font-size: 8px; letter-spacing: .04em; }
+#portrait-count { font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media(max-width:680px) {
+  .research-intro { display: flex; flex-direction: column; gap: 32px; padding-top: 42px; }
+  .about-copy h1 { font-size: 62px; }
+  .about-affiliation { max-width: 100%; margin-bottom: 26px; font-size: 11px; }
+  .about-lead { margin-top: 0; font-size: 28px; }
+  .portrait-toggle { position: relative; top: auto; right: auto; width: min(100%, 300px); margin: 0; align-self: center; }
+  .portrait-toggle:before { display: none; }
+  .portrait-toggle figcaption { display: flex; }
+  .portrait-toggle figcaption span:first-child { display: block; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .portrait-toggle .portrait-photo, .portrait-switch-icon { transition: none; }
+}

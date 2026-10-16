@@ -13,11 +13,11 @@
 </head>
 <body class="content-page projects-page">
 <a class="skip-link" href="#content">Skip to content</a>
-<header class="site-header"><a class="identity" href="./index.html"><span class="identity-mark">zh<span>·</span></span><span>Zhilin He<small>Robotics · Carnegie Mellon</small></span></a><nav aria-label="Main navigation"><a href="./index.html">Scene</a><a href="./research.html">Research</a><a href="./projects.html" aria-current="page">Projects</a><a href="./films.html">Films</a></nav><a class="header-link" href="./index.html">zhilinhe92 <span>↗</span></a></header>
+<header class="site-header"><a class="identity" href="./index.html"><span class="identity-mark">zh<span>·</span></span><span>Zhilin He<small>Robotics · Carnegie Mellon</small></span></a><nav aria-label="Main navigation"><a href="./index.html">Research</a><a href="./scene.html">Scene</a><a href="./projects.html" aria-current="page">Projects</a></nav><a class="header-link" href="./index.html">zhilinhe92 <span>↗</span></a></header>
 <main id="content" class="projects-main">
   <section class="projects-intro projects-shell" aria-labelledby="projects-title">
     <div class="projects-intro-top"><p class="eyebrow">PROJECTS / SELECTED SYSTEMS</p><span>2025 — PRESENT</span></div>
-    <div class="projects-intro-grid"><h1 id="projects-title">Ideas become<br/><em>systems.</em></h1><p>From generative motion to an autonomous tennis buddy.<br/>Two projects, through their original experiments and the people who built them.</p></div>
+    <div class="projects-intro-grid"><h1 id="projects-title">Ideas become<br/><em>systems.</em></h1><p>From generative motion to an autonomous tennis buddy.<br/>Two projects, through their original experiments, hardware, and open-source implementations.</p></div>
     <nav class="projects-jump" aria-label="Projects on this page">
       <a href="#generative-dynamics"><span class="project-index-number">01</span><span>Generative Dynamics<small>Planning · Control · Learning</small></span><span aria-hidden="true">↓</span></a>
       <a href="#tennis-buddy"><span class="project-index-number">02</span><span>Tennis Buddy<small>Perception · Navigation · Retrieval</small></span><span aria-hidden="true">↓</span></a>
@@ -71,7 +71,7 @@
   <div class="project-sim-media"><video controls playsinline loop muted preload="none" poster="./assets/publications/gallery/mga_peg_id_wide.jpg" aria-label="Contact-rich insertion — simulation" ><source src="./assets/publications/gallery/mga_peg_id_wide.mp4" type="video/mp4"/>Your browser does not support embedded video. <a href="./assets/publications/gallery/mga_peg_id_wide.mp4">Open the demonstration.</a></video><span class="project-media-type">SIMULATION</span></div>
   <figcaption><span class="project-card-kicker">MGA</span><h4>Contact-rich insertion</h4><p>Refining motion and impedance together.</p></figcaption>
 </figure></div>
-        <div class="project-case-end"><p>MDOC · MD-COAS · 2GO · MGA</p><a href="./research.html">Read the research <span aria-hidden="true">↗</span></a></div>
+        <div class="project-case-end"><p>MDOC · MD-COAS · 2GO · MGA</p><a href="./index.html">Read the research <span aria-hidden="true">↗</span></a></div>
       </section>
     </div>
   </article>
@@ -80,25 +80,20 @@
     <div class="projects-shell">
       <header class="project-case-heading">
         <div class="project-case-index"><span>02 / AUTONOMOUS ROBOTICS</span><span>SEP — DEC 2025</span></div>
-        <div class="project-case-copy"><h2 id="tennis-title">Tennis <em>Buddy</em><span class="tennis-ball-mark" aria-hidden="true"></span></h2><p class="project-case-lead">More time playing.<br/>Less time picking up.</p><p>A ROS2-based autonomous robot for tennis-ball retrieval, developed with a team at Carnegie Mellon. It brings perception, mapping, and navigation together to detect balls, move between waypoints, and avoid obstacles.</p><div class="project-links"><a href="https://z4ziad.github.io/2026-01-07-tennis_buddy/" target="_blank" rel="noopener noreferrer">Original project <span aria-hidden="true">↗</span></a><a href="https://github.com/hhhhzl/tennis_buddy" target="_blank" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span></a></div></div>
+        <div class="project-case-copy"><h2 id="tennis-title">Tennis <em>Buddy</em><span class="tennis-ball-mark" aria-hidden="true"></span></h2><p class="project-case-lead">More time playing.<br/>Less time picking up.</p><p>A ROS2-based autonomous robot for tennis-ball retrieval. It brings perception, mapping, and navigation together to detect balls, move between waypoints, and avoid obstacles.</p><div class="project-links"><a href="https://z4ziad.github.io/2026-01-07-tennis_buddy/" target="_blank" rel="noopener noreferrer">Original project <span aria-hidden="true">↗</span></a><a href="https://github.com/hhhhzl/tennis_buddy" target="_blank" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span></a><a href="https://z4ziad.github.io/assets/img/auto_robo/f25/tennis_buddy/tennisbuddy_144521_13716459_Final%20Presentation.pdf" target="_blank" rel="noopener noreferrer">Project report <span aria-hidden="true">↗</span></a></div></div>
       </header>
       <figure class="tennis-feature-film">
         <div class="tennis-film-label"><span>IN THE REAL WORLD</span><span>ORIGINAL PROJECT DEMONSTRATION</span></div>
         <video controls playsinline preload="none" poster="./assets/projects/tennis-buddy-poster.jpg" aria-label="Tennis Buddy original demonstration: object detection, obstacle avoidance, and waypoint navigation"><source src="./assets/projects/tennis-buddy-demo.mp4" type="video/mp4"/>Your browser does not support embedded video. <a href="./assets/projects/tennis-buddy-demo.mp4">Open the demonstration.</a></video>
-        <figcaption><h3>A robot with a court-side job.</h3><p>Object detection, obstacle avoidance, and waypoint navigation in the original team demonstration.</p></figcaption>
+        <figcaption><h3>A robot with a court-side job.</h3><p>Object detection, obstacle avoidance, and waypoint navigation in the original demonstration.</p></figcaption>
       </figure>
       <section class="tennis-system" aria-labelledby="tennis-system-title">
-        <div class="tennis-contribution"><p class="eyebrow">FROM MAP TO MOVEMENT</p><h3 id="tennis-system-title">A connected<br/><em>navigation stack.</em></h3><p>My work focused on ROS2, SLAM, and Nav2 integration, including a custom bridge for adaptive switching between global planning and local control.</p><div class="project-tech-tags"><span>ROS2</span><span>SLAM</span><span>Nav2</span><span>Gazebo</span></div></div>
+        <div class="tennis-navigation"><p class="eyebrow">FROM MAP TO MOVEMENT</p><h3 id="tennis-system-title">A connected<br/><em>navigation stack.</em></h3><p>The navigation stack integrates ROS2, SLAM, and Nav2, with a custom bridge for adaptive switching between global planning and local control.</p><div class="project-tech-tags"><span>ROS2</span><span>SLAM</span><span>Nav2</span><span>Gazebo</span></div></div>
         <div class="tennis-system-visuals"><figure><a href="./assets/projects/tennis-buddy-map.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the Tennis Buddy SLAM map at full size"><img src="./assets/projects/tennis-buddy-map.webp" alt="SLAM occupancy map of an indoor environment from the Tennis Buddy repository." width="692" height="910" loading="lazy" decoding="async"/></a><figcaption><span>01 / MAPPING</span><h4>Building a view of the world.</h4></figcaption></figure><figure><a href="./assets/projects/tennis-buddy-simulation.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the Tennis Buddy Gazebo simulation at full size"><img src="./assets/projects/tennis-buddy-simulation.webp" alt="Tennis Buddy mobile robot inside the project's Gazebo tennis-court simulation." width="1048" height="938" loading="lazy" decoding="async"/></a><figcaption><span>02 / SIMULATION</span><h4>Testing before the court.</h4></figcaption></figure></div>
-      </section>
-      <section class="tennis-team" aria-labelledby="team-title">
-        <div class="project-section-heading"><div><p class="eyebrow">THE PEOPLE BEHIND THE ROBOT</p><h3 id="team-title">A team effort.</h3></div><p>Autonomous Robotics · Fall 2025<br/>Advised by Ziad Youssfi</p></div>
-        <div class="tennis-team-grid"><figure class="tennis-team-main"><img src="./assets/projects/tennis-buddy-team-1.webp" alt="Tennis Buddy project group at Carnegie Mellon, holding tennis balls and including a remote teammate on a phone." width="1600" height="1200" loading="lazy" decoding="async"/><figcaption>With the Tennis Buddy team.</figcaption></figure><figure class="tennis-team-detail"><img src="./assets/projects/tennis-buddy-team-2.webp" alt="A participant holds a phone displaying the teammate who could not attend the group photo." width="900" height="1200" loading="lazy" decoding="async"/><figcaption>Making room for the teammate who couldn't be there.</figcaption></figure></div>
-        <div class="tennis-team-credit"><p>Michelle Heo · Anoushka Sengupta · Alan Chen · Hector He · Yina Bao</p><a href="https://z4ziad.github.io/assets/img/auto_robo/f25/tennis_buddy/tennisbuddy_144521_13716459_Final%20Presentation.pdf" target="_blank" rel="noopener noreferrer">Project report <span aria-hidden="true">↗</span></a></div>
       </section>
     </div>
   </article>
-  <div class="projects-outro projects-shell"><p>From an idea to its next experiment.</p><a href="./research.html">Explore the research <span aria-hidden="true">↗</span></a></div>
+  <div class="projects-outro projects-shell"><p>From an idea to its next experiment.</p><a href="./index.html">Explore the research <span aria-hidden="true">↗</span></a></div>
 </main>
 <footer class="site-footer"><a href="./index.html">zhilinhe92 <span>↗</span></a><span>© 2026 Zhilin He</span><span>Carnegie Mellon University</span></footer>
 <script type="module" src="./src/projects.js"></script>

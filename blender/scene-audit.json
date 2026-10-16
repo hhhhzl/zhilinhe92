@@ -2,14 +2,14 @@
   "coordinates": "Blender Z up; export glTF +Y up (x,z,-y)",
   "human_bounds": {
     "min": [
-      -0.29014840722084045,
+      -0.2851543128490448,
       0.754551887512207,
-      0.0003910520754288882
+      0.00039105225005187094
     ],
     "max": [
-      0.2924797236919403,
-      1.0937097072601318,
-      1.7781764268875122
+      0.28748100996017456,
+      1.090034008026123,
+      1.7857742309570312
     ]
   },
   "robot_bounds": {
@@ -24,8 +24,8 @@
       1.322845458984375
     ]
   },
-  "mesh_objects": 46,
-  "triangles": 453104,
+  "mesh_objects": 55,
+  "triangles": 556074,
   "g1_visual_meshes": 35,
   "g1_source": "/Users/zhilinhe/Desktop/hhhhzl/EduGetRicher/CMU/projects/enerdynamics/third_party/mujoco_menagerie/unitree_g1",
   "human_eye_blender": [

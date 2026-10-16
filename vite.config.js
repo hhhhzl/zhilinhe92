@@ -3,7 +3,7 @@ export default defineConfig({
   base: './',
   build: {
     rollupOptions: {
-      input: ['index.html', 'research.html', 'projects.html', 'films.html'],
+      input: ['index.html', 'research.html', 'scene.html', 'projects.html'],
       output: {
         manualChunks(id) {
           if (id.includes('/three/examples/')) return 'three-extras';
