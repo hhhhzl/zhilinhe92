@@ -1,8 +1,9 @@
 /**
  * Six research papers from the author-provided cv.tex (IET book excluded).
  * Author order, contribution marks, submission venues and Spotlight status follow the CV.
- * Media: [{ type: 'video'|'image'|'gif', src, poster?, alt, caption? }].
- * preview remains compatible with the single-preview renderer. Local paths use ./assets/.
+ * method: original paper mechanism figure; montage: one simultaneous demo composite.
+ * media: archived source inputs for regenerating the composite; not rendered as slides.
+ * preview is a legacy single-image fallback. Local paths use ./assets/.
  * Abstract fields reproduce original author-source abstracts with typesetting normalized.
  * Short summary fields are editorial descriptions.
  * Original public videos are preserved; additional author-provided project clips are
@@ -127,7 +128,26 @@ export const publications = [
       "label": "MGA",
       "theme": "blue"
     },
-    "bibtex": "@misc{he2026mga,\n  title = {Manifold Generative Annealing for Contact Constraint-aware Impedance Control with Reinforcement Learning Prior},\n  author = {Zhilin He and Guoquan Qi and Changliu Liu},\n  year = {2026},\n  note = {In submission · ICLR 2027},\n  eprint = {2610.21140},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.48550/arXiv.2610.21140},\n  url = {https://arxiv.org/abs/2610.21140}\n}"
+    "bibtex": "@misc{he2026mga,\n  title = {Manifold Generative Annealing for Contact Constraint-aware Impedance Control with Reinforcement Learning Prior},\n  author = {Zhilin He and Guoquan Qi and Changliu Liu},\n  year = {2026},\n  note = {In submission · ICLR 2027},\n  eprint = {2610.21140},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.48550/arXiv.2610.21140},\n  url = {https://arxiv.org/abs/2610.21140}\n}",
+    "method": {
+      "type": "image",
+      "src": "./assets/publications/methods/mga.png",
+      "alt": "The original MGA framework diagram connects offline training, a learned proposal prior, manifold-aware model-based refinement, and force-adaptive control; four toy-path panels illustrate the role of LRC.",
+      "caption": "MGA overview: offline policy training, model-based refinement, and force-adaptive deployment with feedback.",
+      "width": 2299,
+      "height": 885
+    },
+    "montage": {
+      "type": "video",
+      "src": "./assets/publications/gallery/mga-experiments.mp4",
+      "gif": "./assets/publications/gallery/mga-experiments.gif",
+      "poster": "./assets/publications/gallery/mga-experiments.jpg",
+      "width": 1200,
+      "height": 900,
+      "alt": "MGA: 9 experiment clips shown simultaneously in one animated montage.",
+      "caption": "All 9 experiment clips shown together. Each panel loops independently.",
+      "sourceCount": 9
+    }
   },
   {
     "selected": true,
@@ -228,7 +248,26 @@ export const publications = [
       "label": "2GO",
       "theme": "blue"
     },
-    "bibtex": "@misc{he2026twogo,\n  title = {Model-Based Geometry-Aware Generative Optimization for Constrained Locomotion Planning},\n  author = {Zhilin He and Xinyuan Wang and Changliu Liu},\n  year = {2026},\n  note = {In submission · RA-L 2026},\n  eprint = {2610.07772},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.48550/arXiv.2610.07772},\n  url = {https://arxiv.org/abs/2610.07772}\n}"
+    "bibtex": "@misc{he2026twogo,\n  title = {Model-Based Geometry-Aware Generative Optimization for Constrained Locomotion Planning},\n  author = {Zhilin He and Xinyuan Wang and Changliu Liu},\n  year = {2026},\n  note = {In submission · RA-L 2026},\n  eprint = {2610.07772},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.48550/arXiv.2610.07772},\n  url = {https://arxiv.org/abs/2610.07772}\n}",
+    "method": {
+      "type": "image",
+      "src": "./assets/publications/methods/twogo.png",
+      "alt": "Original 2GO framework diagram showing task modulation, constraint geometry, geometric-aware generative updates, optional CFS correction, and governor-based deployment.",
+      "caption": "2GO overview: transport selection, geometry-shaped score and exploration, CFS retraction, and deployment through a reference governor.",
+      "width": 2368,
+      "height": 933
+    },
+    "montage": {
+      "type": "video",
+      "src": "./assets/publications/gallery/2go-experiments.mp4",
+      "gif": "./assets/publications/gallery/2go-experiments.gif",
+      "poster": "./assets/publications/gallery/2go-experiments.jpg",
+      "width": 1200,
+      "height": 900,
+      "alt": "2GO: 7 experiment clips shown simultaneously in one animated montage.",
+      "caption": "All 7 experiment clips shown together. Each panel loops independently.",
+      "sourceCount": 7
+    }
   },
   {
     "selected": true,
@@ -340,7 +379,26 @@ export const publications = [
       "label": "FedGuide",
       "theme": "blue"
     },
-    "bibtex": "@inproceedings{he2026fedguide,\n  title = {FedGuide: Diffusion-Prior Alignment and Value Baseline Guidance for Heterogeneous Federated Reinforcement Learning},\n  author = {Zhilin He and Gauri Joshi},\n  year = {2026},\n  booktitle = {Conference on Robot Learning (CoRL)},\n  eprint = {2609.18964},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.LG},\n  doi = {10.48550/arXiv.2609.18964},\n  url = {https://arxiv.org/abs/2609.18964},\n  note = {Spotlight presentation}\n}"
+    "bibtex": "@inproceedings{he2026fedguide,\n  title = {FedGuide: Diffusion-Prior Alignment and Value Baseline Guidance for Heterogeneous Federated Reinforcement Learning},\n  author = {Zhilin He and Gauri Joshi},\n  year = {2026},\n  booktitle = {Conference on Robot Learning (CoRL)},\n  eprint = {2609.18964},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.LG},\n  doi = {10.48550/arXiv.2609.18964},\n  url = {https://arxiv.org/abs/2609.18964},\n  note = {Spotlight presentation}\n}",
+    "method": {
+      "type": "image",
+      "src": "./assets/publications/methods/fedguide.png",
+      "alt": "Three original FedGuide panels compare policy-based aggregation, diffusion priors only, and priors with a value baseline in a two-client heterogeneous setting.",
+      "caption": "FedGuide method visualization: policy aggregation, diffusion priors, and diffusion priors with value-baseline guidance.",
+      "width": 2387,
+      "height": 746
+    },
+    "montage": {
+      "type": "video",
+      "src": "./assets/publications/gallery/fedguide-experiments.mp4",
+      "gif": "./assets/publications/gallery/fedguide-experiments.gif",
+      "poster": "./assets/publications/gallery/fedguide-experiments.jpg",
+      "width": 1200,
+      "height": 656,
+      "alt": "FedGuide: 8 experiment clips shown simultaneously in one animated montage.",
+      "caption": "All 8 experiment clips shown together. Each panel loops independently.",
+      "sourceCount": 8
+    }
   },
   {
     "selected": true,
@@ -453,7 +511,26 @@ export const publications = [
       "label": "MD-COAS",
       "theme": "blue"
     },
-    "bibtex": "@inproceedings{he2026mdcoas,\n  title = {Motion Planning with Model-Based Diffusion via Constraint Optimization and Adaptive Scheduling},\n  author = {Zhilin He and Bowei Li and Jianlin Dou and Yuner Zhang and Changliu Liu},\n  year = {2026},\n  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},\n  eprint = {2607.14455},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.48550/arXiv.2607.14455},\n  url = {https://arxiv.org/abs/2607.14455}\n}"
+    "bibtex": "@inproceedings{he2026mdcoas,\n  title = {Motion Planning with Model-Based Diffusion via Constraint Optimization and Adaptive Scheduling},\n  author = {Zhilin He and Bowei Li and Jianlin Dou and Yuner Zhang and Changliu Liu},\n  year = {2026},\n  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},\n  eprint = {2607.14455},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.48550/arXiv.2607.14455},\n  url = {https://arxiv.org/abs/2607.14455}\n}",
+    "method": {
+      "type": "image",
+      "src": "./assets/publications/methods/mdcoas.png",
+      "alt": "Original MD-COAS diagram shows CFS trajectory projection, constraint optimization, adaptive scheduling, and the model-based diffusion schedule.",
+      "caption": "MD-COAS overview: constraint optimization and adaptive scheduling coupled to model-based diffusion.",
+      "width": 2600,
+      "height": 872
+    },
+    "montage": {
+      "type": "video",
+      "src": "./assets/publications/gallery/md-coas-experiments.mp4",
+      "gif": "./assets/publications/gallery/md-coas-experiments.gif",
+      "poster": "./assets/publications/gallery/md-coas-experiments.jpg",
+      "width": 1200,
+      "height": 840,
+      "alt": "MD-COAS: 7 experiment clips shown simultaneously in one animated montage.",
+      "caption": "All 7 experiment clips shown together. Each panel loops independently.",
+      "sourceCount": 7
+    }
   },
   {
     "selected": true,
@@ -553,7 +630,26 @@ export const publications = [
       "label": "MDOC",
       "theme": "blue"
     },
-    "bibtex": "@inproceedings{he2026mdoc,\n  title = {Model-Based Diffusion Optimal Control for Multi-Robot Motion Planning},\n  author = {Zhilin He and Yorai Shaoul and Jiaoyang Li},\n  year = {2026},\n  booktitle = {Robotics: Science and Systems (RSS)},\n  eprint = {2607.12423},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.15607/RSS.2026.XXII.041},\n  url = {https://arxiv.org/abs/2607.12423}\n}"
+    "bibtex": "@inproceedings{he2026mdoc,\n  title = {Model-Based Diffusion Optimal Control for Multi-Robot Motion Planning},\n  author = {Zhilin He and Yorai Shaoul and Jiaoyang Li},\n  year = {2026},\n  booktitle = {Robotics: Science and Systems (RSS)},\n  eprint = {2607.12423},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.15607/RSS.2026.XXII.041},\n  url = {https://arxiv.org/abs/2607.12423}\n}",
+    "method": {
+      "type": "image",
+      "src": "./assets/publications/methods/mdoc.png",
+      "alt": "The original MDOC and MDOC-CBS algorithm boxes, cropped from paper page 4 and placed side by side without changing their pseudocode.",
+      "caption": "Original method algorithms: MDOC performs CBF-constrained diffusion rollouts; MDOC-CBS coordinates robots through conflict-based search.",
+      "width": 2600,
+      "height": 1673
+    },
+    "montage": {
+      "type": "video",
+      "src": "./assets/publications/gallery/mdoc-experiments.mp4",
+      "gif": "./assets/publications/gallery/mdoc-experiments.gif",
+      "poster": "./assets/publications/gallery/mdoc-experiments.jpg",
+      "width": 1200,
+      "height": 856,
+      "alt": "MDOC: 6 experiment clips shown simultaneously in one animated montage.",
+      "caption": "All 6 experiment clips shown together. Each panel loops independently.",
+      "sourceCount": 6
+    }
   },
   {
     "id": "wang2024antivirus",
@@ -626,6 +722,22 @@ export const publications = [
     "monogram": {
       "label": "Antivirus Routing",
       "theme": "blue"
+    },
+    "method": {
+      "type": "image",
+      "src": "./assets/publications/methods/acc.png",
+      "alt": "Original three-cluster model showing susceptible, infected and recovered states, intra-cluster migration, and antivirus communication between clusters.",
+      "caption": "Heterogeneous-cluster system model: antivirus communication and node-state transitions across three network clusters.",
+      "width": 2018,
+      "height": 922
+    },
+    "montage": {
+      "type": "image",
+      "src": "./assets/publications/gallery/acc-results-composite.png",
+      "width": 840,
+      "height": 584,
+      "alt": "Original antivirus-routing experiment plots displayed together.",
+      "caption": "Original experiment results from the author repository. The source provides static plots, presented here without synthetic animation."
     }
   }
 ];

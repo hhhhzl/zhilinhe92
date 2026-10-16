@@ -1,31 +1,38 @@
-/* All experiments live in the paper's original, compact left preview. */
-#publication-list .publication-showcase { width: 100%; max-width: 250px; overflow: visible; }
-.preview-stage { display: block; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #fff; border: 1px solid #ddd6d5; cursor: zoom-in; }
-.preview-slide { width: 100%; height: 100%; }
-#publication-list .publication-showcase .publication-preview-media { display: block; width: 100%; height: 100%; max-height: none; aspect-ratio: auto; object-fit: contain; background: #fff; border: 0; animation: preview-reveal 180ms ease-out; }
-@keyframes preview-reveal { from { opacity: .35; } to { opacity: 1; } }
-.preview-toolbar { display: flex; align-items: center; gap: 4px; padding-top: 6px; color: #655c65; }
-.preview-control { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 25px; width: 25px; height: 26px; padding: 0; border: 0; background: transparent; color: inherit; font-size: 14px; line-height: 1; cursor: pointer; transition: color .2s, background .2s; }
+/* Exactly two visual plates in the paper's original image column. */
+#publication-list .publication-showcase { width: 100%; overflow: visible; display: grid; gap: 18px; }
+.publication-visual { margin: 0; min-width: 0; }
+.preview-stage { display: block; position: relative; width: 100%; padding: 0; overflow: hidden; background: #fff; border: 1px solid #ded7d7; cursor: zoom-in; }
+#publication-list .publication-showcase .publication-preview-media { display: block; width: 100%; height: auto; max-height: none; aspect-ratio: auto; object-fit: contain; background: #fff; border: 0; }
+#publication-list .publication-visual-method .publication-preview-media { height: 170px; padding: 9px; }
+.preview-expand { display: grid; place-items: center; position: absolute; right: 6px; bottom: 6px; height: 24px; width: 24px; color: #403b4a; background: #f5f1eaed; border: 1px solid #c7bec47a; font-size: 15px; opacity: 0; transform: translateY(3px); transition: opacity .2s, transform .2s; }
+.preview-stage:hover .preview-expand, .preview-stage:focus-visible .preview-expand { opacity: 1; transform: none; }
+.preview-caption { display: flex; align-items: center; justify-content: space-between; min-height: 24px; padding-top: 5px; color: #786c78; }
+.preview-kind { font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
+.preview-control { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; padding: 0; border: 0; background: transparent; color: inherit; font-size: 14px; line-height: 1; cursor: pointer; }
 .preview-control:hover { background: #e8e1df; color: var(--ink); }
-.preview-counter { color: #726973; font: 9px/1.2 var(--font-mono, monospace); letter-spacing: .08em; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.preview-toggle { margin-left: auto; font-size: 12px; }
-.preview-open { font-size: 15px; }
-.preview-markers { display: flex; gap: 3px; width: 100%; }
-.preview-marker { flex: 1 1 0; min-width: 0; height: 24px; width: auto; }
-.preview-marker:hover { background: transparent; }
-.preview-marker-track { display: block; width: 100%; height: 2px; overflow: hidden; background: #dcd4d6; transition: background .2s; }
-.preview-marker[aria-current="true"] .preview-marker-track { background: #b2a3b3; }
-.preview-marker:hover .preview-marker-track { background: #9f8fa2; }
-.preview-marker-fill { display: block; width: 100%; height: 100%; background: #66516e; transform: scaleX(0); transform-origin: left; }
-.preview-caption { min-height: 2.8em; margin: 0; color: #776c77; font-size: 9px; line-height: 1.4; letter-spacing: .015em; }
-.publication-showcase :focus-visible { outline: 2px solid #796789; outline-offset: 2px; }
+.preview-toggle { height: 24px; font-size: 12px; }
+.publication-showcase :focus-visible, .publication-viewer :focus-visible { outline: 2px solid #796789; outline-offset: 3px; }
 .publication-showcase .preview-stage:focus-visible { outline-offset: -3px; }
+.publication-viewer-open { overflow: hidden; }
+.publication-viewer { width: min(1200px, calc(100vw - 56px), calc((100dvh - 210px) * var(--visual-aspect, 1.333))); min-width: min(340px, calc(100vw - 20px)); max-width: none; max-height: calc(100dvh - 48px); padding: 0; border: 1px solid #d0c6c7; background: #f1eee8; color: var(--ink); box-shadow: 0 24px 100px #17152555; }
+.publication-viewer::backdrop { background: #171523bd; backdrop-filter: blur(6px); }
+.viewer-header, .viewer-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 22px; }
+.viewer-title { font: 500 12px/1.5 'DM Sans', sans-serif; letter-spacing: .10em; text-transform: uppercase; }
+.viewer-close { font-size: 26px; flex: 0 0 32px; width: 32px; height: 32px; }
+.viewer-stage { background: #fff; }
+.viewer-stage .publication-preview-media { display: block; width: 100%; height: auto; max-height: calc(100dvh - 210px); object-fit: contain; }
+.viewer-footer { align-items: start; border-top: 1px solid #ded7d7; }
+.viewer-caption { color: #746976; font-size: 11px; line-height: 1.7; max-width: 800px; }
+.viewer-download { flex-shrink: 0; border-bottom: 1px solid #b4a3b6; font-size: 11px; line-height: 1.8; }
+@media (hover: none) { .preview-expand { opacity: 1; transform: none; } }
 @media (max-width: 680px) {
-  #publication-list .publication-showcase { max-width: none; }
-  .preview-control { height: 30px; flex-basis: 30px; width: 30px; }
-  .preview-marker { flex: 1 1 0; width: auto; height: 24px; }
-  .preview-caption { font-size: 10px; }
+  #publication-list .publication-showcase { gap: 13px; }
+  #publication-list .publication-visual-method .publication-preview-media { height: auto; max-height: 220px; min-height: 110px; }
+  .preview-kind { font-size: 9px; }
+  .preview-control { width: 32px; height: 32px; }
+  .publication-viewer { width: calc(100vw - 20px); max-height: calc(100dvh - 28px); }
+  .viewer-header, .viewer-footer { padding: 10px 13px; gap: 12px; }
+  .viewer-footer { flex-direction: column; }
+  .viewer-stage .publication-preview-media { max-height: calc(100dvh - 250px); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .publication-showcase *, .publication-showcase *::before { transition: none !important; animation: none !important; }
-}
+@media (prefers-reduced-motion: reduce) { .publication-showcase *, .publication-viewer * { transition: none !important; } }

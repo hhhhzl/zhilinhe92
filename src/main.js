@@ -22,6 +22,8 @@ const v3=(x,y,z)=>new THREE.Vector3(x,y,z);
 const positions=new THREE.CatmullRomCurve3([v3(0,1.215,.76),v3(.55,1.54,1.23),v3(1.9,1.13,1.48),v3(3.55,2.05,.65),v3(2.9,1.73,-1.5),v3(.65,1.77,-1.4),v3(0,1.65,-.77)],false,'catmullrom',.42);
 const targets=new THREE.CatmullRomCurve3([v3(-.48,1.48,-.95),v3(-.05,1.26,-.45),v3(0,1.13,-.03),v3(0,.99,0),v3(0,1.02,.08),v3(0,1.18,.55),v3(0,.78,.95)],false,'catmullrom',.38);
 const pos=new THREE.Vector3(),target=new THREE.Vector3();
+const focusPoint=new THREE.Vector3(),viewDirection=new THREE.Vector3();
+const humanEyes=v3(0,1.64,-.95),robotEyes=v3(0,1.215,.95);
 function setTarget(value){
   state.target=THREE.MathUtils.clamp(value,0,1);
   if(state.reduced)state.progress=state.target;
@@ -44,7 +46,10 @@ function pose(){
   const movement=Math.abs(t-lastProgress);lastProgress=t;
   optics.uniforms.aberration.value=state.reduced?.2:Math.min(1.05,.22+movement*85);
   optics.uniforms.lens.value=1-reveal;
-  bokeh.uniforms.focus.value=pos.distanceTo(target);
+  // Pull focus between the actual subjects, rather than empty space at the orbit's centre.
+  focusPoint.lerpVectors(humanEyes,robotEyes,THREE.MathUtils.smoothstep(t,.48,.80));
+  camera.getWorldDirection(viewDirection);
+  bokeh.uniforms.focus.value=Math.max(.1,focusPoint.sub(pos).dot(viewDirection));
   bokeh.uniforms.aperture.value=THREE.MathUtils.lerp(.00125,.00045,mid);
   canvas.setAttribute('aria-valuenow',String(Math.round(t*100)));
   canvas.setAttribute('aria-valuetext',t<.03?'Robot perspective':t>.97?'Human perspective':'Between perspectives');
@@ -85,16 +90,17 @@ try{
   scene=new THREE.Scene();scene.background=new THREE.Color('#222745');scene.fog=new THREE.Fog('#36334f',12,43);
   camera=new THREE.PerspectiveCamera(55,1,.035,70);
   const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment();scene.environment=pmrem.fromScene(room,.04).texture;scene.environmentIntensity=.32;room.dispose();pmrem.dispose();
-  scene.add(new THREE.HemisphereLight('#b0b8e7','#453444',.8));
+  scene.add(new THREE.HemisphereLight('#b0b8e7','#453444',.48));
   const sun=new THREE.DirectionalLight('#ffbc9c',3.1);sun.position.set(-16,9,-10);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-8;sun.shadow.camera.right=8;sun.shadow.camera.top=8;sun.shadow.camera.bottom=-8;sun.shadow.camera.far=50;sun.shadow.normalBias=.009;sun.shadow.bias=-.0002;scene.add(sun);
   RectAreaLightUniformsLib.init();
-  const key=new THREE.RectAreaLight('#ffd0b9',4,9,4);key.position.set(-4.5,3.4,-.3);key.lookAt(0,1,0);scene.add(key);
-  const fill=new THREE.RectAreaLight('#8797ee',2.8,9,5);fill.position.set(4.5,3,0);fill.lookAt(0,1,0);scene.add(fill);
+  const key=new THREE.RectAreaLight('#ffd0b9',5.2,3,3);key.position.set(-3.4,3.6,1.0);key.lookAt(0,1.35,-.95);scene.add(key);
+  const fill=new THREE.RectAreaLight('#8797ee',1.8,3.5,3);fill.position.set(3.8,2.3,.4);fill.lookAt(0,1.35,-.95);scene.add(fill);
   const rim=new THREE.DirectionalLight('#bcc1f6',1.25);rim.position.set(2,4,6);scene.add(rim);
-  const gltf=await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/atelier.glb?look=blue-white-polo-v2`);
+  const gltf=await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}assets/atelier.glb?look=cinematic-polo-v3`);
   robot=gltf.scene.getObjectByName('Robot');human=gltf.scene.getObjectByName('Human');
   if(!robot||!human)throw new Error('The scene is missing a subject root.');
-  gltf.scene.traverse(o=>{if(o.isLight||o.isCamera)o.visible=false;if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=true;for(const m of Array.isArray(o.material)?o.material:[o.material]){if(m.transparent||/glass|glow|sky/i.test(o.name+m.name))o.castShadow=false;if(/floor/i.test(o.name)){m.roughness=.72;m.metalness=.06;}if(/head|skin/i.test(m.name)){m.roughness=.72;m.metalness=0;}if(m.map)m.map.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());}});
+  // Keep the actor's authored skin, hair, and fabric PBR maps intact.
+  gltf.scene.traverse(o=>{if(o.isLight||o.isCamera)o.visible=false;if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=true;for(const m of Array.isArray(o.material)?o.material:[o.material]){if(m.transparent||/glass|glow|sky/i.test(o.name+m.name))o.castShadow=false;if(/floor/i.test(o.name)){m.roughness=.72;m.metalness=.06;}if(m.map)m.map.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());}});
   scene.add(gltf.scene);
   const hall=new THREE.Group();scene.add(hall);[...gltf.scene.children].filter(o=>/^(Architecture_|Floor)/.test(o.name)).forEach(o=>hall.attach(o));hall.rotation.y=.24;
   floorFinish();

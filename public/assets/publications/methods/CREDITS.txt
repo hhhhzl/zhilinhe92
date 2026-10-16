@@ -1,0 +1,38 @@
+Original publication method illustrations
+Checked 2026-10-16
+
+Author-provided research material reused at the author’s request. Copyright remains with the original authors and applicable publishers. This manifest grants no new license. MDOC, MD-COAS, and FedGuide public paper licensing was previously recorded as CC BY 4.0 in sources.json.
+
+Scientific diagrams were not generated or redrawn with AI. Only original-source rendering, lossless cropping, white padding, and the explicitly described MDOC algorithm composition were performed.
+
+mga — MGA overview, LaTeX label fig:mga_overview
+https://arxiv.org/abs/2610.21140
+enerdynamics/latex/latex_mga/figures/mga.pdf
+Original standalone figure PDF rendered to 2400 px width with Poppler. Only white margins trimmed; 20 px white padding added. All diagram and toy-example panels retained.
+
+twogo — Overview of the 2GO framework, LaTeX label fig:2go_overview
+https://arxiv.org/abs/2610.07772
+enerdynamics/latex/latex_2go/figs/2go.pdf
+Original standalone figure PDF rendered to 2400 px width with Poppler. Only white margins trimmed; 20 px white padding added. All original panels and labels retained.
+
+fedguide — Figure 1, paper PDF page 4: Method Visualization with 2 Clients Heterogeneous Settings
+https://arxiv.org/abs/2609.18964
+https://arxiv.org/pdf/2609.18964
+Paper PDF page 4 rendered at 432 dpi with link annotations hidden. Figure and its three panel labels cropped; the paragraph caption and all surrounding paper text omitted. White margins trimmed and 20 px padding added.
+
+mdcoas — Figure 1: Constraint Optimization and Adaptive Scheduling overview
+https://arxiv.org/abs/2607.14455
+enerdynamics/latex/latex_mdcoas/figures/main_page.pdf
+Original letter-page figure PDF rendered at 360 dpi. Empty page margins removed around the artwork; 20 px white padding added and uniformly downsampled to 2600 px width. Diagram content unchanged.
+
+mdoc — Algorithms 1 and 2, paper PDF page 4
+https://arxiv.org/abs/2607.12423
+https://arxiv.org/pdf/2607.12423
+Paper PDF page 4 rendered at 360 dpi with link annotations hidden. Each complete algorithm box cropped separately to exclude adjacent prose, then aligned side by side on white. No pseudocode, equations, or original algorithm titles rewritten.
+
+acc — Figure 4, preprint PDF page 5: Heterogeneous-Cluster Model
+https://ieeexplore.ieee.org/document/10644719
+https://raw.githubusercontent.com/hhhhzl/sir_antivirus/main/assets/multicluster_large.png
+Original 2018 x 922 author-repository PNG retained at native resolution and losslessly re-encoded. Visually verified against Figure 4 of the preprint; the PDF embeds this same 2018 x 922 artwork. No caption, results, or page text included.
+
+Full provenance, original captions, dimensions, crops, and SHA-256 checksums: ../method-sources.json

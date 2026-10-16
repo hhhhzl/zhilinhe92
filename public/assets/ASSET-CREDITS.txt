@@ -5,3 +5,4 @@ Atelier, material adaptation and Echo choreography: built for zhilinhe92. Echo i
 Research portraits: the two photographs supplied by Zhilin He, published at the author’s request.
 Laboratory MP4/GIF/poster derived from user-provided footage. GIF excerpt 5–9 s, 480x222, 9 fps.
 Paper preview image provenance and CC BY 4.0 attribution: assets/publications/CREDITS.txt.
+Photo-referenced skin and transparent hair-card texture atlases: generated with built-in ImageGen for this site; likeness references supplied and authorized by Zhilin He. Geometry adaptation, hair placement and PBR baking are authored in Blender; prompts are included in blender/.

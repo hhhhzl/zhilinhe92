@@ -5,7 +5,7 @@ edited with built-in ImageGen from the owner's authorized reference pictures.
 Clothing, eyewear and hair are native geometry/material adaptations.
 """
 import bpy, math, random, os
-from avatar_surface import bake_color,project_face
+from avatar_surface import bake_color,project_face,refine_skin,refine_cotton,separate_eyes
 from mathutils import Vector, Matrix
 
 def customize(human,rig,meshes,here):
@@ -99,6 +99,8 @@ def customize(human,rig,meshes,here):
                 hand_weight=sum(g.weight for g in v.groups if any(k in groups[g.group] for k in ['Hand','Finger']))
                 taper=(1-min(1.,hand_weight/.35))*smooth(.835,.93,q.z)
                 q+=n*(.006+(.004 if q.z<1.32 else .002))*taper
+                cloth_fold=math.exp(-((q.z-1.10)/.18)**2)*math.exp(-(q.x/.24)**4)
+                q+=n*.0016*cloth_fold*(math.sin(51*q.z+13*q.x)+.45*math.sin(91*q.z-21*q.x))
                 if abs(q.x)<.28:q.x*=1.06
             elif v.index in pantsverts:
                 centre=.112 if q.x>0 else -.112
@@ -145,6 +147,8 @@ def customize(human,rig,meshes,here):
         bmesh.ops.delete(bm,geom=hidden,context='FACES');bm.to_mesh(o.data);bm.free()
         o.data.update()
         project_face(o,human,headidx,here)
+        refine_skin(o,human,headidx,here)
+        separate_eyes(o,headidx)
     def skin_object(o,bone='Bip01 Head'):
         # Mesh coordinates are actor-space metres, independent of FBX cm scale.
         o.parent=human;o.matrix_parent_inverse=Matrix.Identity(4);o.matrix_basis=Matrix.Identity(4)
@@ -177,7 +181,8 @@ def customize(human,rig,meshes,here):
         accessories.append(tube('Human spectacle temple',[(sign*.060,-.123,1.65),(sign*.079,-.09,1.65),(sign*.087,-.015,1.647),(sign*.085,.026,1.63)],[.0013]*4,frame))
     accessories.append(tube('Human spectacle bridge',[(-.008,-.129,1.65),(0,-.135,1.655),(.008,-.129,1.65)],[.001]*3,frame))
     # Soft cotton collar is a folded continuous strip, with two front points.
-    collar_mat=material('Polo ivory cotton collar',(.74,.77,.76),.88)
+    collar_mat=material('Human Polo soft cotton collar',(.63,.66,.64),.87)
+    collar_mat.node_tree.nodes.get('Principled BSDF').inputs['Sheen Weight'].default_value=.22
     blue_trim=material('Polo deep blue placket',(.025,.070,.15),.83)
     original=meshes[0];M=actor_inv@original.matrix_world
     torso=[M@v.co for v in original.data.vertices if .28>abs((M@v.co).x)]
@@ -189,19 +194,19 @@ def customize(human,rig,meshes,here):
     for i in range(steps+1):
         th=.36+(2*math.pi-.72)*i/steps;f=math.cos(th)
         inner=Vector((.059*math.sin(th),.012-.073*math.cos(th),1.486+.014*(1-f)/2))
-        outer=Vector((.091*math.sin(th),.012-.117*math.cos(th),1.451+.017*(1-f)/2))
+        outer=Vector((.086*math.sin(th),.012-.117*math.cos(th),1.459+.014*(1-f)/2))
         edge=min(i,steps-i)/steps
         if edge<.10:
-            amount=1-edge/.10;outer.z-=.017*amount
+            amount=1-edge/.10;outer.z-=.013*amount
         if f>.25:
             inner.y=front_y(inner.x,inner.z)-.006
             outer.y=front_y(outer.x,outer.z)-.008
         for k in range(4):
-            u=k/3;p=inner.lerp(outer,u);p.z+=.006*math.sin(math.pi*u);verts.append(p)
+            u=k/3;p=inner.lerp(outer,u);p.z+=.002*math.sin(math.pi*u);verts.append(p)
         if i:
             for k in range(3):faces.append(((i-1)*4+k,(i-1)*4+k+1,i*4+k+1,i*4+k))
     collar=mesh('Human soft polo collar',verts,faces,collar_mat,'Bip01 Spine2')
-    solid=collar.modifiers.new('Cotton collar thickness','SOLIDIFY');solid.thickness=.0015
+    solid=collar.modifiers.new('Cotton collar thickness','SOLIDIFY');solid.thickness=.0006
     sub=collar.modifiers.new('Soft sewn collar edge','SUBSURF');sub.levels=2
     bpy.context.view_layer.objects.active=collar
     bpy.ops.object.modifier_move_to_index(modifier=sub.name,index=0);bpy.ops.object.modifier_apply(modifier=sub.name)
@@ -223,58 +228,8 @@ def customize(human,rig,meshes,here):
     for z in [1.402,1.355]:
         points=[(.0032*math.cos(a),front_y(0,z)-.003,z+.0032*math.sin(a)) for a in [2*math.pi*i/16 for i in range(17)]]
         accessories.append(tube('Human polo mother of pearl button',points,[.0012]*len(points),collar_mat,'Bip01 Spine2'))
-    # Continuous dark wavy silhouette and broad textured curtain locks.
-    hair=material('Zhilin wavy black textured hair',(.012,.014,.018),.93)
-    hn=hair.node_tree.nodes;hl=hair.node_tree.links;hp=hn.get('Principled BSDF')
-    hi=hn.new('ShaderNodeTexImage');hi.image=hair_image
-    tint=hn.new('ShaderNodeMix');tint.data_type='RGBA';tint.blend_type='MULTIPLY';tint.inputs[0].default_value=1;tint.inputs[7].default_value=(.16,.17,.20,1)
-    hl.new(hi.outputs[0],tint.inputs[6]);hl.new(tint.outputs[2],hp.inputs['Base Color']);hp.inputs['Specular IOR Level'].default_value=.10
-    verts=[];faces=[];rings=25;segments=90
-    for i in range(rings+1):
-        for j in range(segments):
-            th=2*math.pi*j/segments;f=math.cos(th)
-            bottom=1.615+.050*max(f,0)+.040*math.exp(-(math.sin(th)/.25)**2)*max(f,0)
-            phi=i/rings*math.acos((bottom-1.683)/.101)
-            wave=1+.048*math.sin(th*12+phi*3)+.020*math.sin(th*27-phi*4)
-            verts.append((.107*math.sin(phi)*math.sin(th)*wave,.008-(.104+.030*max(f,0))*math.sin(phi)*math.cos(th)*wave,1.683+.101*math.cos(phi)+.002*math.sin(th*18+phi*8)*math.sin(phi)))
-            if i:faces.append(((i-1)*segments+j,(i-1)*segments+(j+1)%segments,i*segments+(j+1)%segments,i*segments+j))
-    cap=mesh('Human full wavy hair silhouette',verts,faces,hair)
-    uv=cap.data.uv_layers.new(name='Hair texture')
-    for p in cap.data.polygons:
-        for li in p.loop_indices:
-            v=cap.data.loops[li].vertex_index;row,col=divmod(v,segments);uv.data[li].uv=(.035+.16*col/segments,.55+.38*row/rings)
-    accessories.append(cap)
-    # Asymmetric individual swept fibers replace the detached solid front cards.
-    # The overlapping bundles begin on the crown and curl toward the temples.
-    front_strands=[material('Natural front hair fiber '+str(i),(.012+i*.003,.010+i*.0025,.009+i*.002),.78) for i in range(3)]
-    for sign in [-1,1]:
-        for j in range(105):
-            layer=j/104;phase=rng.uniform(-.6,.6);points=[];radii=[]
-            rootx=.004+.017*(j%15)/14
-            rooty=-.048+.053*layer
-            endx=.076+.022*layer
-            endz=1.663+.026*layer+(.007 if sign<0 else 0)
-            for k in range(25):
-                t=k/24;swell=math.sin(math.pi*t)
-                x=sign*(rootx+(endx-rootx)*math.sin(t*math.pi/2)+.005*math.sin(t*8+phase)*swell)
-                y=rooty*(1-t)+(-.093+.021*layer)*t-.050*swell+.003*math.sin(t*10+phase)*swell
-                z=(1.776-.005*layer)*(1-t)+endz*t+.014*swell+.003*math.sin(t*9+phase)*swell
-                points.append((x,y,z));radii.append(.00072*(.30+.70*swell))
-            accessories.append(tube('Human swept front hair fiber',points,radii,front_strands[j%3],sides=4))
-    # Fine swept strands break the continuous shell's broad specular highlight.
-    # They are real skinned geometry, so their texture survives glTF export.
-    strand_materials=[material('Natural dark hair strand '+str(i),(.009+i*.004,.008+i*.0035,.007+i*.003),.72) for i in range(3)]
-    for j in range(360):
-        th=2*math.pi*(j+.27)/360;f=math.cos(th)
-        bottom=1.615+.050*max(f,0)+.040*math.exp(-(math.sin(th)/.25)**2)*max(f,0)
-        end=math.acos((bottom-1.683)/.101);points=[];radii=[]
-        for k in range(19):
-            t=k/18;phi=.08+(end-.08)*t
-            angle=th+.035*math.sin(phi*4+th*3)*t
-            wave=1+.048*math.sin(angle*12+phi*3)+.020*math.sin(angle*27-phi*4)
-            points.append((.108*math.sin(phi)*math.sin(angle)*wave,.008-(.105+.030*max(math.cos(angle),0))*math.sin(phi)*math.cos(angle)*wave,1.683+.102*math.cos(phi)+.002*math.sin(angle*18+phi*8)*math.sin(phi)))
-            radii.append(.00045*(.5+.5*math.sin(math.pi*t)))
-        accessories.append(tube('Human fine wavy hair strand',points,radii,strand_materials[j%3],sides=4))
+    from cinematic_hair import build_hair
+    accessories.extend(build_hair(here,mesh,tube,material))
     # Fine blue/ivory horizontal bands follow the cloth rather than world space
     # after baking, so their scale stays consistent through the animation.
     N=jacket.node_tree.nodes;L=jacket.node_tree.links
@@ -283,10 +238,11 @@ def customize(human,rig,meshes,here):
     scale=N.new('ShaderNodeMath');scale.operation='MULTIPLY';scale.inputs[1].default_value=1/.090;L.new(sep.outputs['Z'],scale.inputs[0])
     mod=N.new('ShaderNodeMath');mod.operation='FRACT';L.new(scale.outputs[0],mod.inputs[0])
     ramp=N.new('ShaderNodeValToRGB');ramp.color_ramp.interpolation='CONSTANT'
-    ramp.color_ramp.elements[0].color=(.025,.10,.27,1);ramp.color_ramp.elements[1].position=.50;ramp.color_ramp.elements[1].color=(.77,.80,.78,1);L.new(mod.outputs[0],ramp.inputs[0])
+    ramp.color_ramp.elements[0].color=(.018,.063,.16,1);ramp.color_ramp.elements[1].position=.50;ramp.color_ramp.elements[1].color=(.63,.66,.64,1);L.new(mod.outputs[0],ramp.inputs[0])
     noise=N.new('ShaderNodeTexNoise');noise.inputs['Scale'].default_value=1050;noise.inputs['Detail'].default_value=2;L.new(tc.outputs['Object'],noise.inputs['Vector'])
     grain=N.new('ShaderNodeMixRGB');grain.blend_type='MULTIPLY';grain.inputs[0].default_value=.10;L.new(ramp.outputs[0],grain.inputs[1]);L.new(noise.outputs['Fac'],grain.inputs[2])
     bake_color(original,ji,jacket,grain.outputs[0],here,'zhilin-polo')
+    refine_cotton(original,human,ji,here)
     # Join accessories by material to keep draw calls bounded, retaining weights.
     by_material={}
     for o in accessories:by_material.setdefault(o.data.materials[0],[]).append(o)

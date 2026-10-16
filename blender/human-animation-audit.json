@@ -55,22 +55,6 @@
   ],
   "texture_audit": [
     {
-      "name": "m003_head_color",
-      "size": [
-        1024,
-        1024
-      ],
-      "format": "JPEG"
-    },
-    {
-      "name": "m003_head_normal",
-      "size": [
-        1024,
-        1024
-      ],
-      "format": "PNG"
-    },
-    {
       "name": "m003_body_color",
       "size": [
         2048,
@@ -80,6 +64,22 @@
     },
     {
       "name": "m003_body_normal",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG"
+    },
+    {
+      "name": "m003_head_color",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "JPEG"
+    },
+    {
+      "name": "m003_head_normal",
       "size": [
         1024,
         1024

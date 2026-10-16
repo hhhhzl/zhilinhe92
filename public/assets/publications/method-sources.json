@@ -1,0 +1,207 @@
+{
+  "checked": "2026-10-16",
+  "rights": "Author-provided research material reused at the author’s request. Copyright remains with the original authors and applicable publishers. This manifest grants no new license. MDOC, MD-COAS, and FedGuide public paper licensing was previously recorded as CC BY 4.0 in sources.json.",
+  "visual_qa": "All six final PNGs opened and inspected at full available resolution. No page prose or paragraph captions are present; original in-figure labels and algorithm headings are retained.",
+  "assets": [
+    {
+      "id": "he2026mga",
+      "paper": "mga",
+      "paper_url": "https://arxiv.org/abs/2610.21140",
+      "author_source": "enerdynamics/latex/latex_mga/figures/mga.pdf",
+      "figure": "MGA overview, LaTeX label fig:mga_overview",
+      "display_caption": "MGA overview: offline policy training, model-based refinement, and force-adaptive deployment with feedback.",
+      "alt": "The original MGA framework diagram connects offline training, a learned proposal prior, manifold-aware model-based refinement, and force-adaptive control; four toy-path panels illustrate the role of LRC.",
+      "transformation": "Original standalone figure PDF rendered to 2400 px width with Poppler. Only white margins trimmed; 20 px white padding added. All diagram and toy-example panels retained.",
+      "render_size": [
+        2400,
+        886
+      ],
+      "crop_pixels": [
+        102,
+        16,
+        2361,
+        861
+      ],
+      "source_sha256": "62e750d778eea98b5926bbe60d9fde14b9b728df7339580df0bda30d86d82a6f",
+      "original_caption_tex": "Left: Overview of \\MGA{}: (1) offline policy training, (2) model-based refinement,\n    and (3) force-adaptive deployment with feedback.\n    Right: an open-circle start-to-goal toy: (A) Gaussian-initialized refinement,\n    (B) RL prior, (C) \\MGA{} w/o LRC, and (D) \\MGA{}.\n    The prior supplies path structure. LRC reduces maximum median-path drift:\n    $0.165$ (B), $0.129$ (C), $0.008$ (D).\n    Arrows mark full-path maxima of distance to the realized manifold. C/D differ only in LRC.",
+      "caption_source": "enerdynamics/latex/latex_mga/tex/mga_overview.tex",
+      "caption_source_sha256": "7156e360447a7249b60ac1146c2c142a26cb80df72562fb73ec8e32ce851b4dc",
+      "src": "./assets/publications/methods/mga.png",
+      "width": 2299,
+      "height": 885,
+      "bytes": 379992,
+      "sha256": "b642a3700b71785e1c9ebc53ab5146ba02bbe998b1aa9e32b687e051009ab3a6"
+    },
+    {
+      "id": "he2026twogo",
+      "paper": "twogo",
+      "paper_url": "https://arxiv.org/abs/2610.07772",
+      "author_source": "enerdynamics/latex/latex_2go/figs/2go.pdf",
+      "figure": "Overview of the 2GO framework, LaTeX label fig:2go_overview",
+      "display_caption": "2GO overview: transport selection, geometry-shaped score and exploration, CFS retraction, and deployment through a reference governor.",
+      "alt": "Original 2GO framework diagram showing task modulation, constraint geometry, geometric-aware generative updates, optional CFS correction, and governor-based deployment.",
+      "transformation": "Original standalone figure PDF rendered to 2400 px width with Poppler. Only white margins trimmed; 20 px white padding added. All original panels and labels retained.",
+      "render_size": [
+        2400,
+        905
+      ],
+      "crop_pixels": [
+        69,
+        0,
+        2397,
+        893
+      ],
+      "source_sha256": "9c162bf7f3f0eb778de6f6910862d150c8cf266888023ad56e917c447b452bb6",
+      "original_caption_tex": "\\textbf{Overview of the 2GO framework.}\n    At each reverse step, 2GO reweights model-based trajectory samples and\n    selects a DDPM-, DDIM-, or flow-like transport. Task-modulated active\n    constraints shape the score through $G^{-1}_k$ and filter stochasticity through\n    $P_k$, with optional CFS correction; a reference governor converts the clean trajectory into executable commands. In a two-time-step foothold contact example (bottom right gray panel), the score $\\hat{\\mathbf S}_{k}$ guides two unconstrained foothold points, $Y_{k}^{1}$ and $Y_{k}^{2}$, which are reshaped into $\\tilde{Y}_{k-1}^{1}$ and $\\tilde{Y}_{k-1}^{2}$ by the $G^{-1}_k$-shaped $\\hat{\\mathbf S}_{k}^{G}$ and $P_k$-filtered exploration, then retracted into the support regions via CFS. The final swing trajectory is shown as a gray line.",
+      "caption_source": "enerdynamics/latex/latex_2go/tex/main_figure.tex",
+      "caption_source_sha256": "04f0b91b416b1f65bbcd309fdd086ebd530ca0e9f4e3b4c0368095b345efb4ae",
+      "src": "./assets/publications/methods/twogo.png",
+      "width": 2368,
+      "height": 933,
+      "bytes": 514356,
+      "sha256": "12d1bbf2345cae0312374fe6ae2e693263e845b96432ed0f6a2ca1834d20b1b1"
+    },
+    {
+      "id": "he2026fedguide",
+      "paper": "fedguide",
+      "paper_url": "https://arxiv.org/abs/2609.18964",
+      "source_url": "https://arxiv.org/pdf/2609.18964",
+      "figure": "Figure 1, paper PDF page 4: Method Visualization with 2 Clients Heterogeneous Settings",
+      "display_caption": "FedGuide method visualization: policy aggregation, diffusion priors, and diffusion priors with value-baseline guidance.",
+      "alt": "Three original FedGuide panels compare policy-based aggregation, diffusion priors only, and priors with a value baseline in a two-client heterogeneous setting.",
+      "transformation": "Paper PDF page 4 rendered at 432 dpi with link annotations hidden. Figure and its three panel labels cropped; the paragraph caption and all surrounding paper text omitted. White margins trimmed and 20 px padding added.",
+      "page": 4,
+      "dpi": 432,
+      "crop_pixels": [
+        612,
+        404,
+        3076,
+        1176
+      ],
+      "inner_crop_pixels": [
+        56,
+        47,
+        2403,
+        753
+      ],
+      "source_sha256": "8e0dbb986d5eb9f0c775c04a9ab27dab660cbf87260b9a6d05140195a42bdde9",
+      "original_caption_tex": "\\textbf{Method Visualization with 2 Clients Heterogeneous Settings.}\n        (a) Policy aggregation averages local optima $\\mathbf{x}_1^{*}, \\mathbf{x}_2^{*}$ into global policy $\\mathbf{x}^{(t,H)}$, away from the global optimum $\\mathbf{x}^{*}$. (b) OT-MoE aggregates diffusion priors in distribution space, forming shared prior support $\\bar{\\pi}_{D}$ and personalized priors $\\bar{\\pi}_{D,1},\\bar{\\pi}_{D,2}$ (pink). The prior regularizer $\\widehat{\\mathcal R}$ (yellow) pulls local policies toward personalized prior supports. (c) FedGuide further uses the DICE value baseline (green) for policy improvement, shown as straighter policies updates and smaller endpoint dispersion ($\\mathrm{Variance}\\downarrow$).",
+      "caption_source": "fedguide/latex/latex_fedguide/tex/illustration.tex",
+      "caption_source_sha256": "66f22462ca2bcf285f070e244c11676050f00480886c97d5bc26b1ad0a40a726",
+      "src": "./assets/publications/methods/fedguide.png",
+      "width": 2387,
+      "height": 746,
+      "bytes": 193007,
+      "sha256": "0f12580a62ced545c5fa23e4da08f867cdd1580257f8d7533ab2a5dddd6cdbd6"
+    },
+    {
+      "id": "he2026mdcoas",
+      "paper": "mdcoas",
+      "paper_url": "https://arxiv.org/abs/2607.14455",
+      "author_source": "enerdynamics/latex/latex_mdcoas/figures/main_page.pdf",
+      "figure": "Figure 1: Constraint Optimization and Adaptive Scheduling overview",
+      "display_caption": "MD-COAS overview: constraint optimization and adaptive scheduling coupled to model-based diffusion.",
+      "alt": "Original MD-COAS diagram shows CFS trajectory projection, constraint optimization, adaptive scheduling, and the model-based diffusion schedule.",
+      "transformation": "Original letter-page figure PDF rendered at 360 dpi. Empty page margins removed around the artwork; 20 px white padding added and uniformly downsampled to 2600 px width. Diagram content unchanged.",
+      "dpi": 360,
+      "render_size": [
+        3060,
+        3960
+      ],
+      "crop_pixels": [
+        98,
+        130,
+        2967,
+        1066
+      ],
+      "source_sha256": "313c89fbe70ea0336899f4b99f4f41b201f483c50213acae965d529b9989cdb8",
+      "original_caption_tex": "Overview of Constraint Optimization (CO) and Adaptive Scheduling (AS) (Bottom Left) and Model-Based Diffusion for Motion Planning (Bottom Right). Top Left: an example CFS projection correcting a violated reference trajectory. Top Right: an illustration of MD-COAS denoising from noisy samples to a clean trajectory.",
+      "caption_source": "enerdynamics/latex/latex_mdcoas/tex/main_fig.tex",
+      "caption_source_sha256": "a25ca9233ac13188e805123ead2e31a8fa2fc9471898087da93c645890c27470",
+      "src": "./assets/publications/methods/mdcoas.png",
+      "width": 2600,
+      "height": 872,
+      "bytes": 902582,
+      "sha256": "62870790a3d0741b915296a21d0b8d9086ff5520e61710e4ad0d42c58b2987b5"
+    },
+    {
+      "id": "he2026mdoc",
+      "paper": "mdoc",
+      "paper_url": "https://arxiv.org/abs/2607.12423",
+      "source_url": "https://arxiv.org/pdf/2607.12423",
+      "figure": "Algorithms 1 and 2, paper PDF page 4",
+      "original_caption": "Algorithm 1: Model-Based Diffusion Optimal Control. Algorithm 2: MDOC-CBS.",
+      "display_caption": "Original method algorithms: MDOC performs CBF-constrained diffusion rollouts; MDOC-CBS coordinates robots through conflict-based search.",
+      "alt": "The original MDOC and MDOC-CBS algorithm boxes, cropped from paper page 4 and placed side by side without changing their pseudocode.",
+      "transformation": "Paper PDF page 4 rendered at 360 dpi with link annotations hidden. Each complete algorithm box cropped separately to exclude adjacent prose, then aligned side by side on white. No pseudocode, equations, or original algorithm titles rewritten.",
+      "method_kind": "Original algorithm boxes; not a paper overview figure",
+      "limitation": "The supplied MDOC LaTeX source and the public paper contain no independent method-overview figure. All numbered figures depict environments or experiments. These original method algorithms are used explicitly as an honest fallback; the former Conveyor experiment panel is not used.",
+      "page": 4,
+      "dpi": 360,
+      "crop_pixels": [
+        [
+          240,
+          264,
+          1504,
+          1296
+        ],
+        [
+          1554,
+          264,
+          2820,
+          1896
+        ]
+      ],
+      "inner_crop_pixels": [
+        [
+          4,
+          6,
+          1260,
+          1021
+        ],
+        [
+          5,
+          6,
+          1261,
+          1623
+        ]
+      ],
+      "composition": {
+        "panel_padding": 12,
+        "gap": 40,
+        "vertical_outer_padding": 16
+      },
+      "source_sha256": "0985e082ded360727772047fd6bc4be5c87957f64b8518303da552d2af5cd26d",
+      "src": "./assets/publications/methods/mdoc.png",
+      "width": 2600,
+      "height": 1673,
+      "bytes": 435256,
+      "sha256": "c04f11cfcaed01e2fa6d021f8c09ff343681a4606eaf8c9ac744852a08d69aae"
+    },
+    {
+      "id": "wang2024antivirus",
+      "paper": "acc",
+      "paper_url": "https://ieeexplore.ieee.org/document/10644719",
+      "source_url": "https://raw.githubusercontent.com/hhhhzl/sir_antivirus/main/assets/multicluster_large.png",
+      "verification_pdf_url": "https://raw.githubusercontent.com/hhhhzl/sir_antivirus/main/assets/preprint.pdf",
+      "figure": "Figure 4, preprint PDF page 5: Heterogeneous-Cluster Model",
+      "original_caption": "Heterogeneous-Cluster Model: This particular configuration is comprised of 3 clusters, in which each cluster’s intra-cluster node migration is indicated in light texts. Additionally, we also included the inter-cluster node migration (bold solid line), which resulted from inter-cluster communication (bold dashed line).",
+      "display_caption": "Heterogeneous-cluster system model: antivirus communication and node-state transitions across three network clusters.",
+      "alt": "Original three-cluster model showing susceptible, infected and recovered states, intra-cluster migration, and antivirus communication between clusters.",
+      "transformation": "Original 2018 x 922 author-repository PNG retained at native resolution and losslessly re-encoded. Visually verified against Figure 4 of the preprint; the PDF embeds this same 2018 x 922 artwork. No caption, results, or page text included.",
+      "page": 5,
+      "pdf_image_bbox_points": [
+        56.519,
+        50.0845,
+        555.4695,
+        278.049
+      ],
+      "source_sha256": "32081919b8ae7e8296de4c5640a17dbcc049f0a719cd6c02ecafce7ec473e0be",
+      "src": "./assets/publications/methods/acc.png",
+      "width": 2018,
+      "height": 922,
+      "bytes": 161713,
+      "sha256": "a0e3caf93271d03a893bdc0998f7c3f8c3d9972a1cbef0b8d9101939e7695b65"
+    }
+  ]
+}
