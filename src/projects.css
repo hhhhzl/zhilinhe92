@@ -1,0 +1,214 @@
+.projects-page { --project-violet: #867692; --project-green: #65734d; }
+.projects-main { overflow: clip; }
+.projects-shell { width: calc(100% - 16vw); max-width: 1240px; margin: 0 auto; }
+.projects-intro { padding: 72px 0 0; }
+.projects-intro-top { display: flex; justify-content: space-between; align-items: center; gap: 24px; color: var(--muted); }
+.projects-intro-top > span { font-size: 9px; letter-spacing: .12em; }
+.projects-intro-grid { display: grid; grid-template-columns: 1.25fr 1fr; align-items: end; gap: 8%; margin: 26px 0 50px; }
+.projects-intro h1 { font-size: clamp(64px, 7.7vw, 112px); line-height: 1.02; }
+.projects-intro h1 em { color: var(--project-violet); }
+.projects-intro-grid > p { max-width: 360px; margin-bottom: 8px; color: var(--muted); font-size: 14px; line-height: 1.85; }
+.projects-jump { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.projects-jump a { display: grid; grid-template-columns: 26px 1fr 20px; align-items: center; gap: 16px; padding: 24px 0; font-size: 17px; }
+.projects-jump a + a { border-left: 1px solid var(--line); padding-left: 30px; margin-left: 25px; }
+.projects-jump a:hover > span:nth-child(2) { color: #8f6a74; }
+.project-index-number { color: var(--muted); font-size: 10px; }
+.projects-jump small { display: block; color: var(--muted); font-size: 10px; line-height: 1.7; margin-top: 5px; }
+.project-case { scroll-margin-top: 28px; }
+.project-case-heading { display: grid; grid-template-columns: 1fr 3fr; gap: 44px; padding: 80px 0 42px; }
+.project-case-index { display: flex; flex-direction: column; gap: 8px; padding-top: 12px; font-size: 9px; letter-spacing: .07em; line-height: 1.8; color: var(--muted); }
+.project-case-index > span:first-child { color: var(--ink); }
+.project-case-copy h2 { font-size: clamp(40px, 4.4vw, 64px); line-height: 1.12; }
+.project-case-copy h2 em { color: var(--project-violet); }
+.project-case-lead { margin: 23px 0 17px; font-size: clamp(22px, 2.2vw, 31px); letter-spacing: -.035em; line-height: 1.35; }
+.project-case-copy > p:not(.project-case-lead) { max-width: 680px; font-size: 13px; line-height: 1.9; color: var(--muted); }
+.project-links { display: flex; flex-wrap: wrap; gap: 26px; margin-top: 21px; }
+.project-links a, .project-section-heading > a, .project-case-end a, .tennis-team-credit a, .projects-outro a { display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; border-bottom: 1px solid var(--line); padding: 8px 0; font-size: 11px; line-height: 1.6; }
+.project-links a:hover, .project-section-heading > a:hover, .project-case-end a:hover, .tennis-team-credit a:hover, .projects-outro a:hover { color: #916979; }
+.project-hardware { padding: 34px; background: #1e202d; color: #f3eee8; }
+.project-showcase-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 27px; }
+.project-showcase-heading .eyebrow { color: #c0b4c2; font-size: 8px; margin-bottom: 9px; }
+.project-showcase-heading h3 { font-size: 37px; line-height: 1.2; }
+.project-showcase-heading > p { color: #bdb9c5; font-size: 11px; line-height: 1.8; }
+.project-hardware video, .project-sim-card video, .tennis-feature-film video { width: 100%; display: block; background: #15161e; object-fit: contain; }
+.project-feature-film > video { aspect-ratio: 16 / 9; }
+.project-feature-film figcaption { display: grid; grid-template-columns: 1.3fr 1fr; gap: 30px; padding: 22px 0 26px; }
+.project-card-kicker { display: block; font-size: 8px; letter-spacing: .13em; line-height: 1.6; color: #c0a6af; }
+.project-feature-film h4, .project-portrait-film h4 { font-family: 'Manrope', sans-serif; margin: 7px 0 0; font-size: 25px; font-weight: 450; letter-spacing: -.035em; line-height: 1.3; }
+.project-feature-film figcaption > p { align-self: end; color: #bdb9c5; font-size: 12px; line-height: 1.7; }
+.project-hardware-pair { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #ffffff24; padding-top: 27px; gap: 28px; }
+.project-portrait-film { display: grid; grid-template-columns: 1.05fr .9fr; gap: 22px; align-items: center; min-width: 0; }
+.project-portrait-film video { aspect-ratio: 4 / 5; }
+.project-portrait-film h4 { font-size: clamp(18px, 1.8vw, 25px); margin-top: 12px; }
+.project-portrait-film figcaption p { color: #bdb9c5; font-size: 11px; line-height: 1.8; margin-top: 12px; }
+.project-framework { display: grid; grid-template-columns: 1fr 1fr; gap: 12%; padding: 66px 0; border-bottom: 1px solid var(--line); }
+.project-framework .eyebrow, .project-section-heading .eyebrow, .tennis-contribution .eyebrow { color: var(--muted); font-size: 8px; margin-bottom: 13px; }
+.project-framework h3 { font-size: clamp(30px, 3.3vw, 46px); line-height: 1.22; }
+.project-framework h3 em { color: var(--project-violet); }
+.project-pipeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.project-pipeline li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; }
+.project-pipeline li > span { font-size: 9px; color: #99838d; padding-top: 4px; }
+.project-pipeline h4 { margin: 0; font-size: 15px; line-height: 1.5; font-weight: 500; }
+.project-pipeline p { margin-top: 5px; font-size: 11px; color: var(--muted); line-height: 1.7; }
+.project-simulations { padding-top: 42px; }
+.project-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 28px; }
+.project-section-heading h3 { font-size: 37px; line-height: 1.2; }
+.project-section-heading > p { font-size: 11px; line-height: 1.8; color: var(--muted); }
+.project-sim-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 22px; }
+.project-sim-card { min-width: 0; }
+.project-sim-media { position: relative; }
+.project-sim-card video { aspect-ratio: 4 / 3; background: #e5e5e6; }
+.project-media-type { position: absolute; top: 8px; left: 8px; padding: 5px 7px; background: #f7f5f0eb; font-size: 6px; line-height: 1; letter-spacing: .13em; color: #53505d; pointer-events: none; }
+.project-sim-card figcaption { padding-top: 15px; }
+.project-sim-card .project-card-kicker { color: #947985; font-size: 8px; }
+.project-sim-card h4 { margin: 6px 0 0; font-size: 17px; line-height: 1.35; letter-spacing: -.025em; font-weight: 500; }
+.project-sim-card figcaption p { margin-top: 8px; font-size: 11px; color: var(--muted); line-height: 1.7; }
+.project-case-end { display: flex; justify-content: space-between; align-items: center; gap: 22px; border-top: 1px solid var(--line); margin-top: 40px; padding: 23px 0 65px; }
+.project-case-end p { font-size: 9px; letter-spacing: .09em; color: var(--muted); }
+.case-tennis { background: #e6e9dc; border-top: 1px solid #777f5c30; border-bottom: 1px solid #777f5c30; }
+.case-tennis .project-case-copy h2 { position: relative; display: inline-block; }
+.case-tennis .project-case-copy h2 em { color: var(--project-green); }
+.tennis-ball-mark { display: inline-block; width: .33em; height: .33em; border-radius: 50%; border: 1px solid #8a9760; background: #d1df83; vertical-align: top; margin: .07em 0 0 .17em; }
+.tennis-feature-film { background: #f8f9f0; }
+.tennis-film-label { display: flex; justify-content: space-between; gap: 20px; padding: 15px 19px; font-size: 8px; letter-spacing: .09em; color: #657052; }
+.tennis-feature-film > video { aspect-ratio: 16 / 9; }
+.tennis-feature-film figcaption { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; padding: 27px 30px; }
+.tennis-feature-film h3 { font-size: clamp(23px, 2.5vw, 34px); line-height: 1.25; }
+.tennis-feature-film figcaption p { align-self: center; max-width: 370px; font-size: 12px; line-height: 1.8; color: #6b725d; }
+.tennis-system { display: grid; grid-template-columns: 1fr 1.65fr; gap: 55px; padding: 65px 0; }
+.tennis-contribution h3 { font-size: clamp(27px, 3vw, 40px); line-height: 1.22; }
+.tennis-contribution h3 em { color: var(--project-green); }
+.tennis-contribution > p:not(.eyebrow) { margin-top: 21px; max-width: 350px; font-size: 12px; line-height: 1.9; color: #68705a; }
+.project-tech-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 23px; }
+.project-tech-tags span { border: 1px solid #737e5f42; padding: 6px 10px; border-radius: 20px; font-size: 9px; line-height: 1.4; color: #68705a; }
+.tennis-system-visuals { display: grid; grid-template-columns: .9fr 1.15fr; gap: 20px; align-items: start; }
+.tennis-system-visuals figure { min-width: 0; }
+.tennis-system-visuals a { display: block; cursor: zoom-in; }
+.tennis-system-visuals img { width: 100%; height: 250px; object-fit: contain; display: block; background: #d4d7cc; border: 1px solid #77816422; }
+.tennis-system-visuals figcaption { padding-top: 12px; }
+.tennis-system-visuals figcaption span { font-size: 8px; letter-spacing: .1em; color: #68705a; }
+.tennis-system-visuals h4 { font-size: 13px; font-weight: 500; margin: 7px 0 0; line-height: 1.5; }
+.tennis-team { padding-top: 40px; border-top: 1px solid #737e5f42; }
+.tennis-team-grid { display: grid; grid-template-columns: 2.05fr 1fr; gap: 28px; align-items: end; }
+.tennis-team-grid img { display: block; width: 100%; height: auto; }
+.tennis-team-grid figcaption { padding-top: 12px; font-size: 10px; color: #68705a; line-height: 1.7; }
+.tennis-team-credit { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; padding: 27px 0 60px; }
+.tennis-team-credit p { max-width: 700px; font-size: 11px; line-height: 1.8; color: #68705a; }
+.projects-outro { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 49px 0 54px; }
+.projects-outro > p { font-family: 'Manrope', sans-serif; font-size: 22px; letter-spacing: -.035em; line-height: 1.35; }
+
+@media (min-width: 1800px) { .projects-shell { width: calc(100% - 120px); } }
+@media (max-width: 1050px) {
+  .projects-shell { width: calc(100% - 12vw); }
+  .project-case-heading { grid-template-columns: 1fr 3fr; gap: 24px; }
+  .project-case-copy h2 { font-size: 44px; }
+  .project-hardware { padding: 25px; }
+  .project-hardware-pair { gap: 22px; }
+  .project-portrait-film { gap: 15px; }
+  .project-portrait-film h4 { font-size: 19px; }
+  .project-portrait-film figcaption p { font-size: 10px; }
+  .project-sim-grid { gap: 28px 17px; }
+  .project-sim-card h4 { font-size: 15px; }
+  .tennis-system { grid-template-columns: 1fr 1.5fr; gap: 30px; }
+  .tennis-system-visuals img { height: 220px; }
+}
+@media (max-width: 760px) {
+  .projects-intro { padding-top: 48px; }
+  .projects-intro-grid { gap: 30px; grid-template-columns: 1.1fr 1fr; }
+  .projects-intro h1 { font-size: 68px; }
+  .projects-intro-grid > p { font-size: 12px; }
+  .projects-jump a { gap: 10px; font-size: 15px; }
+  .projects-jump a + a { margin-left: 17px; padding-left: 18px; }
+  .project-case-heading { display: block; padding-top: 53px; }
+  .project-case-index { flex-direction: row; justify-content: space-between; margin-bottom: 24px; padding-top: 0; }
+  .project-case-copy h2 { font-size: 47px; }
+  .project-case-lead { font-size: 27px; }
+  .project-case-copy > p:not(.project-case-lead) { max-width: 580px; }
+  .project-showcase-heading h3 { font-size: 31px; }
+  .project-showcase-heading > p { font-size: 10px; }
+  .project-feature-film h4 { font-size: 23px; }
+  .project-feature-film figcaption > p { font-size: 11px; }
+  .project-hardware-pair { gap: 25px; }
+  .project-portrait-film { display: block; }
+  .project-portrait-film video { max-height: 310px; }
+  .project-portrait-film figcaption { padding-top: 16px; }
+  .project-portrait-film h4 br { display: none; }
+  .project-portrait-film h4 { font-size: 21px; margin-top: 7px; }
+  .project-portrait-film figcaption p { margin-top: 6px; font-size: 11px; }
+  .project-framework { padding: 45px 0; gap: 30px; }
+  .project-framework h3 { font-size: 32px; }
+  .project-pipeline h4 { font-size: 13px; }
+  .project-pipeline p { font-size: 10px; }
+  .project-sim-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 27px 20px; }
+  .project-sim-card h4 { font-size: 17px; }
+  .tennis-system { display: block; padding: 43px 0; }
+  .tennis-contribution h3 { font-size: 35px; }
+  .tennis-contribution > p:not(.eyebrow) { max-width: 580px; }
+  .tennis-system-visuals { margin-top: 28px; gap: 24px; grid-template-columns: 1fr 1fr; }
+  .tennis-system-visuals img { height: 280px; }
+  .tennis-team-grid { gap: 22px; }
+}
+@media (max-width: 520px) {
+  .projects-shell { width: calc(100% - 14vw); }
+  .projects-intro-top > span { font-size: 7px; }
+  .projects-intro-top .eyebrow { font-size: 8px; }
+  .projects-intro-grid { grid-template-columns: 1fr; margin: 24px 0 30px; gap: 22px; }
+  .projects-intro h1 { font-size: clamp(58px, 17vw, 80px); }
+  .projects-intro-grid > p { max-width: 310px; margin: 0; font-size: 12px; }
+  .projects-jump { grid-template-columns: 1fr; }
+  .projects-jump a { padding: 18px 0; font-size: 16px; }
+  .projects-jump a + a { margin: 0; padding: 18px 0; border-left: 0; border-top: 1px solid var(--line); }
+  .projects-jump small { font-size: 9px; }
+  .project-case-heading { padding: 42px 0 29px; }
+  .project-case-index { font-size: 7px; letter-spacing: .04em; gap: 12px; margin-bottom: 21px; }
+  .project-case-copy h2 { font-size: clamp(36px, 10.2vw, 49px); }
+  .project-case-lead { font-size: 24px; margin: 20px 0 14px; }
+  .project-case-copy > p:not(.project-case-lead) { font-size: 12px; }
+  .project-links { gap: 23px; margin-top: 17px; }
+  .project-links a { font-size: 10px; }
+  .project-hardware { padding: 20px 16px; margin: 0 -16px; }
+  .project-showcase-heading { display: block; margin-bottom: 21px; }
+  .project-showcase-heading > p { margin-top: 12px; }
+  .project-showcase-heading > p br { display: none; }
+  .project-feature-film figcaption { grid-template-columns: 1fr; gap: 11px; padding: 18px 0 22px; }
+  .project-feature-film h4 { font-size: 24px; }
+  .project-hardware-pair { gap: 16px; padding-top: 23px; }
+  .project-portrait-film video { max-height: 220px; }
+  .project-portrait-film h4 { font-size: 17px; line-height: 1.35; }
+  .project-portrait-film .project-card-kicker { font-size: 6px; letter-spacing: .07em; }
+  .project-portrait-film figcaption p { font-size: 10px; }
+  .project-framework { grid-template-columns: 1fr; gap: 27px; padding: 39px 0; }
+  .project-framework h3 { font-size: 34px; }
+  .project-pipeline { gap: 19px; }
+  .project-pipeline h4 { font-size: 14px; }
+  .project-pipeline p { font-size: 11px; }
+  .project-simulations { padding-top: 31px; }
+  .project-section-heading { align-items: start; flex-wrap: wrap; gap: 10px; margin-bottom: 23px; }
+  .project-section-heading h3 { font-size: 31px; }
+  .project-section-heading > a { font-size: 10px; }
+  .project-sim-grid { grid-template-columns: 1fr; gap: 28px; }
+  .project-sim-card h4 { font-size: 19px; }
+  .project-sim-card figcaption { padding-top: 12px; }
+  .project-sim-card figcaption p { margin-top: 5px; font-size: 11px; }
+  .project-case-end { padding-bottom: 40px; align-items: start; flex-direction: column; gap: 10px; margin-top: 28px; }
+  .tennis-film-label { font-size: 6px; gap: 10px; padding: 12px; }
+  .tennis-feature-film figcaption { display: block; padding: 20px; }
+  .tennis-feature-film h3 { font-size: 26px; }
+  .tennis-feature-film figcaption p { margin-top: 13px; font-size: 11px; }
+  .tennis-system-visuals { gap: 16px; }
+  .tennis-system-visuals img { height: 200px; }
+  .tennis-system-visuals h4 { font-size: 12px; }
+  .tennis-system-visuals figcaption span { font-size: 7px; }
+  .tennis-team { padding-top: 31px; }
+  .tennis-team-grid { grid-template-columns: 1fr; gap: 25px; }
+  .tennis-team-detail { width: 64%; margin-left: auto; }
+  .tennis-team-grid figcaption { font-size: 9px; }
+  .tennis-team-credit { gap: 14px; padding: 23px 0 37px; }
+  .tennis-team-credit p { font-size: 10px; }
+  .projects-outro { display: block; padding: 36px 0; }
+  .projects-outro > p { max-width: 280px; font-size: 25px; }
+  .projects-outro a { margin-top: 18px; }
+}
+
+.project-showcase-heading > div > p { color:#bdb9c5; font-size:11px; line-height:1.8; }
+#project-motion-toggle { color:#d5c7d2; font-size:10px; padding:7px 0; margin-top:9px; border-bottom:1px solid #ffffff40; }

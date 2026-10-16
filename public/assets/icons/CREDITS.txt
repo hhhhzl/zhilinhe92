@@ -1,0 +1,30 @@
+Social-link SVG assets — Font Awesome Free 6.7.2
+Copyright Fonticons, Inc. https://fontawesome.com
+
+SVG icon license: Creative Commons Attribution 4.0 International (CC BY 4.0).
+Full license: CC-BY-4.0.txt (official Creative Commons text).
+Upstream package license and brand-use notice: FONT-AWESOME-LICENSE.txt.
+License source: https://creativecommons.org/licenses/by/4.0/legalcode.txt
+
+Downloaded 2026-10-05 from the official FortAwesome/Font-Awesome repository,
+pinned release 6.7.2. Original path geometry, native viewBox and embedded
+attribution comments are unchanged. Only fill="currentColor" was added to
+each SVG root. No external media, fonts, or runtime-library dependencies.
+
+Files and original sources:
+- google-scholar.svg: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.7.2/svgs/brands/google-scholar.svg
+- github.svg: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.7.2/svgs/brands/github.svg
+- linkedin.svg: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.7.2/svgs/brands/linkedin-in.svg
+- youtube.svg: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.7.2/svgs/brands/youtube.svg
+- bilibili.svg: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.7.2/svgs/brands/bilibili.svg
+- x.svg: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.7.2/svgs/brands/x-twitter.svg
+- email.svg: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.7.2/svgs/solid/envelope.svg
+
+Keep these license files and the embedded attribution when redistributing.
+The marks identify their respective services, whose owners hold the trademarks;
+no endorsement is implied.
+
+Integration: preserve each native viewBox and size with CSS. Inline SVG inherits
+currentColor; an external <img> does not inherit parent color. CSS masks can use
+background-color: currentColor. Name the social link accessibly and mark a
+decorative inline icon aria-hidden="true".

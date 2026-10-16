@@ -1,0 +1,149 @@
+{
+  "source": "/Users/zhilinhe/Documents/Codex/2026-10-02/wo/work/rocketbox-source/Assets/Avatars/Adults/Male_Adult_02",
+  "rig": "Human_Rig",
+  "mesh": [
+    "Human_Textured_Performer"
+  ],
+  "bones": 80,
+  "animated_bones": [
+    "Bip01 R UpperArm",
+    "Bip01 R Forearm",
+    "Bip01 R Hand",
+    "Bip01 L UpperArm",
+    "Bip01 L Forearm",
+    "Bip01 L Hand",
+    "Bip01 Head",
+    "Bip01 Neck",
+    "Bip01 R Finger0",
+    "Bip01 R Finger01",
+    "Bip01 R Finger02",
+    "Bip01 R Finger1",
+    "Bip01 R Finger11",
+    "Bip01 R Finger12",
+    "Bip01 R Finger2",
+    "Bip01 R Finger21",
+    "Bip01 R Finger22",
+    "Bip01 R Finger3",
+    "Bip01 R Finger31",
+    "Bip01 R Finger32",
+    "Bip01 R Finger4",
+    "Bip01 R Finger41",
+    "Bip01 R Finger42",
+    "Bip01 L Finger0",
+    "Bip01 L Finger01",
+    "Bip01 L Finger02",
+    "Bip01 L Finger1",
+    "Bip01 L Finger11",
+    "Bip01 L Finger12",
+    "Bip01 L Finger2",
+    "Bip01 L Finger21",
+    "Bip01 L Finger22",
+    "Bip01 L Finger3",
+    "Bip01 L Finger31",
+    "Bip01 L Finger32",
+    "Bip01 L Finger4",
+    "Bip01 L Finger41",
+    "Bip01 L Finger42"
+  ],
+  "source_height": 1.8227452982100658,
+  "normalization_scale": 0.9765489461132931,
+  "eye_world_blender": [
+    9.033828973770142e-08,
+    0.8296743035316467,
+    1.6299793720245361
+  ],
+  "texture_audit": [
+    {
+      "name": "m003_head_color",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "JPEG"
+    },
+    {
+      "name": "m003_head_normal",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG"
+    },
+    {
+      "name": "m003_body_color",
+      "size": [
+        2048,
+        2048
+      ],
+      "format": "JPEG"
+    },
+    {
+      "name": "m003_body_normal",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG"
+    },
+    {
+      "name": "m003_opacity_color",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG"
+    }
+  ],
+  "gesture_keys": [
+    [
+      0.0,
+      "rest"
+    ],
+    [
+      0.3,
+      "rest"
+    ],
+    [
+      1.2,
+      "chest"
+    ],
+    [
+      1.55,
+      "chest"
+    ],
+    [
+      2.5,
+      "reach"
+    ],
+    [
+      2.75,
+      "reach"
+    ],
+    [
+      3.9,
+      "open"
+    ],
+    [
+      4.0,
+      "open"
+    ],
+    [
+      4.85,
+      "rest"
+    ],
+    [
+      5.0,
+      "rest"
+    ]
+  ],
+  "wrist_policy": "Both hand bones retain identity matrix_basis rotation: source neutral wrist orientation follows the forearm",
+  "elbow_flexion_limits_degrees": [
+    15,
+    135
+  ],
+  "finger_additional_flexion_degrees": [
+    2.25,
+    23.0
+  ],
+  "interpolation": "Per-frame two-link arm IK; quaternion hemisphere continuity; linear baked samples"
+}

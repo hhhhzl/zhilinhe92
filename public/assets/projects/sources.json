@@ -1,0 +1,100 @@
+{
+  "checked": "2026-10-16",
+  "content_sources": [
+    "/Users/zhilinhe/Desktop/hector_personal/cv.tex",
+    "https://hhhhzl.github.io/generative-dynamics/",
+    "https://z4ziad.github.io/2026-01-07-tennis_buddy/",
+    "https://github.com/hhhhzl/tennis_buddy"
+  ],
+  "tennis_buddy_media": [
+    {
+      "file": "tennis-buddy-demo.mp4",
+      "source": "https://z4ziad.github.io/assets/video/tennis_buddy.mp4",
+      "transformation": "Complete 99.27-second source, unchanged timing and framing; resized from 1920x1080 to 960x540, H.264 CRF 28 with 1.2 Mbps maximum rate, AAC 96 kbps, faststart; original audio retained.",
+      "sha256": "b1587869c8474e0e2e9f69a08d19a1609bcc9a47f0d39f41a5a1ab296943cf18",
+      "bytes": 14654166
+    },
+    {
+      "file": "tennis-buddy-poster.jpg",
+      "source": "https://z4ziad.github.io/assets/video/tennis_buddy.mp4",
+      "transformation": "Actual video frame at 20 seconds, 1280x720; no synthesized content.",
+      "sha256": "a919e11923b746f0103666b91a51ca65c6f2e345125a1fd746f59788921090a0",
+      "bytes": 212103
+    },
+    {
+      "file": "tennis-buddy-team-1.webp",
+      "source": "https://z4ziad.github.io/assets/img/auto_robo/f25/tennis_buddy/IMG_2638.jpg",
+      "transformation": "EXIF orientation applied; resized to 1600x1200; WebP quality 85; no crop.",
+      "sha256": "b1e9449e95eb2852e1a55877a29870d6fdb5a1da2ad61b3c582563222017fe2c",
+      "bytes": 333140
+    },
+    {
+      "file": "tennis-buddy-team-2.webp",
+      "source": "https://z4ziad.github.io/assets/img/auto_robo/f25/tennis_buddy/IMG_2639.jpg",
+      "transformation": "EXIF orientation applied; resized to 900x1200; WebP quality 85; no crop.",
+      "sha256": "1c3a468dcd11103ec6da1bbdf21b50bbcc695cdbcdd10b27236a9de95c12e5f1",
+      "bytes": 109440
+    },
+    {
+      "file": "tennis-buddy-map.webp",
+      "source": "https://raw.githubusercontent.com/hhhhzl/tennis_buddy/main/assets/singleton_room.png",
+      "transformation": "Original 692x910 dimensions; WebP quality 90; no crop.",
+      "sha256": "c606788d26528044c217d5b191754ddc84b2273e31b1eb4024d34e392bb26d05",
+      "bytes": 20234
+    },
+    {
+      "file": "tennis-buddy-simulation.webp",
+      "source": "https://raw.githubusercontent.com/hhhhzl/tennis_buddy/main/assets/gazebo_sim.png",
+      "transformation": "Original 1048x938 dimensions; WebP quality 90; no crop.",
+      "sha256": "91b1aa1d3b51a2c04cfdeca3c669d169c321a17f842a1c78e1b42222887c85c6",
+      "bytes": 52430
+    }
+  ],
+  "generative_dynamics_reused_media": [
+    {
+      "file": "../publications/gallery/hardware_twogo_g1.mp4",
+      "poster": "../publications/gallery/hardware_twogo_g1.jpg",
+      "source": "https://hhhhzl.github.io/generative-dynamics/media/hardware_twogo_g1.mp4"
+    },
+    {
+      "file": "../publications/gallery/hardware_mga_surface_foam.mp4",
+      "poster": "../publications/gallery/hardware_mga_surface_foam.jpg",
+      "source": "https://hhhhzl.github.io/generative-dynamics/media/hardware_mga_surface_foam.mp4"
+    },
+    {
+      "file": "../publications/gallery/hardware_mga_peg_insert.mp4",
+      "poster": "../publications/gallery/hardware_mga_peg_insert.jpg",
+      "source": "https://hhhhzl.github.io/generative-dynamics/media/hardware_mga_peg_insert.mp4"
+    },
+    {
+      "file": "../publications/gallery/mdoc_cbs_random.mp4",
+      "poster": "../publications/gallery/mdoc_cbs_random.jpg",
+      "source": "https://hhhhzl.github.io/generative-dynamics/media/mdoc_cbs_random.mp4"
+    },
+    {
+      "file": "../publications/gallery/mdcoas_7dof_execution.mp4",
+      "poster": "../publications/gallery/mdcoas_7dof_execution.jpg",
+      "source": "https://hhhhzl.github.io/generative-dynamics/media/mdcoas_7dof_execution.mp4"
+    },
+    {
+      "file": "../publications/gallery/twogo_go2_s2.mp4",
+      "poster": "../publications/gallery/twogo_go2_s2.jpg",
+      "source": "https://hhhhzl.github.io/generative-dynamics/media/twogo_go2_s2.mp4"
+    },
+    {
+      "file": "../publications/gallery/twogo_g1_zone_c.mp4",
+      "poster": "../publications/gallery/twogo_g1_zone_c.jpg",
+      "source": "https://hhhhzl.github.io/generative-dynamics/media/twogo_g1_zone_c.mp4"
+    },
+    {
+      "file": "../publications/gallery/mga_surface_hybrid_stripes.mp4",
+      "poster": "../publications/gallery/mga_surface_hybrid_stripes.jpg",
+      "source": "https://hhhhzl.github.io/generative-dynamics/media/mga_surface_hybrid_stripes.mp4"
+    },
+    {
+      "file": "../publications/gallery/mga_peg_id_wide.mp4",
+      "poster": "../publications/gallery/mga_peg_id_wide.jpg",
+      "source": "https://hhhhzl.github.io/generative-dynamics/media/mga_peg_id_wide.mp4"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+Unitree G1 mesh and kinematic model: MuJoCo Menagerie, Google DeepMind and Unitree Robotics. BSD-3-Clause; see UNITREE-G1-LICENSE.txt.
+Human performer: Microsoft Rocketbox, Male_Adult_02. MIT; see ROCKETBOX-LICENSE.md. Source: https://github.com/microsoft/Microsoft-Rocketbox/tree/master/Assets/Avatars/Adults/Male_Adult_02
+Atelier, material adaptation and Echo choreography: built for zhilinhe92. Echo is an authored artistic animation, not a dynamics simulation, research result, captured motion, or deployable robot controller. The human is a photo-referenced approximate digital likeness of Zhilin He, not a 3D scan.
+
+Research portraits: the two photographs supplied by Zhilin He, published at the author’s request.
+Laboratory MP4/GIF/poster derived from user-provided footage. GIF excerpt 5–9 s, 480x222, 9 fps.
+Paper preview image provenance and CC BY 4.0 attribution: assets/publications/CREDITS.txt.

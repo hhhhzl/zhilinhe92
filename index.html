@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="theme-color" content="#020205"/><meta name="description" content="Zhilin He — embodied intelligence, robot learning, and generative control at Carnegie Mellon University."/><title>Zhilin He — zhilinhe92</title><link rel="icon" href="./favicon.svg"/></head>
+<body class="scene-page">
+<header class="site-header"><a class="identity" href="./index.html" aria-label="Zhilin He, home"><span class="identity-mark">zh<span>·</span></span><span>Zhilin He<small>Robotics · Carnegie Mellon</small></span></a><nav aria-label="Main navigation"><a href="./research.html">Research</a><a href="./projects.html">Projects</a><a href="./films.html">Films</a></nav></header>
+<main class="experience" id="scene-stage">
+<h1 class="sr-only">zhilinhe92 — Zhilin He</h1>
+<p class="sr-only" id="camera-instructions">Drag left to travel from the robot’s eyes to the human’s eyes. Drag right to return. Use the left and right arrow keys to rotate, Home and End for either viewpoint, and Space to pause or resume movement.</p>
+<canvas id="world" tabindex="0" role="slider" aria-label="Camera perspective" aria-describedby="camera-instructions" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Robot perspective"></canvas>
+<div class="cinema-shade" aria-hidden="true"></div>
+<div class="eye-mask" id="eye-mask" aria-hidden="true">
+<svg viewBox="0 0 1600 1000" preserveAspectRatio="none"><defs>
+<path id="left-eye" d="M105 432 C330 394 565 419 785 476 C770 534 721 558 640 563 C382 580 201 519 105 432Z"/>
+<path id="right-eye" d="M1495 432 C1270 394 1035 419 815 476 C830 534 879 558 960 563 C1218 580 1399 519 1495 432Z"/>
+<filter id="edge-softness" x="-15%" y="-50%" width="130%" height="200%"><feGaussianBlur stdDeviation="2.5"/></filter>
+<filter id="rim-softness" x="-15%" y="-50%" width="130%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+<linearGradient id="housing-light" x1="0" y1="0" x2=".3" y2="1"><stop stop-color="#222437" stop-opacity=".65"/><stop offset=".32" stop-color="#05060b" stop-opacity="0"/><stop offset=".85" stop-color="#11121c" stop-opacity=".2"/><stop offset="1" stop-color="#533e38" stop-opacity=".28"/></linearGradient>
+<mask id="aperture"><rect width="1600" height="1000" fill="white"/><g fill="black" filter="url(#edge-softness)"><use href="#left-eye"/><use href="#right-eye"/></g></mask>
+<mask id="inside-eyes"><rect width="1600" height="1000" fill="black"/><g fill="white"><use href="#left-eye"/><use href="#right-eye"/></g></mask>
+</defs>
+<rect width="1600" height="1000" fill="#020205" mask="url(#aperture)"/>
+<g fill="none" stroke="url(#housing-light)" stroke-width="9" opacity=".65" filter="url(#rim-softness)"><use href="#left-eye"/><use href="#right-eye"/></g>
+<g mask="url(#inside-eyes)" fill="none" stroke="#010207" stroke-width="24" opacity=".68" filter="url(#rim-softness)"><use href="#left-eye"/><use href="#right-eye"/></g>
+</svg></div>
+<div class="film-grain" aria-hidden="true"></div><div class="cinema-matte" aria-hidden="true"></div>
+<div class="loading" id="loading" role="status" aria-label="Loading the interactive scene"><span class="loader-orbit" aria-hidden="true"></span></div>
+<p class="sr-only" id="scene-status" role="status" aria-live="polite"></p>
+
+</main><script type="module" src="./src/main.js"></script>
+</body></html>

@@ -1,0 +1,84 @@
+[
+  {
+    "id": "mdoc",
+    "title": "Model-Based Diffusion Optimal Control for Multi-Robot Motion Planning",
+    "authors": [
+      "Zhilin He",
+      "Yorai Shaoul",
+      "Jiaoyang Li"
+    ],
+    "paper": "https://arxiv.org/abs/2607.12423",
+    "version": "v1",
+    "figure": "Figure 4, lower-right panel: MDOC-CBS, Conveyor map, six robots in Circle setup",
+    "source": "https://arxiv.org/html/2607.12423v1/figures/exp2/conveyor/mdoc_single_trial.gif.png",
+    "changes": "Original HTML figure panel, re-encoded as PNG without geometry or color changes; panel selected from comparison figure.",
+    "alt": "MDOC-CBS trajectories for six robots moving around three obstacles in the Conveyor map.",
+    "src": "/assets/publications/mdoc.png",
+    "width": 450,
+    "height": 450,
+    "bytes": 40157,
+    "sha256": "3ece516b2d824319017f4c7bd341fd8c05c95bd71ae5d680acafbbe2ede085ec",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "retrievedAt": "2026-10-05"
+  },
+  {
+    "id": "md-coas",
+    "title": "Motion Planning with Model-Based Diffusion via Constraint Optimization and Adaptive Scheduling",
+    "authors": [
+      "Zhilin He",
+      "Bowei Li",
+      "Jianlin Dou",
+      "Yuner Zhang",
+      "Changliu Liu"
+    ],
+    "paper": "https://arxiv.org/abs/2607.14455",
+    "version": "v1",
+    "figure": "Figure 1: overview of Constraint Optimization, Adaptive Scheduling and Model-Based Diffusion",
+    "source": "https://arxiv.org/html/2607.14455v1/main_page.png",
+    "changes": "Blank white margins removed from original HTML figure asset; figure contents unchanged.",
+    "alt": "MD-COAS overview linking constraint optimization and adaptive scheduling with the model-based diffusion schedule.",
+    "cropPixels": [
+      20,
+      31,
+      1001,
+      367
+    ],
+    "src": "/assets/publications/md-coas.png",
+    "width": 981,
+    "height": 336,
+    "bytes": 164032,
+    "sha256": "cea1a9b2cc4ea82acc57aa6336d7efa838d5cf200bcdaf3bcf6ee4ec6d94fec5",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "retrievedAt": "2026-10-05"
+  },
+  {
+    "id": "fedguide",
+    "title": "FedGuide: Diffusion Prior Alignment and Value Baseline Guidance for Heterogeneous Federated Reinforcement Learning",
+    "authors": [
+      "Zhilin He",
+      "Gauri Joshi"
+    ],
+    "paper": "https://arxiv.org/abs/2609.18964",
+    "version": "v1",
+    "figure": "Figure 1, PDF page 4: three-panel method visualization with two heterogeneous clients",
+    "source": "https://arxiv.org/pdf/2609.18964",
+    "changes": "PDF page 4 rendered at 216 dpi, cropped to Figure 1 panels and panel labels; surrounding text and caption omitted; diagram contents unchanged.",
+    "cropPixels": [
+      306,
+      202,
+      1538,
+      588
+    ],
+    "alt": "FedGuide figure comparing policy aggregation, diffusion priors only, and diffusion priors with value-baseline guidance.",
+    "src": "/assets/publications/fedguide.png",
+    "width": 1232,
+    "height": 386,
+    "bytes": 94462,
+    "sha256": "f003083b04593d8f95c3d0e534224907006e3c4ae87f13db123a57b10b64e48c",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "retrievedAt": "2026-10-05"
+  }
+]

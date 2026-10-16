@@ -1,0 +1,29 @@
+Publication figure previews
+Retrieved 2026-10-05. All figures originate from the corresponding authors' own papers.
+
+mdoc.png
+Model-Based Diffusion Optimal Control for Multi-Robot Motion Planning
+Zhilin He, Yorai Shaoul, Jiaoyang Li
+Figure 4, lower-right panel: MDOC-CBS, Conveyor map, six robots in Circle setup
+Paper: https://arxiv.org/abs/2607.12423
+Source: https://arxiv.org/html/2607.12423v1/figures/exp2/conveyor/mdoc_single_trial.gif.png
+License: CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/
+Changes: Original HTML figure panel, re-encoded as PNG without geometry or color changes; panel selected from comparison figure.
+
+md-coas.png
+Motion Planning with Model-Based Diffusion via Constraint Optimization and Adaptive Scheduling
+Zhilin He, Bowei Li, Jianlin Dou, Yuner Zhang, Changliu Liu
+Figure 1: overview of Constraint Optimization, Adaptive Scheduling and Model-Based Diffusion
+Paper: https://arxiv.org/abs/2607.14455
+Source: https://arxiv.org/html/2607.14455v1/main_page.png
+License: CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/
+Changes: Blank white margins removed from original HTML figure asset; figure contents unchanged.
+
+fedguide.png
+FedGuide: Diffusion Prior Alignment and Value Baseline Guidance for Heterogeneous Federated Reinforcement Learning
+Zhilin He, Gauri Joshi
+Figure 1, PDF page 4: three-panel method visualization with two heterogeneous clients
+Paper: https://arxiv.org/abs/2609.18964
+Source: https://arxiv.org/pdf/2609.18964
+License: CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/
+Changes: PDF page 4 rendered at 216 dpi, cropped to Figure 1 panels and panel labels; surrounding text and caption omitted; diagram contents unchanged.

@@ -1,0 +1,26 @@
+Projects media and content sources
+Checked: 2026-10-16
+
+Generative Dynamics
+https://hhhhzl.github.io/generative-dynamics/
+https://github.com/hhhhzl/genedynamics
+Nine original project demonstration clips are reused from the local
+../publications/gallery/ directory, with frames from those clips as posters.
+The original overlays, framing, and published playback timing are retained.
+Hardware clips are labeled separately from simulation; the G1 demonstration
+uses motion-capture-registered AR virtual obstacles.
+
+Tennis Buddy
+https://z4ziad.github.io/2026-01-07-tennis_buddy/
+https://github.com/hhhhzl/tennis_buddy
+Video and team photographs are from the original project presentation page
+by Michelle Heo, Anoushka Sengupta, Alan Chen, Hector He, and Yina Bao.
+SLAM map and Gazebo screenshot are from the project's official repository.
+The local demo preserves the complete source duration, audio and framing.
+It is resized and compressed for web playback; still images are optimized
+without cropping. Individual URLs, transformations and hashes: sources.json.
+
+The user's provided CV supplies dates, personal contribution, and advisor
+information. No inferred performance numbers or fabricated demonstrations
+are included. Assets are reused for this user-requested personal project
+showcase; no blanket third-party redistribution license is asserted.

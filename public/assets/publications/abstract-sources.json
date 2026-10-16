@@ -1,0 +1,97 @@
+{
+  "checked": "2026-10-16",
+  "abstracts": [
+    {
+      "id": "he2026mga",
+      "kind": "Author-provided local LaTeX abstract",
+      "source": "enerdynamics/latex/latex_mga/sections/abstract.tex",
+      "public_reference": "https://arxiv.org/abs/2610.21140",
+      "source_file_sha256": "3ef75ce09df07a3e2f04b2ea7573c4c57bf784d89883f9e2fb857a82b6a5d155",
+      "normalized_abstract_sha256": "186d51f516af30b8e196e84cb7b53a6f2808e9226c8a0eac7ccf9bc0ce7431f8",
+      "normalization": "Whitespace folded; LaTeX display formatting and macros rendered as plain text. Original wording retained.",
+      "words": 172
+    },
+    {
+      "id": "he2026twogo",
+      "kind": "Author-provided local LaTeX abstract",
+      "source": "enerdynamics/latex/latex_2go/sections/abstract.tex",
+      "public_reference": "https://arxiv.org/abs/2610.07772",
+      "source_file_sha256": "f40f2feb2e59ba714217b836ceda0a6580ff436e66f54d65406fe2658970e18f",
+      "normalized_abstract_sha256": "4ec3f59c322656ebcab147a772a4db226d83a91693ea98857b5c043da6c50b7f",
+      "normalization": "Whitespace folded; LaTeX display formatting and macros rendered as plain text. Original wording retained.",
+      "words": 184
+    },
+    {
+      "id": "he2026fedguide",
+      "kind": "Author-provided local LaTeX abstract",
+      "source": "fedguide/latex/latex_fedguide/sections/abstract.tex",
+      "public_reference": "https://arxiv.org/abs/2609.18964",
+      "source_file_sha256": "881146ef6885905a81982e7d2035c97ff435930b9110c72c48ebc4cd45f94c56",
+      "normalized_abstract_sha256": "54a79cdbf10c128f798b8caf38f3fe135a8229fc93b8c0c2460da35cfa28ace0",
+      "normalization": "Whitespace folded; LaTeX display formatting and macros rendered as plain text. Original wording retained.",
+      "words": 141
+    },
+    {
+      "id": "he2026mdcoas",
+      "kind": "Author-provided local LaTeX abstract",
+      "source": "enerdynamics/latex/latex_mdcoas/main.tex",
+      "public_reference": "https://arxiv.org/abs/2607.14455",
+      "source_file_sha256": "dc856a1636e090bd0e51e906ab6672bba4e5d30212b5e92dbd4bfcac9aa53f68",
+      "normalized_abstract_sha256": "30f2e2616db663d2b42f718b30b3fdbf1c171ea8bdbd0dfa76f19de2fb64f656",
+      "normalization": "Whitespace folded; LaTeX display formatting and macros rendered as plain text. Original wording retained.",
+      "words": 200
+    },
+    {
+      "id": "he2026mdoc",
+      "kind": "Author-provided local LaTeX abstract",
+      "source": "enerdynamics/latex/latex_mdoc/main.tex",
+      "public_reference": "https://arxiv.org/abs/2607.12423",
+      "source_file_sha256": "4d947761935b6013242ea648eb6caf4a20a55fccbfebe8137587fdd84103e763",
+      "normalized_abstract_sha256": "e14c1171cbdb4e958990f6c3b33744bf4cd238e120bb2d08cf8ed39803333390",
+      "normalization": "Whitespace folded; LaTeX display formatting and macros rendered as plain text. Original wording retained.",
+      "words": 165
+    },
+    {
+      "id": "wang2024antivirus",
+      "kind": "Author repository README Abstract section",
+      "source": "sir_antivirus/README.md#abstract",
+      "public_reference": "https://github.com/hhhhzl/sir_antivirus/blob/main/README.md#abstract",
+      "source_file_sha256": "54bd927084c480380a665daa6fee9cba0d009bca67ac24fd09d78fa1d06f9900",
+      "normalized_abstract_sha256": "4d6111d660143b21b3685c01db7aecfffaf3c096a66c990ad5b67e10ee43f7dd",
+      "normalization": "Whitespace folded; LaTeX display formatting and macros rendered as plain text. Original wording retained.",
+      "words": 167
+    }
+  ],
+  "website_checks": [
+    {
+      "url": "https://hhhhzl.github.io/generative-dynamics/research/mga/",
+      "status": 200,
+      "final_url": "https://hhhhzl.github.io/generative-dynamics/research/mga/",
+      "bytes": 26826
+    },
+    {
+      "url": "https://hhhhzl.github.io/generative-dynamics/research/2go/",
+      "status": 200,
+      "final_url": "https://hhhhzl.github.io/generative-dynamics/research/2go/",
+      "bytes": 22419
+    },
+    {
+      "url": "https://hhhhzl.github.io/generative-dynamics/research/md-coas/",
+      "status": 200,
+      "final_url": "https://hhhhzl.github.io/generative-dynamics/research/md-coas/",
+      "bytes": 18427
+    },
+    {
+      "url": "https://hhhhzl.github.io/generative-dynamics/research/mdoc/",
+      "status": 200,
+      "final_url": "https://hhhhzl.github.io/generative-dynamics/research/mdoc/",
+      "bytes": 17086
+    },
+    {
+      "url": "https://hhhhzl.github.io/fedguide-page/",
+      "status": 200,
+      "final_url": "https://hhhhzl.github.io/fedguide-page/",
+      "bytes": 17371
+    }
+  ]
+}

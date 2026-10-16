@@ -1,0 +1,309 @@
+{
+  "coordinates": "Blender Z up; export glTF +Y up (x,z,-y)",
+  "human_bounds": {
+    "min": [
+      -0.29014840722084045,
+      0.754551887512207,
+      0.0003910520754288882
+    ],
+    "max": [
+      0.2924797236919403,
+      1.0937097072601318,
+      1.7781764268875122
+    ]
+  },
+  "robot_bounds": {
+    "min": [
+      -0.23594467341899872,
+      -1.0290902853012085,
+      -1.4901161193847656e-08
+    ],
+    "max": [
+      0.23593451082706451,
+      -0.8076369762420654,
+      1.322845458984375
+    ]
+  },
+  "mesh_objects": 46,
+  "triangles": 453104,
+  "g1_visual_meshes": 35,
+  "g1_source": "/Users/zhilinhe/Desktop/hhhhzl/EduGetRicher/CMU/projects/enerdynamics/third_party/mujoco_menagerie/unitree_g1",
+  "human_eye_blender": [
+    9.033824710513727e-08,
+    0.8296743631362915,
+    1.6299793720245361
+  ],
+  "robot_eye_blender": [
+    -5.026812743835762e-09,
+    -0.8349999785423279,
+    1.2072728872299194
+  ],
+  "motion": {
+    "duration_seconds": 5.0,
+    "delay_seconds": 0.12,
+    "keys": [
+      [
+        0.0,
+        "rest"
+      ],
+      [
+        0.3,
+        "rest"
+      ],
+      [
+        1.2,
+        "chest"
+      ],
+      [
+        1.55,
+        "chest"
+      ],
+      [
+        2.5,
+        "reach"
+      ],
+      [
+        2.75,
+        "reach"
+      ],
+      [
+        3.9,
+        "open"
+      ],
+      [
+        4.0,
+        "open"
+      ],
+      [
+        4.85,
+        "rest"
+      ],
+      [
+        5.0,
+        "rest"
+      ]
+    ],
+    "poses": {
+      "rest": {
+        "left_hip_pitch_joint": 0.0,
+        "left_hip_roll_joint": 0.0,
+        "left_hip_yaw_joint": 0.0,
+        "left_knee_joint": 0.0,
+        "left_ankle_pitch_joint": 0.0,
+        "left_ankle_roll_joint": 0.0,
+        "right_hip_pitch_joint": 0.0,
+        "right_hip_roll_joint": 0.0,
+        "right_hip_yaw_joint": 0.0,
+        "right_knee_joint": 0.0,
+        "right_ankle_pitch_joint": 0.0,
+        "right_ankle_roll_joint": 0.0,
+        "waist_yaw_joint": 0.0,
+        "waist_roll_joint": 0.0,
+        "waist_pitch_joint": 0.0,
+        "left_shoulder_pitch_joint": 0.08,
+        "left_shoulder_roll_joint": 0.12,
+        "left_shoulder_yaw_joint": 0.0,
+        "left_elbow_joint": 1.28,
+        "left_wrist_roll_joint": 0.0,
+        "left_wrist_pitch_joint": 0.0,
+        "left_wrist_yaw_joint": 0.0,
+        "right_shoulder_pitch_joint": 0.08,
+        "right_shoulder_roll_joint": -0.12,
+        "right_shoulder_yaw_joint": 0.0,
+        "right_elbow_joint": 1.28,
+        "right_wrist_roll_joint": 0.0,
+        "right_wrist_pitch_joint": 0.0,
+        "right_wrist_yaw_joint": 0.0
+      },
+      "chest": {
+        "left_hip_pitch_joint": 0.0,
+        "left_hip_roll_joint": 0.0,
+        "left_hip_yaw_joint": 0.0,
+        "left_knee_joint": 0.0,
+        "left_ankle_pitch_joint": 0.0,
+        "left_ankle_roll_joint": 0.0,
+        "right_hip_pitch_joint": 0.0,
+        "right_hip_roll_joint": 0.0,
+        "right_hip_yaw_joint": 0.0,
+        "right_knee_joint": 0.0,
+        "right_ankle_pitch_joint": 0.0,
+        "right_ankle_roll_joint": 0.0,
+        "waist_yaw_joint": 0.0,
+        "waist_roll_joint": 0.0,
+        "waist_pitch_joint": 0.0,
+        "left_shoulder_pitch_joint": 0.08,
+        "left_shoulder_roll_joint": 0.12,
+        "left_shoulder_yaw_joint": 0.0,
+        "left_elbow_joint": 1.28,
+        "left_wrist_roll_joint": 0.0,
+        "left_wrist_pitch_joint": 0.0,
+        "left_wrist_yaw_joint": 0.0,
+        "right_shoulder_pitch_joint": 0.11517184496377539,
+        "right_shoulder_roll_joint": -0.5935920333375254,
+        "right_shoulder_yaw_joint": 0.43485389093359467,
+        "right_elbow_joint": -0.635,
+        "right_wrist_roll_joint": 0.0,
+        "right_wrist_pitch_joint": 0.0,
+        "right_wrist_yaw_joint": 0.0
+      },
+      "reach": {
+        "left_hip_pitch_joint": 0.0,
+        "left_hip_roll_joint": 0.0,
+        "left_hip_yaw_joint": 0.0,
+        "left_knee_joint": 0.0,
+        "left_ankle_pitch_joint": 0.0,
+        "left_ankle_roll_joint": 0.0,
+        "right_hip_pitch_joint": 0.0,
+        "right_hip_roll_joint": 0.0,
+        "right_hip_yaw_joint": 0.0,
+        "right_knee_joint": 0.0,
+        "right_ankle_pitch_joint": 0.0,
+        "right_ankle_roll_joint": 0.0,
+        "waist_yaw_joint": 0.0,
+        "waist_roll_joint": 0.0,
+        "waist_pitch_joint": -0.02,
+        "left_shoulder_pitch_joint": 0.08,
+        "left_shoulder_roll_joint": 0.12,
+        "left_shoulder_yaw_joint": 0.0,
+        "left_elbow_joint": 1.28,
+        "left_wrist_roll_joint": 0.0,
+        "left_wrist_pitch_joint": 0.0,
+        "left_wrist_yaw_joint": 0.0,
+        "right_shoulder_pitch_joint": -0.6363250984418993,
+        "right_shoulder_roll_joint": -0.19790302492470085,
+        "right_shoulder_yaw_joint": 0.04753488254817398,
+        "right_elbow_joint": 0.48319397082497706,
+        "right_wrist_roll_joint": 0.0,
+        "right_wrist_pitch_joint": 0.0,
+        "right_wrist_yaw_joint": 0.0
+      },
+      "open": {
+        "left_hip_pitch_joint": 0.0,
+        "left_hip_roll_joint": 0.0,
+        "left_hip_yaw_joint": 0.0,
+        "left_knee_joint": 0.0,
+        "left_ankle_pitch_joint": 0.0,
+        "left_ankle_roll_joint": 0.0,
+        "right_hip_pitch_joint": 0.0,
+        "right_hip_roll_joint": 0.0,
+        "right_hip_yaw_joint": 0.0,
+        "right_knee_joint": 0.0,
+        "right_ankle_pitch_joint": 0.0,
+        "right_ankle_roll_joint": 0.0,
+        "waist_yaw_joint": 0.0,
+        "waist_roll_joint": 0.0,
+        "waist_pitch_joint": -0.05,
+        "left_shoulder_pitch_joint": 0.3677109209462145,
+        "left_shoulder_roll_joint": 0.8775484258200041,
+        "left_shoulder_yaw_joint": 0.6204152345965438,
+        "left_elbow_joint": 0.029465464327431183,
+        "left_wrist_roll_joint": 0.0,
+        "left_wrist_pitch_joint": 0.0,
+        "left_wrist_yaw_joint": 0.0,
+        "right_shoulder_pitch_joint": 0.3678543782050251,
+        "right_shoulder_roll_joint": -0.8776168000646956,
+        "right_shoulder_yaw_joint": -0.6204359594761022,
+        "right_elbow_joint": 0.02944643898982017,
+        "right_wrist_roll_joint": 0.0,
+        "right_wrist_pitch_joint": 0.0,
+        "right_wrist_yaw_joint": 0.0
+      }
+    },
+    "hand_fit": {
+      "chest": {
+        "target": [
+          0.21,
+          -0.085,
+          0.98
+        ],
+        "achieved": [
+          0.21172091364860535,
+          -0.08511374145746231,
+          0.9783673286437988
+        ],
+        "error_m": 0.0023748887684398104,
+        "finger_axis": [
+          0.7779824733734131,
+          0.5891261696815491,
+          0.21834301948547363
+        ],
+        "palm_normal": [
+          -0.4375471770763397,
+          0.25863322615623474,
+          0.8611976504325867
+        ]
+      },
+      "reach": {
+        "target": [
+          0.4,
+          -0.14,
+          0.98
+        ],
+        "achieved": [
+          0.39956584572792053,
+          -0.13993485271930695,
+          0.9801290035247803
+        ],
+        "error_m": 0.00045757623359644927,
+        "finger_axis": [
+          0.9817793369293213,
+          0.11977855861186981,
+          0.14752143621444702
+        ],
+        "palm_normal": [
+          -0.17149166762828827,
+          0.22408334910869598,
+          0.9593629837036133
+        ]
+      },
+      "open_right": {
+        "target": [
+          0.18,
+          -0.43,
+          1.02
+        ],
+        "achieved": [
+          0.1812804937362671,
+          -0.4304087162017822,
+          1.0192697048187256
+        ],
+        "error_m": 0.0015297202992740925,
+        "finger_axis": [
+          0.8604758381843567,
+          -0.48001378774642944,
+          0.17078684270381927
+        ],
+        "palm_normal": [
+          0.2928341031074524,
+          0.7402620315551758,
+          0.605194628238678
+        ]
+      },
+      "open_left": {
+        "target": [
+          0.18,
+          0.43,
+          1.02
+        ],
+        "achieved": [
+          0.18129751086235046,
+          0.43041232228279114,
+          1.019271731376648
+        ],
+        "error_m": 0.001543994588903303,
+        "finger_axis": [
+          0.8604632616043091,
+          0.48001253604888916,
+          0.17085352540016174
+        ],
+        "palm_normal": [
+          0.2927490770816803,
+          -0.7402204871177673,
+          0.6052863597869873
+        ]
+      }
+    },
+    "wrist_policy": "All six wrist hinge angles are 0 rad in every pose; no end-effector orientation optimization",
+    "interpolation": "Smoothstep authoring, quaternion hemisphere continuity, linear baked samples"
+  }
+}
