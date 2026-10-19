@@ -3,18 +3,26 @@ Requires Python 3 with Pillow, Node.js, and ffmpeg on PATH (or pass --ffmpeg).
 Run: python3 scripts/build-publication-composites.py
 Sources are read from the preserved media arrays in src/publication-data.js.
 Use --only mga,2go to rebuild a subset; existing manifest entries are retained.
+Use --preview --output-dir /tmp/montage-review for first-frame layout review.
 """
-import pathlib,json,subprocess,hashlib,math,re,concurrent.futures,time,argparse,shutil,tempfile,os
+import pathlib,json,subprocess,hashlib,math,re,concurrent.futures,time,argparse,shutil,tempfile,os,datetime
 from PIL import Image,ImageDraw,ImageFont
 SITE=pathlib.Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--ffmpeg',default=shutil.which('ffmpeg'))
 parser.add_argument('--node',default=shutil.which('node'))
 parser.add_argument('--only',help='Comma-separated slugs: mga,2go,fedguide,md-coas,mdoc,acc')
+parser.add_argument('--preview',action='store_true',help='Write only first-frame JPEG previews; requires a separate --output-dir.')
+parser.add_argument('--output-dir',type=pathlib.Path,help='Alternate output directory for review; defaults to the public gallery.')
+parser.add_argument('--jobs',type=int,default=2,choices=range(1,5),help='Concurrent papers to encode (default: 2).')
 options=parser.parse_args()
 if not options.ffmpeg or not options.node:parser.error('Provide ffmpeg and Node.js on PATH, or --ffmpeg and --node executable paths.')
 FF=pathlib.Path(options.ffmpeg);temp=tempfile.TemporaryDirectory(prefix='publication-composites-');WORK=pathlib.Path(temp.name)
-OUT=SITE/'public/assets/publications/gallery'
+PUBLIC_OUT=SITE/'public/assets/publications/gallery'
+OUT=options.output_dir or PUBLIC_OUT
+if options.preview and (not options.output_dir or OUT.resolve()==PUBLIC_OUT.resolve()):
+ parser.error('--preview requires an --output-dir outside the public gallery.')
+OUT.mkdir(parents=True,exist_ok=True)
 font_candidates=['/System/Library/Fonts/Supplemental/Arial.ttf','/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf','C:/Windows/Fonts/arial.ttf']
 FONT=next((x for x in font_candidates if pathlib.Path(x).exists()),None)
 if not FONT:parser.error('Arial or DejaVuSans TTF is required for the small source labels.')
@@ -32,14 +40,37 @@ for paper in papers:
   match=re.search(r'Duration: (\d+):(\d+):([\d.]+)',probe)
   if not match:raise RuntimeError('Could not read video duration: '+str(path))
   prepared[path.name]={'duration_seconds':int(match[1])*3600+int(match[2])*60+float(match[3])}
-# Rows group related experiments, retaining the complete source frame with letterboxing.
+# Tiles are equal within each paper, with natural image proportions suited to
+# that paper's clips. Canvas height follows the grid, avoiding unused bands.
+# Fit preserves source pixels and scientific white backgrounds. Newly added
+# framing and letterboxing use the same muted indigo so tiles remain compact.
+WIDTH=1280
+MARGIN,GUTTER,LABEL_HEIGHT=8,8,30
+FRAME_COLOR='30394e'
+FIT_COLOR=FRAME_COLOR
+LABEL_COLOR='f5f1e8'
 layouts={
- 'he2026mga':('mga',1200,900,[(3,342),(3,255),(3,255)]),
- 'he2026twogo':('2go',1200,900,[(3,236),(2,308),(2,308)]),
- 'he2026fedguide':('fedguide',1200,656,[(4,308),(4,308)]),
- 'he2026mdcoas':('md-coas',1200,840,[(3,462),(4,338)]),
- 'he2026mdoc':('mdoc',1200,856,[(3,408),(3,408)]),
+ 'he2026mga':('mga',[3,3,3],226),
+ 'he2026twogo':('2go',[4,3],232),
+ 'he2026fedguide':('fedguide',[4,4],310),
+ 'he2026mdcoas':('md-coas',[4,3],310),
+ 'he2026mdoc':('mdoc',[3,3],416),
 }
+
+def display_caption(caption):
+ # Remove repeated context, retaining the complete author caption in metadata.
+ return caption.replace('Simulation · ','').replace('Hardware · MGA: ','Hardware · ').replace('Hardware · 2GO: G1 hardware','Hardware · G1').replace('constrained refinement','refinement').replace('peg-insertion hardware','Peg insertion').replace(' · client ',' · C').replace('Random-obstacle coordination','Random obstacles · coordination').replace('fixed-stance pushing','fixed-stance push')
+
+def tile_positions(rows,image_height):
+ columns=max(rows)
+ tw=(WIDTH-2*MARGIN-(columns-1)*GUTTER)//columns
+ th=image_height+LABEL_HEIGHT
+ positions=[]
+ for row,count in enumerate(rows):
+  left=(WIDTH-(count*tw+(count-1)*GUTTER))//2
+  for column in range(count):
+   positions.append({'x':left+column*(tw+GUTTER),'y':MARGIN+row*(th+GUTTER),'width':tw,'height':th})
+ return positions
 
 def run(args,log):
  p=subprocess.run([str(FF),'-hide_banner','-loglevel','error','-y',*map(str,args)],capture_output=True,text=True)
@@ -53,29 +84,33 @@ def assets(paper):
  return [m for m in paper['media'] if m['type']=='video']
 
 def make(paper):
- pid,width,height,rows=layouts[paper['id']]; clips=assets(paper);n=len(clips);assert sum(x[0] for x in rows)==n
- dest=OUT/f'{pid}-experiments'; positions=[];offset=0;y=16
- for count,h in rows:
-  usable=width-32-(count-1)*8;tw=usable//count
-  for j in range(count):positions.append({'x':16+j*(tw+8),'y':y,'width':tw,'height':h})
-  y+=h+8
- assert y-8+16==height
+ pid,rows,image_height=layouts[paper['id']];width=WIDTH
+ height=2*MARGIN+len(rows)*(image_height+LABEL_HEIGHT)+(len(rows)-1)*GUTTER
+ clips=assets(paper);n=len(clips);assert sum(rows)==n
+ # Encode in temporary storage, then publish complete files atomically.
+ dest=WORK/f'{pid}-experiments';positions=tile_positions(rows,image_height)
  duration=math.ceil(max(prepared[pathlib.Path(x['src']).name]['duration_seconds'] for x in clips)*12)/12
  args=[];filters=[];sources=[]
  for i,(m,box) in enumerate(zip(clips,positions)):
   source=SITE/'public'/m['src'].removeprefix('./');assert source.exists()
   args+=['-stream_loop','-1','-threads','1','-i',source]
-  title=m.get('caption') or m.get('alt') or f'Experiment {i+1}'
+  original_title=m.get('caption') or m.get('alt') or f'Experiment {i+1}'
+  title=display_caption(original_title)
   label=WORK/f'{pid}-label-{i}.txt';label.write_text(title)
   textsize=14
-  while ImageFont.truetype(FONT,textsize).getlength(title)>box['width']-20 and textsize>10:textsize-=1
+  while ImageFont.truetype(FONT,textsize).getlength(title)>box['width']-18 and textsize>11:textsize-=1
   tw,th=box['width'],box['height']
-  filters.append(f"[{i}:v]setpts=PTS-STARTPTS,fps=12,scale=w={tw-12}:h={th-38}:force_original_aspect_ratio=decrease:force_divisible_by=2,pad={tw}:{th}:(ow-iw)/2:(oh-26-ih)/2:color=white,setsar=1,drawbox=x=0:y=ih-26:w=iw:h=26:color=0xf0ede8:t=fill,drawtext=fontfile='{FONT}':textfile='{label}':fontsize={textsize}:fontcolor=0x554e58:x=10:y=h-19[t{i}]")
+  filters.append(f"[{i}:v]setpts=PTS-STARTPTS,fps=12,scale=w={tw}:h={th-LABEL_HEIGHT}:force_original_aspect_ratio=decrease:force_divisible_by=2,pad={tw}:{th}:(ow-iw)/2:(oh-{LABEL_HEIGHT}-ih)/2:color=0x{FIT_COLOR},setsar=1,drawbox=x=0:y=ih-{LABEL_HEIGHT}:w=iw:h={LABEL_HEIGHT}:color=0x{FRAME_COLOR}:t=fill,drawtext=fontfile='{FONT}':textfile='{label}':fontsize={textsize}:fontcolor=0x{LABEL_COLOR}:x=9:y=h-21[t{i}]")
   provenance=byfile.get('gallery/'+source.name,{})
-  sources.append({'file':'gallery/'+source.name,'sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'caption':title,'duration_seconds':prepared[source.name]['duration_seconds'],'placement_px':box,'source_url':provenance.get('source_url'),'author_provided_source':provenance.get('author_provided_source')})
+  sources.append({'file':'gallery/'+source.name,'sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'caption':original_title,'display_caption':title,'duration_seconds':prepared[source.name]['duration_seconds'],'placement_px':box,'source_url':provenance.get('source_url'),'author_provided_source':provenance.get('author_provided_source')})
  inputs=''.join(f'[t{i}]' for i in range(n));layout='|'.join(f"{p['x']}_{p['y']}" for p in positions)
- filters.append(f'{inputs}xstack=inputs={n}:layout={layout}:fill=white,pad={width}:{height}:0:0:color=white,format=yuv420p[v]')
+ filters.append(f'{inputs}xstack=inputs={n}:layout={layout}:fill=0x{FRAME_COLOR},pad={width}:{height}:0:0:color=0x{FRAME_COLOR},format=yuv420p[v]')
  graph=WORK/f'{pid}-filter.txt';graph.write_text(';\n'.join(filters))
+ if options.preview:
+  jpg=OUT/f'{pid}-experiments.jpg'
+  run(args+['-filter_complex_threads','1','-filter_complex_script',graph,'-map','[v]','-frames:v','1','-q:v','2','-update','1',jpg],WORK/f'{pid}-preview.log')
+  print(pid,'preview',width,height,flush=True)
+  return None
  mp4=dest.with_suffix('.mp4')
  run(args+['-filter_complex_threads','1','-filter_complex_script',graph,'-map','[v]','-an','-t',duration,'-c:v','libx264','-threads','2','-preset','medium','-crf','24','-pix_fmt','yuv420p','-movflags','+faststart',mp4],WORK/f'{pid}-mp4.log')
  jpg=dest.with_suffix('.jpg');run(['-i',mp4,'-frames:v','1','-q:v','2','-update','1',jpg],WORK/f'{pid}-poster.log')
@@ -86,7 +121,10 @@ def make(paper):
  if gif.stat().st_size>12_000_000:
   gifwidth=800;giffps=8;gifencode()
  with Image.open(gif) as im:gifdimensions=list(im.size);gifframes=im.n_frames
- result={'paper_id':paper['id'],'slug':pid,'kind':'simultaneous_experiment_composite','source_count':n,'sources':sources,'duration_seconds':duration,'dimensions':[width,height],'aspect_ratio':f'{width}:{height}','video':{**fileinfo(mp4),'codec':'H.264','pixel_format':'yuv420p','fps':12,'audio':False,'faststart':True},'gif':{**fileinfo(gif),'dimensions':gifdimensions,'fps':giffps,'palette_colors':colors,'dither':dither,'frames':gifframes,'loop':0},'poster':{**fileinfo(jpg),'frame':0},'transform':'All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Grid, caption bands, resampling and encoding only. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json).'}
+ result={'paper_id':paper['id'],'slug':pid,'kind':'simultaneous_experiment_composite','source_count':n,'sources':sources,'duration_seconds':duration,'dimensions':[width,height],'aspect_ratio':f'{width}:{height}','layout':{'version':2,'row_counts':rows,'equal_tile_dimensions':[positions[0]['width'],positions[0]['height']],'image_area_dimensions':[positions[0]['width'],image_height],'outer_margin_px':MARGIN,'gutter_px':GUTTER,'caption_height_px':LABEL_HEIGHT,'short_row_alignment':'center','frame_and_caption_color':'#'+FRAME_COLOR,'letterbox_color':'#'+FIT_COLOR,'caption_color':'#'+LABEL_COLOR},'video':{**fileinfo(mp4),'codec':'H.264','pixel_format':'yuv420p','fps':12,'audio':False,'faststart':True},'gif':{**fileinfo(gif),'dimensions':gifdimensions,'fps':giffps,'palette_colors':colors,'dither':dither,'frames':gifframes,'loop':0},'poster':{**fileinfo(jpg),'frame':0},'transform':'All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Compact equal-tile grid, caption bands, resampling and encoding only. Muted indigo replaces newly added letterboxing; the original source colors and scientific white backgrounds remain intact. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json).'}
+ for path in (mp4,gif,jpg):
+  pending=OUT/('.'+path.name+'.pending')
+  shutil.copyfile(path,pending);os.replace(pending,OUT/path.name)
  (WORK/f'{pid}-result.json').write_text(json.dumps(result,indent=2))
  print(pid,'done',n,'sources',duration,'seconds',round(mp4.stat().st_size/1e6,2),'MB MP4',round(gif.stat().st_size/1e6,2),'MB GIF',flush=True)
  return result
@@ -116,17 +154,20 @@ if __name__=='__main__':
  start=time.time()
  selected=set(options.only.split(',')) if options.only else None
  chosen=[p for p in papers if p['id'] in layouts and (not selected or layouts[p['id']][0] in selected)]
- with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(make,chosen))
+ with concurrent.futures.ThreadPoolExecutor(max_workers=options.jobs) as pool:results=list(pool.map(make,chosen))
+ if options.preview:
+  print('Preview only; no public media or manifest changed.',flush=True)
+  raise SystemExit(0)
  if not selected or 'acc' in selected:results.append(make_acc(next(p for p in papers if p['id']=='wang2024antivirus')))
  manifest_path=OUT/'composites-manifest.json'
  if selected and manifest_path.exists():
   retained=[r for r in json.loads(manifest_path.read_text())['artifacts'] if r['slug'] not in selected];results=retained+results
  order=['mga','2go','fedguide','md-coas','mdoc','acc'];results.sort(key=lambda r:order.index(r['slug']))
- manifest={'created':'2026-10-16','rights':original['rights'],'source_manifest':'../gallery-sources.json','note':'Synchronized playback is a presentation device: clips are independent experiments, not synchronized measurements. All 37 input MP4 files are covered. No synthetic research visuals. Original arrays and individual media files remain available.','artifacts':results}
+ manifest={'created':datetime.date.today().isoformat(),'rights':original['rights'],'source_manifest':'../gallery-sources.json','note':'Synchronized playback is a presentation device: clips are independent experiments, not synchronized measurements. All 37 input MP4 files are covered. No synthetic research visuals. Original arrays and individual media files remain available. Animated montages use compact grids with a shared 1280 px width, equal tiles within each paper, 8 px framing/gutters and 30 px caption bands. Height follows the natural tile proportions rather than adding outer letterboxing.','artifacts':results}
  (OUT/'composites-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
  lines=['# Simultaneous experiment composites','',original['rights'],'','Each animation shows every available experiment for that paper at once. Videos retain their source speed; shorter clips loop independently while the longest completes. This is a presentation collage, not evidence that experiments occurred in sync. No input frame is newly cropped; original clips may contain pre-existing crops or time normalization documented in [the original source manifest](../gallery-sources.json).','', 'The GIF and H.264 MP4 for each paper show the same montage. MP4 is the lightweight browser playback version. JPEG posters are the first decoded frame. ACC has only its original static experiment-results figure and therefore has no fabricated animation.','','| Paper | Inputs | Outputs |','| --- | ---: | --- |']
  for r in results:
   names=[r[k]['file'].removeprefix('gallery/') for k in ['video','gif','image','poster'] if k in r];lines.append(f"| {r['slug']} | {r['source_count']} | "+' · '.join(f'[{n}]({n})' for n in names)+' |')
- lines+=['','Per-input original URLs/local provenance, hashes, complete placement coordinates, dimensions, timing and transformations are in [composites-manifest.json](composites-manifest.json). Reproduction script: `scripts/build-publication-composites.py` at the repository root (requires Python/Pillow, Node.js, ffmpeg and the original local media arrays/assets).','']
+ lines+=['','Animated montages use a consistent 1280 px width, 8 px outer framing/gutters, equal tiles within each paper, centered short rows, and 30 px caption bands. Image cells follow the natural proportions of each paper’s clips; canvas height follows those rows, avoiding extra outer padding. Framing, captions and newly introduced letterboxing are muted indigo (#30394e). Original source colors, including scientific white backgrounds, are preserved. Visible captions abbreviate repeated context; the complete original captions remain in the manifest.','', 'Per-input original URLs/local provenance, hashes, complete placement coordinates, dimensions, timing and transformations are in [composites-manifest.json](composites-manifest.json). Reproduction script: `scripts/build-publication-composites.py` at the repository root (requires Python/Pillow, Node.js, ffmpeg and the original local media arrays/assets). Use `--preview --output-dir /tmp/montage-review` to inspect layouts without replacing public media.','']
  (OUT/'COMPOSITES-CREDITS.md').write_text('\n'.join(lines))
  print('TOTAL seconds',round(time.time()-start,2),'bytes',sum(r[k]['bytes'] for r in results for k in ['video','gif','image','poster'] if k in r),flush=True)

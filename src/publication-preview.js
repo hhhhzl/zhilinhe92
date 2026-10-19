@@ -65,6 +65,12 @@ function createPreview(paper, { resolveUrl, initial, onStateChange, open }) {
   panel.id = 'preview-panel-' + paper.id;
   const stage = node('button', 'preview-stage');
   stage.type = 'button';
+  // Fit the complete experiment grid, keeping the same frame during each switch.
+  // A paper with only a figure uses that figure's native aspect ratio.
+  const frame = paper.montage || paper.method || visuals[0].item;
+  if (Number.isFinite(frame.width) && frame.width > 0 && Number.isFinite(frame.height) && frame.height > 0) {
+    stage.style.setProperty('--preview-aspect', `${frame.width} / ${frame.height}`);
+  }
   const expand = node('span', 'preview-expand', '↗');
   expand.setAttribute('aria-hidden', 'true');
   panel.append(stage);

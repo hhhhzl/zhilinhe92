@@ -1,8 +1,8 @@
 {
-  "created": "2026-10-16",
+  "created": "2026-10-19",
   "rights": "Author-provided research material, reused at the author\u2019s request. Retain upstream paper and repository terms; this record does not grant a new license. Prior publication figure licensing is recorded separately in sources.json.",
   "source_manifest": "../gallery-sources.json",
-  "note": "Synchronized playback is a presentation device: clips are independent experiments, not synchronized measurements. All 37 input MP4 files are covered. No synthetic research visuals. Original arrays and individual media files remain available.",
+  "note": "Synchronized playback is a presentation device: clips are independent experiments, not synchronized measurements. All 37 input MP4 files are covered. No synthetic research visuals. Original arrays and individual media files remain available. Animated montages use compact grids with a shared 1280 px width, equal tiles within each paper, 8 px framing/gutters and 30 px caption bands. Height follows the natural tile proportions rather than adding outer letterboxing.",
   "artifacts": [
     {
       "paper_id": "he2026mga",
@@ -14,12 +14,13 @@
           "file": "gallery/hardware_mga_surface_foam.mp4",
           "sha256": "2e26db4282634459f3789636d3a8f2eb73480e585418b5815f1890b35486f321",
           "caption": "Hardware \u00b7 MGA: compliant scanning",
+          "display_caption": "Hardware \u00b7 compliant scanning",
           "duration_seconds": 12.0,
           "placement_px": {
-            "x": 16,
-            "y": 16,
-            "width": 384,
-            "height": 342
+            "x": 8,
+            "y": 8,
+            "width": 416,
+            "height": 256
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/hardware_mga_surface_foam.mp4",
           "author_provided_source": null
@@ -28,12 +29,13 @@
           "file": "gallery/hardware_mga_peg_insert.mp4",
           "sha256": "d10f1475cbdaf5518765e6d43f23bd4181bfb8c01d85db2fc87cd45d55ff17d6",
           "caption": "Hardware \u00b7 MGA: peg-insertion hardware",
+          "display_caption": "Hardware \u00b7 Peg insertion",
           "duration_seconds": 12.0,
           "placement_px": {
-            "x": 408,
-            "y": 16,
-            "width": 384,
-            "height": 342
+            "x": 432,
+            "y": 8,
+            "width": 416,
+            "height": 256
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/hardware_mga_peg_insert.mp4",
           "author_provided_source": null
@@ -42,12 +44,13 @@
           "file": "gallery/hardware_mga_surface_curved.mp4",
           "sha256": "a64ae9ced9278f807da1d22508b81f38392790703e8180e73d83d1e06077d0e5",
           "caption": "Hardware \u00b7 MGA: curved scanning",
+          "display_caption": "Hardware \u00b7 curved scanning",
           "duration_seconds": 12.0,
           "placement_px": {
-            "x": 800,
-            "y": 16,
-            "width": 384,
-            "height": 342
+            "x": 856,
+            "y": 8,
+            "width": 416,
+            "height": 256
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/hardware_mga_surface_curved.mp4",
           "author_provided_source": null
@@ -56,12 +59,13 @@
           "file": "gallery/mga_surface_hybrid_stripes.mp4",
           "sha256": "97f81b08501d566c2e6b62235901b8ffe1d834ab7b14f6f991ceb84c366e120a",
           "caption": "Simulation \u00b7 Hybrid: stripes",
+          "display_caption": "Hybrid: stripes",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 16,
-            "y": 366,
-            "width": 384,
-            "height": 255
+            "x": 8,
+            "y": 272,
+            "width": 416,
+            "height": 256
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/mga_surface_hybrid_stripes.mp4",
           "author_provided_source": null
@@ -70,12 +74,13 @@
           "file": "gallery/mga_surface_soft_unseen.mp4",
           "sha256": "8a1953c0ed829da3fca45dcc1e05f176d01221254967fc340ee3227ac2840d94",
           "caption": "Simulation \u00b7 Compliant: unseen geometry",
+          "display_caption": "Compliant: unseen geometry",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 408,
-            "y": 366,
-            "width": 384,
-            "height": 255
+            "x": 432,
+            "y": 272,
+            "width": 416,
+            "height": 256
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/mga_surface_soft_unseen.mp4"
@@ -84,12 +89,13 @@
           "file": "gallery/mga_peg_id_wide.mp4",
           "sha256": "4110918bd1f50196141c0e58f6318db4db622137233023491171ca4cb8d317de",
           "caption": "Simulation \u00b7 Peg insertion: wide clearance",
+          "display_caption": "Peg insertion: wide clearance",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 800,
-            "y": 366,
-            "width": 384,
-            "height": 255
+            "x": 856,
+            "y": 272,
+            "width": 416,
+            "height": 256
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/mga_peg_id_wide.mp4",
           "author_provided_source": null
@@ -98,12 +104,13 @@
           "file": "gallery/mga_peg_ood_sensing.mp4",
           "sha256": "dba53cf77cacbe6ffc82d6b81d7fd4aa0731ce6dc1e14f471402a8a177fac628",
           "caption": "Simulation \u00b7 Peg insertion: sensing shift",
+          "display_caption": "Peg insertion: sensing shift",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 16,
-            "y": 629,
-            "width": 384,
-            "height": 255
+            "x": 8,
+            "y": 536,
+            "width": 416,
+            "height": 256
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/mga_peg_ood_sensing.mp4"
@@ -112,12 +119,13 @@
           "file": "gallery/mga_humanoid_fixed_stance_push.mp4",
           "sha256": "79296866022d127138b83ba8da11e8a5c96d775b4d557a9d7da4dcad6e0b8214",
           "caption": "Simulation \u00b7 Humanoid: fixed-stance pushing",
+          "display_caption": "Humanoid: fixed-stance push",
           "duration_seconds": 1.54,
           "placement_px": {
-            "x": 408,
-            "y": 629,
-            "width": 384,
-            "height": 255
+            "x": 432,
+            "y": 536,
+            "width": 416,
+            "height": 256
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/mga_humanoid_fixed_stance_push.mp4",
           "author_provided_source": null
@@ -126,12 +134,13 @@
           "file": "gallery/mga_humanoid_unjamming.mp4",
           "sha256": "882a53d0c3a4fe1b0ed1c41cada80dbfeac67dc3e5db62dea1097be5d5d586a0",
           "caption": "Simulation \u00b7 Humanoid: unjamming",
+          "display_caption": "Humanoid: unjamming",
           "duration_seconds": 2.12,
           "placement_px": {
-            "x": 800,
-            "y": 629,
-            "width": 384,
-            "height": 255
+            "x": 856,
+            "y": 536,
+            "width": 416,
+            "height": 256
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/mga_humanoid_unjamming.mp4",
           "author_provided_source": null
@@ -139,14 +148,37 @@
       ],
       "duration_seconds": 12.0,
       "dimensions": [
-        1200,
-        900
+        1280,
+        800
       ],
-      "aspect_ratio": "1200:900",
+      "aspect_ratio": "1280:800",
+      "layout": {
+        "version": 2,
+        "row_counts": [
+          3,
+          3,
+          3
+        ],
+        "equal_tile_dimensions": [
+          416,
+          256
+        ],
+        "image_area_dimensions": [
+          416,
+          226
+        ],
+        "outer_margin_px": 8,
+        "gutter_px": 8,
+        "caption_height_px": 30,
+        "short_row_alignment": "center",
+        "frame_and_caption_color": "#30394e",
+        "letterbox_color": "#30394e",
+        "caption_color": "#f5f1e8"
+      },
       "video": {
         "file": "gallery/mga-experiments.mp4",
-        "bytes": 407658,
-        "sha256": "2cfe5108441be320557dc7baa592b4f5a3bcc79e46ba67552ae8b5dc6ed14346",
+        "bytes": 355698,
+        "sha256": "5cdd55dba4686d1c217bf76185e2aaaba7be849f5c0a378180550ccdd7b739e6",
         "codec": "H.264",
         "pixel_format": "yuv420p",
         "fps": 12,
@@ -155,23 +187,25 @@
       },
       "gif": {
         "file": "gallery/mga-experiments.gif",
-        "bytes": 4355913,
-        "sha256": "6a84661fb2417f677934898e5d6b885f419e032d63941e942f3d26bb7a998b8e",
+        "bytes": 3227106,
+        "sha256": "285df3d428847398eb7f80eda4d319b3e67ccb660441abf277466719b14bc38e",
         "dimensions": [
           960,
-          720
+          600
         ],
         "fps": 10,
+        "palette_colors": 192,
+        "dither": "bayer:bayer_scale=3",
         "frames": 120,
         "loop": 0
       },
       "poster": {
         "file": "gallery/mga-experiments.jpg",
-        "bytes": 139109,
-        "sha256": "e8c55497ae86d87014ee33d1f56885b4be7354777bb8ea3bcab49ad914188452",
+        "bytes": 115441,
+        "sha256": "b9042b7ce6352edec36b82c739c3a7eb3daf6e18037c4e754bebe2094753737e",
         "frame": 0
       },
-      "transform": "All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Grid, caption bands, resampling and encoding only. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json)."
+      "transform": "All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Compact equal-tile grid, caption bands, resampling and encoding only. Muted indigo replaces newly added letterboxing; the original source colors and scientific white backgrounds remain intact. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json)."
     },
     {
       "paper_id": "he2026twogo",
@@ -183,12 +217,13 @@
           "file": "gallery/hardware_twogo_g1.mp4",
           "sha256": "a5056387971abe27da2643087707db17c1fdea4777887c7c8dbfedb3c4122542",
           "caption": "Hardware \u00b7 2GO: G1 hardware",
+          "display_caption": "Hardware \u00b7 G1",
           "duration_seconds": 20.0,
           "placement_px": {
-            "x": 16,
-            "y": 16,
-            "width": 384,
-            "height": 236
+            "x": 8,
+            "y": 8,
+            "width": 310,
+            "height": 262
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/hardware_twogo_g1.mp4",
           "author_provided_source": null
@@ -197,12 +232,13 @@
           "file": "gallery/twogo_go2_s2.mp4",
           "sha256": "27a3120356376df089dbba0d48afed751e706875b4f2a97e39a95916b84382e9",
           "caption": "Simulation \u00b7 Go2 stepping stones: S2",
+          "display_caption": "Go2 stepping stones: S2",
           "duration_seconds": 16.28,
           "placement_px": {
-            "x": 408,
-            "y": 16,
-            "width": 384,
-            "height": 236
+            "x": 326,
+            "y": 8,
+            "width": 310,
+            "height": 262
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/twogo_go2_s2.mp4",
           "author_provided_source": null
@@ -211,12 +247,13 @@
           "file": "gallery/twogo_go2_s1.mp4",
           "sha256": "a079903e1f6d21260860b09f16e766c2ca7a2c0d812f4a04927e6dcaaf01bafe",
           "caption": "Simulation \u00b7 Go2 stepping stones: S1",
+          "display_caption": "Go2 stepping stones: S1",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 800,
-            "y": 16,
-            "width": 384,
-            "height": 236
+            "x": 644,
+            "y": 8,
+            "width": 310,
+            "height": 262
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/twogo_go2_s1.mp4"
@@ -225,12 +262,13 @@
           "file": "gallery/twogo_g1_zone_a.mp4",
           "sha256": "30061904c9bc359cbfa11d1dc78b867fab1cfffd265318f423b3313e36954384",
           "caption": "Simulation \u00b7 G1: central wall (A)",
+          "display_caption": "G1: central wall (A)",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 16,
-            "y": 260,
-            "width": 580,
-            "height": 308
+            "x": 962,
+            "y": 8,
+            "width": 310,
+            "height": 262
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/twogo_g1_zone_a.mp4"
@@ -239,12 +277,13 @@
           "file": "gallery/twogo_g1_zone_b.mp4",
           "sha256": "66818e92bd1df5f13868e3933d3feb2d9981abf0e0a035c72996cec6f0e13b89",
           "caption": "Simulation \u00b7 G1: asymmetric passage (B)",
+          "display_caption": "G1: asymmetric passage (B)",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 604,
-            "y": 260,
-            "width": 580,
-            "height": 308
+            "x": 167,
+            "y": 278,
+            "width": 310,
+            "height": 262
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/twogo_g1_zone_b.mp4"
@@ -253,12 +292,13 @@
           "file": "gallery/twogo_g1_zone_c.mp4",
           "sha256": "6e96e31ae7fa00deacb0882ccc3a5b8376da1a838d64b55af427302c17a66a38",
           "caption": "Simulation \u00b7 G1: tapered squeeze (C)",
+          "display_caption": "G1: tapered squeeze (C)",
           "duration_seconds": 34.56,
           "placement_px": {
-            "x": 16,
-            "y": 576,
-            "width": 580,
-            "height": 308
+            "x": 485,
+            "y": 278,
+            "width": 310,
+            "height": 262
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/twogo_g1_zone_c.mp4",
           "author_provided_source": null
@@ -267,12 +307,13 @@
           "file": "gallery/twogo_g1_zone_d.mp4",
           "sha256": "97f11b8d26cc4ab5adc9f94144bb43a4c5ceb4dc37cb90bfd77788b503d2af98",
           "caption": "Simulation \u00b7 G1: spherical obstacles (D)",
+          "display_caption": "G1: spherical obstacles (D)",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 604,
-            "y": 576,
-            "width": 580,
-            "height": 308
+            "x": 803,
+            "y": 278,
+            "width": 310,
+            "height": 262
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/twogo_g1_zone_d.mp4"
@@ -280,14 +321,36 @@
       ],
       "duration_seconds": 34.583333333333336,
       "dimensions": [
-        1200,
-        900
+        1280,
+        548
       ],
-      "aspect_ratio": "1200:900",
+      "aspect_ratio": "1280:548",
+      "layout": {
+        "version": 2,
+        "row_counts": [
+          4,
+          3
+        ],
+        "equal_tile_dimensions": [
+          310,
+          262
+        ],
+        "image_area_dimensions": [
+          310,
+          232
+        ],
+        "outer_margin_px": 8,
+        "gutter_px": 8,
+        "caption_height_px": 30,
+        "short_row_alignment": "center",
+        "frame_and_caption_color": "#30394e",
+        "letterbox_color": "#30394e",
+        "caption_color": "#f5f1e8"
+      },
       "video": {
         "file": "gallery/2go-experiments.mp4",
-        "bytes": 3131065,
-        "sha256": "07017c0bc4b2919e5e39b64cd6eba68bd467b23b4938655ce95b29eef2b9b130",
+        "bytes": 2654356,
+        "sha256": "bdf479b2d5cfa0af83ad14a1f9df084f6204cab183ef649f5235ebf7f9eff738",
         "codec": "H.264",
         "pixel_format": "yuv420p",
         "fps": 12,
@@ -296,23 +359,25 @@
       },
       "gif": {
         "file": "gallery/2go-experiments.gif",
-        "bytes": 28972319,
-        "sha256": "350f8417b3fa0a7eeae2384c9397b621bc266cfb71290f3e68d3410698288c22",
+        "bytes": 21338536,
+        "sha256": "8147595541799e2392fc6b6894dc0e65532f45abe46b2109b1a05a8e749f3d02",
         "dimensions": [
           800,
-          600
+          343
         ],
         "fps": 8,
+        "palette_colors": 192,
+        "dither": "bayer:bayer_scale=3",
         "frames": 277,
         "loop": 0
       },
       "poster": {
         "file": "gallery/2go-experiments.jpg",
-        "bytes": 131475,
-        "sha256": "f2c6b6adfbc14305334c7fbaa4319b9df5cf778847c11ad17712ae3c7b3e12f9",
+        "bytes": 93881,
+        "sha256": "c9f6d1ab3f12236d5a962d8b6cd7f20429fcc96985dc21f5e35d1abc05ba27dd",
         "frame": 0
       },
-      "transform": "All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Grid, caption bands, resampling and encoding only. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json)."
+      "transform": "All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Compact equal-tile grid, caption bands, resampling and encoding only. Muted indigo replaces newly added letterboxing; the original source colors and scientific white backgrounds remain intact. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json)."
     },
     {
       "paper_id": "he2026fedguide",
@@ -324,12 +389,13 @@
           "file": "gallery/fedguide_halfcheetah_client1.mp4",
           "sha256": "747018efc3bee72da107aeb09bdf1f0e3a737740fcdebb6d48f762a816c4d7fe",
           "caption": "Simulation \u00b7 HalfCheetah \u00b7 client 1",
+          "display_caption": "HalfCheetah \u00b7 C1",
           "duration_seconds": 33.37,
           "placement_px": {
-            "x": 16,
-            "y": 16,
-            "width": 286,
-            "height": 308
+            "x": 8,
+            "y": 8,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/fedguide-page/assets/videos/halfcheetah/fedguide/client-1.mp4",
           "author_provided_source": null
@@ -338,12 +404,13 @@
           "file": "gallery/fedguide_walker_client4.mp4",
           "sha256": "6f0e1bd9088de0860205b6591594823154da94bad268dc0cf233e8e307919557",
           "caption": "Simulation \u00b7 Walker2D \u00b7 client 4",
+          "display_caption": "Walker2D \u00b7 C4",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 310,
-            "y": 16,
-            "width": 286,
-            "height": 308
+            "x": 326,
+            "y": 8,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/fedguide-page/assets/videos/walker/fedguide/client-4.mp4",
           "author_provided_source": null
@@ -352,12 +419,13 @@
           "file": "gallery/fedguide_hopper_client3.mp4",
           "sha256": "952bb88b43f183263c6cf3e693671fc526b0968cf91799265e9f394972947bb5",
           "caption": "Simulation \u00b7 Hopper \u00b7 client 3",
+          "display_caption": "Hopper \u00b7 C3",
           "duration_seconds": 4.93,
           "placement_px": {
-            "x": 604,
-            "y": 16,
-            "width": 286,
-            "height": 308
+            "x": 644,
+            "y": 8,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/fedguide-page/assets/videos/hopper/fedguide/client-3.mp4",
           "author_provided_source": null
@@ -366,12 +434,13 @@
           "file": "gallery/fedguide_reacher_hard_client7.mp4",
           "sha256": "82863bf4624bd416336004d0009111869632a4c54caf1d49d8355345a8a49988",
           "caption": "Simulation \u00b7 Reacher-Hard \u00b7 client 7",
+          "display_caption": "Reacher-Hard \u00b7 C7",
           "duration_seconds": 1.7,
           "placement_px": {
-            "x": 898,
-            "y": 16,
-            "width": 286,
-            "height": 308
+            "x": 962,
+            "y": 8,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/fedguide-page/assets/videos/reacher_hard/fedguide/client-7.mp4",
           "author_provided_source": null
@@ -380,12 +449,13 @@
           "file": "gallery/fedguide_metaworld_client2.mp4",
           "sha256": "de9463da01965c51528556d42e0ee4a936cda870a9c8d50d0a2b999a7e58ce78",
           "caption": "Simulation \u00b7 Pick & place \u00b7 client 2",
+          "display_caption": "Pick & place \u00b7 C2",
           "duration_seconds": 16.7,
           "placement_px": {
-            "x": 16,
-            "y": 332,
-            "width": 286,
-            "height": 308
+            "x": 8,
+            "y": 356,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/fedguide-page/assets/videos/metaworld/fedguide/client-2.mp4",
           "author_provided_source": null
@@ -394,12 +464,13 @@
           "file": "gallery/fedguide_metaworld_client3.mp4",
           "sha256": "8cdb6756142206cf6a284f0eb495bd9976041ec46026e4b30890795e992c7e63",
           "caption": "Simulation \u00b7 Door open \u00b7 client 3",
+          "display_caption": "Door open \u00b7 C3",
           "duration_seconds": 16.7,
           "placement_px": {
-            "x": 310,
-            "y": 332,
-            "width": 286,
-            "height": 308
+            "x": 326,
+            "y": 356,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/fedguide-page/assets/videos/metaworld/fedguide/client-3.mp4",
           "author_provided_source": null
@@ -408,12 +479,13 @@
           "file": "gallery/fedguide_metaworld_client8.mp4",
           "sha256": "661406c3006f0df7404cf60f000c10bd7a1b43ea59f9515ec25c08f756d2b08a",
           "caption": "Simulation \u00b7 Sweep \u00b7 client 8",
+          "display_caption": "Sweep \u00b7 C8",
           "duration_seconds": 16.7,
           "placement_px": {
-            "x": 604,
-            "y": 332,
-            "width": 286,
-            "height": 308
+            "x": 644,
+            "y": 356,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/fedguide-page/assets/videos/metaworld/fedguide/client-8.mp4",
           "author_provided_source": null
@@ -422,12 +494,13 @@
           "file": "gallery/fedguide_metaworld_client9.mp4",
           "sha256": "b59c6f97089afd4065768382f87541646d7a7e06d6bda643d08968a97d29c185",
           "caption": "Simulation \u00b7 Basketball \u00b7 client 9",
+          "display_caption": "Basketball \u00b7 C9",
           "duration_seconds": 16.7,
           "placement_px": {
-            "x": 898,
-            "y": 332,
-            "width": 286,
-            "height": 308
+            "x": 962,
+            "y": 356,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/fedguide-page/assets/videos/metaworld/fedguide/client-9.mp4",
           "author_provided_source": null
@@ -435,14 +508,36 @@
       ],
       "duration_seconds": 33.416666666666664,
       "dimensions": [
-        1200,
-        656
+        1280,
+        704
       ],
-      "aspect_ratio": "1200:656",
+      "aspect_ratio": "1280:704",
+      "layout": {
+        "version": 2,
+        "row_counts": [
+          4,
+          4
+        ],
+        "equal_tile_dimensions": [
+          310,
+          340
+        ],
+        "image_area_dimensions": [
+          310,
+          310
+        ],
+        "outer_margin_px": 8,
+        "gutter_px": 8,
+        "caption_height_px": 30,
+        "short_row_alignment": "center",
+        "frame_and_caption_color": "#30394e",
+        "letterbox_color": "#30394e",
+        "caption_color": "#f5f1e8"
+      },
       "video": {
         "file": "gallery/fedguide-experiments.mp4",
-        "bytes": 1664103,
-        "sha256": "8ebd2cfe589593b52d0e4bc95e199915482ccf3eb5a7163da9a4bc3272702f67",
+        "bytes": 1991921,
+        "sha256": "e03c1ce7562c9a34bb96d0d9b1421cd308bd22ec104be211beb89a2ce85208a3",
         "codec": "H.264",
         "pixel_format": "yuv420p",
         "fps": 12,
@@ -451,23 +546,25 @@
       },
       "gif": {
         "file": "gallery/fedguide-experiments.gif",
-        "bytes": 8157975,
-        "sha256": "c42c9339607211558d325d03a8c8ea5f07307cc10bc066a878ff04232c970280",
+        "bytes": 9038480,
+        "sha256": "af5f4c40678694cd35a48ad756b17b2df5e1659d7540669e93e654f56ffe4037",
         "dimensions": [
           800,
-          437
+          440
         ],
         "fps": 8,
+        "palette_colors": 192,
+        "dither": "bayer:bayer_scale=3",
         "frames": 267,
         "loop": 0
       },
       "poster": {
         "file": "gallery/fedguide-experiments.jpg",
-        "bytes": 120657,
-        "sha256": "265de27bd960798ebf618fbec6a0ce7b88cfcc5f73a5051fdb5950c380a99569",
+        "bytes": 133288,
+        "sha256": "3bd9a893f43b70d27be996cb56511f7024b7e70401038eea1810694b41fff729",
         "frame": 0
       },
-      "transform": "All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Grid, caption bands, resampling and encoding only. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json)."
+      "transform": "All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Compact equal-tile grid, caption bands, resampling and encoding only. Muted indigo replaces newly added letterboxing; the original source colors and scientific white backgrounds remain intact. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json)."
     },
     {
       "paper_id": "he2026mdcoas",
@@ -479,12 +576,13 @@
           "file": "gallery/mdcoas_7dof_execution.mp4",
           "sha256": "0dc1407d3a395f0974a3ca6a895e1aaef7a2cddcb9eb5abb40b84b933f05cc12",
           "caption": "Simulation \u00b7 7-DoF: arm execution",
+          "display_caption": "7-DoF: arm execution",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 16,
-            "y": 16,
-            "width": 384,
-            "height": 462
+            "x": 8,
+            "y": 8,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/mdcoas_7dof_execution.mp4",
           "author_provided_source": null
@@ -493,12 +591,13 @@
           "file": "gallery/mdcoas_7dof_diffusion.mp4",
           "sha256": "e0d2c591cd5a9b36896fe2ebe8d07b755efc06d1fa6cedaea40e33bd1c086995",
           "caption": "Simulation \u00b7 7-DoF: constrained refinement",
+          "display_caption": "7-DoF: refinement",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 408,
-            "y": 16,
-            "width": 384,
-            "height": 462
+            "x": 326,
+            "y": 8,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/mdcoas_7dof_diffusion.mp4",
           "author_provided_source": null
@@ -507,12 +606,13 @@
           "file": "gallery/mdcoas_7dof_candidates.mp4",
           "sha256": "ab79ea842ff72f78332a2f813c482764fb28e702d24d4acadf0c9de6f7c9c170",
           "caption": "Simulation \u00b7 7-DoF: 20 candidates",
+          "display_caption": "7-DoF: 20 candidates",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 800,
-            "y": 16,
-            "width": 384,
-            "height": 462
+            "x": 644,
+            "y": 8,
+            "width": 310,
+            "height": 340
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/mdcoas_7dof_candidates.mp4"
@@ -521,12 +621,13 @@
           "file": "gallery/mdcoas_2d_l6.mp4",
           "sha256": "c44d09bae8a916ffea847b57fc3ef39cff486d39ac99782321752fcfc398b0a6",
           "caption": "Simulation \u00b7 Planar L6: constrained refinement",
+          "display_caption": "Planar L6: refinement",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 16,
-            "y": 486,
-            "width": 286,
-            "height": 338
+            "x": 962,
+            "y": 8,
+            "width": 310,
+            "height": 340
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/mdcoas_2d_l6.mp4"
@@ -535,12 +636,13 @@
           "file": "gallery/mdcoas_2d_l6_candidates.mp4",
           "sha256": "5fc75b9dce80465a207a85698ff0f99c0eb554296109d997eeed51e21068af75",
           "caption": "Simulation \u00b7 Planar L6: 20 candidates",
+          "display_caption": "Planar L6: 20 candidates",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 310,
-            "y": 486,
-            "width": 286,
-            "height": 338
+            "x": 167,
+            "y": 356,
+            "width": 310,
+            "height": 340
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/mdcoas_2d_l6_candidates.mp4"
@@ -549,12 +651,13 @@
           "file": "gallery/mdcoas_2d_l10.mp4",
           "sha256": "b363ca1141d90f45085aa660603d0a45737853857957cdb4eb17c42f4d64a7ea",
           "caption": "Simulation \u00b7 Planar L10: constrained refinement",
+          "display_caption": "Planar L10: refinement",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 604,
-            "y": 486,
-            "width": 286,
-            "height": 338
+            "x": 485,
+            "y": 356,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/mdcoas_2d_l10.mp4",
           "author_provided_source": null
@@ -563,12 +666,13 @@
           "file": "gallery/mdcoas_2d_l10_candidates.mp4",
           "sha256": "a077ed107f1173a66ded4d8234f942583290a5115876993124f0535f8ccc3ea0",
           "caption": "Simulation \u00b7 Planar L10: 20 candidates",
+          "display_caption": "Planar L10: 20 candidates",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 898,
-            "y": 486,
-            "width": 286,
-            "height": 338
+            "x": 803,
+            "y": 356,
+            "width": 310,
+            "height": 340
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/mdcoas_2d_l10_candidates.mp4",
           "author_provided_source": null
@@ -576,14 +680,36 @@
       ],
       "duration_seconds": 6.0,
       "dimensions": [
-        1200,
-        840
+        1280,
+        704
       ],
-      "aspect_ratio": "1200:840",
+      "aspect_ratio": "1280:704",
+      "layout": {
+        "version": 2,
+        "row_counts": [
+          4,
+          3
+        ],
+        "equal_tile_dimensions": [
+          310,
+          340
+        ],
+        "image_area_dimensions": [
+          310,
+          310
+        ],
+        "outer_margin_px": 8,
+        "gutter_px": 8,
+        "caption_height_px": 30,
+        "short_row_alignment": "center",
+        "frame_and_caption_color": "#30394e",
+        "letterbox_color": "#30394e",
+        "caption_color": "#f5f1e8"
+      },
       "video": {
         "file": "gallery/md-coas-experiments.mp4",
-        "bytes": 642510,
-        "sha256": "368660a7ec0e7ed5a7977a5adbee5c71ba06fb1c59edaaa0b0d558b34d3a3b69",
+        "bytes": 532468,
+        "sha256": "468e540e1f157139dee498fd18bcaadbd61edec6e87dc8dfcdd6ae16c9634060",
         "codec": "H.264",
         "pixel_format": "yuv420p",
         "fps": 12,
@@ -592,23 +718,25 @@
       },
       "gif": {
         "file": "gallery/md-coas-experiments.gif",
-        "bytes": 2421549,
-        "sha256": "92bf609be9471e7c5ca323916462c6faaf81b22e797aede7f3e971167ade9fa7",
+        "bytes": 1868763,
+        "sha256": "dac26e2c38ad59b5b73fcc4331697ad14354172166d73f32d1cc7c3f4d41d7f1",
         "dimensions": [
           960,
-          672
+          528
         ],
         "fps": 10,
+        "palette_colors": 192,
+        "dither": "bayer:bayer_scale=3",
         "frames": 60,
         "loop": 0
       },
       "poster": {
         "file": "gallery/md-coas-experiments.jpg",
-        "bytes": 99818,
-        "sha256": "482a0505c737bed8cbbe9c9206f04747596339567f93a5a7d9ea21038213a9ea",
+        "bytes": 91171,
+        "sha256": "a23dee947f533cf973f7257cdf156d9631a0fcf3b30afe2314c9be32bc05b55c",
         "frame": 0
       },
-      "transform": "All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Grid, caption bands, resampling and encoding only. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json)."
+      "transform": "All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Compact equal-tile grid, caption bands, resampling and encoding only. Muted indigo replaces newly added letterboxing; the original source colors and scientific white backgrounds remain intact. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json)."
     },
     {
       "paper_id": "he2026mdoc",
@@ -620,12 +748,13 @@
           "file": "gallery/mdoc_cbs_random.mp4",
           "sha256": "63c2501f2033e0d5ce3b439e7845a741db1d237f77dcdb2594cd7381a20e3517",
           "caption": "Simulation \u00b7 Random-obstacle coordination",
+          "display_caption": "Random obstacles \u00b7 coordination",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 16,
-            "y": 16,
-            "width": 384,
-            "height": 408
+            "x": 8,
+            "y": 8,
+            "width": 416,
+            "height": 446
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/mdoc_cbs_random.mp4",
           "author_provided_source": null
@@ -634,12 +763,13 @@
           "file": "gallery/mdoc_cbs_conveyor_boundary.mp4",
           "sha256": "5ce0b87e14c5e06e7b15c9fe322b409abe78c7c7b9cc74c294e9f577af0afd84",
           "caption": "Simulation \u00b7 Conveyor coordination",
+          "display_caption": "Conveyor coordination",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 408,
-            "y": 16,
-            "width": 384,
-            "height": 408
+            "x": 432,
+            "y": 8,
+            "width": 416,
+            "height": 446
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/mdoc_cbs_conveyor_boundary.mp4"
@@ -648,12 +778,13 @@
           "file": "gallery/mdoc_cbs_dropregion_boundary.mp4",
           "sha256": "a8f8c2ccb6c83f6473947aa42ae3253686f45481d20ff9e37f84f2ef2bff4031",
           "caption": "Simulation \u00b7 Drop-region coordination",
+          "display_caption": "Drop-region coordination",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 800,
-            "y": 16,
-            "width": 384,
-            "height": 408
+            "x": 856,
+            "y": 8,
+            "width": 416,
+            "height": 446
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/mdoc_cbs_dropregion_boundary.mp4"
@@ -662,12 +793,13 @@
           "file": "gallery/mdoc_cbs_empty_large.mp4",
           "sha256": "83ae6d7aeac48294364a741b51c856f3ee069ca7c0fba475176c04ac76f3e7e1",
           "caption": "Simulation \u00b7 Open-area coordination",
+          "display_caption": "Open-area coordination",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 16,
-            "y": 432,
-            "width": 384,
-            "height": 408
+            "x": 8,
+            "y": 462,
+            "width": 416,
+            "height": 446
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/mdoc_cbs_empty_large.mp4"
@@ -676,12 +808,13 @@
           "file": "gallery/mdoc_single_narrow.mp4",
           "sha256": "797b5c1df739b00fa45e2d82be0ca3596059c0ca642cf655684f8b322981b037",
           "caption": "Simulation \u00b7 Narrow-passage navigation",
+          "display_caption": "Narrow-passage navigation",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 408,
-            "y": 432,
-            "width": 384,
-            "height": 408
+            "x": 432,
+            "y": 462,
+            "width": 416,
+            "height": 446
           },
           "source_url": "https://hhhhzl.github.io/generative-dynamics/media/mdoc_single_narrow.mp4",
           "author_provided_source": null
@@ -690,12 +823,13 @@
           "file": "gallery/mdoc_single_conveyor.mp4",
           "sha256": "784eb67e06aed680476863d9ea522c58752a6681a735e928465a215b073cefa2",
           "caption": "Simulation \u00b7 Conveyor navigation",
+          "display_caption": "Conveyor navigation",
           "duration_seconds": 6.0,
           "placement_px": {
-            "x": 800,
-            "y": 432,
-            "width": 384,
-            "height": 408
+            "x": 856,
+            "y": 462,
+            "width": 416,
+            "height": 446
           },
           "source_url": null,
           "author_provided_source": "GenerativeDynamics/docs/assets/showcase_sources/v2/mdoc_single_conveyor.mp4"
@@ -703,14 +837,36 @@
       ],
       "duration_seconds": 6.0,
       "dimensions": [
-        1200,
-        856
+        1280,
+        916
       ],
-      "aspect_ratio": "1200:856",
+      "aspect_ratio": "1280:916",
+      "layout": {
+        "version": 2,
+        "row_counts": [
+          3,
+          3
+        ],
+        "equal_tile_dimensions": [
+          416,
+          446
+        ],
+        "image_area_dimensions": [
+          416,
+          416
+        ],
+        "outer_margin_px": 8,
+        "gutter_px": 8,
+        "caption_height_px": 30,
+        "short_row_alignment": "center",
+        "frame_and_caption_color": "#30394e",
+        "letterbox_color": "#30394e",
+        "caption_color": "#f5f1e8"
+      },
       "video": {
         "file": "gallery/mdoc-experiments.mp4",
-        "bytes": 393700,
-        "sha256": "faef8b6df6a1574952eb457a22ce0e741e38d34180bd443b0f0c075af5f96841",
+        "bytes": 454385,
+        "sha256": "c8d7b91868c334982c1eed81e4ecef2008213b74b0f1916c2b089d1372f58851",
         "codec": "H.264",
         "pixel_format": "yuv420p",
         "fps": 12,
@@ -719,23 +875,25 @@
       },
       "gif": {
         "file": "gallery/mdoc-experiments.gif",
-        "bytes": 2121021,
-        "sha256": "54f5b896a454b2f6b73dbdfd1bd2df84db82624790ad512f49bcb15f65cd2dcf",
+        "bytes": 2150140,
+        "sha256": "6cdd00655c2307c07dfea3bfa972050d24fd363d9f1e7e59e049cc845afea54e",
         "dimensions": [
           960,
-          685
+          687
         ],
         "fps": 10,
+        "palette_colors": 192,
+        "dither": "bayer:bayer_scale=3",
         "frames": 60,
         "loop": 0
       },
       "poster": {
         "file": "gallery/mdoc-experiments.jpg",
-        "bytes": 127065,
-        "sha256": "4c3fa71177c715106cc844e7dd27f2317f16ce9752ad81ab8b22ffc50fc9e739",
+        "bytes": 147183,
+        "sha256": "cd3fde398949785fed0202aa6e832eb5fab12031996d0463e846e55088cb1bf0",
         "frame": 0
       },
-      "transform": "All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Grid, caption bands, resampling and encoding only. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json)."
+      "transform": "All source clips start together, retain source playback speed, and loop independently for the longest source duration. Each complete input frame is aspect-fitted without new cropping. Compact equal-tile grid, caption bands, resampling and encoding only. Muted indigo replaces newly added letterboxing; the original source colors and scientific white backgrounds remain intact. The source clips may already contain upstream crops or time-normalization (see gallery-sources.json)."
     },
     {
       "paper_id": "wang2024antivirus",
