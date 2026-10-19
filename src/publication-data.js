@@ -1,6 +1,6 @@
 /**
  * Six research papers from the author-provided cv.tex (IET book excluded).
- * Author order, contribution marks, submission venues and Spotlight status follow the CV.
+ * Author order, contribution marks and accepted venues follow the CV; review labels follow the author’s updates.
  * method: original paper mechanism figure; montage: one simultaneous demo composite.
  * media: archived source inputs for regenerating the composite; not rendered as slides.
  * preview is a legacy single-image fallback. Local paths use ./assets/.
@@ -11,7 +11,7 @@
  * Video posters are decoded frames; no synthetic diagrams or generated research imagery.
  * Other optional fields: authorLimit, location, note, additional_info, award, badges,
  * venueUrl, pdf/code/website/video/blog/html/poster/slides/supp/doi/arxiv/hal, bibtex.
- * Paper metadata updated 2026-10-16. Acceptance labels are author-provided CV facts;
+ * Paper metadata updated 2026-10-19. Acceptance labels are author-provided CV facts;
  * a submission is clearly labeled as such and never presented as an acceptance.
  */
 export const publications = [
@@ -36,7 +36,7 @@ export const publications = [
       }
     ],
     "month": 10,
-    "journal": "In submission · ICLR 2027",
+    "journal": "Under review",
     "tags": [
       "Contact-rich manipulation",
       "Impedance control",
@@ -128,7 +128,7 @@ export const publications = [
       "label": "MGA",
       "theme": "blue"
     },
-    "bibtex": "@misc{he2026mga,\n  title = {Manifold Generative Annealing for Contact Constraint-aware Impedance Control with Reinforcement Learning Prior},\n  author = {Zhilin He and Guoquan Qi and Changliu Liu},\n  year = {2026},\n  note = {In submission · ICLR 2027},\n  eprint = {2610.21140},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.48550/arXiv.2610.21140},\n  url = {https://arxiv.org/abs/2610.21140}\n}",
+    "bibtex": "@misc{he2026mga,\n  title = {Manifold Generative Annealing for Contact Constraint-aware Impedance Control with Reinforcement Learning Prior},\n  author = {Zhilin He and Guoquan Qi and Changliu Liu},\n  year = {2026},\n  note = {Under review},\n  eprint = {2610.21140},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.48550/arXiv.2610.21140},\n  url = {https://arxiv.org/abs/2610.21140}\n}",
     "method": {
       "type": "image",
       "src": "./assets/publications/methods/mga.png",
@@ -170,7 +170,7 @@ export const publications = [
       }
     ],
     "month": 10,
-    "journal": "In submission · RA-L 2026",
+    "journal": "Under review",
     "tags": [
       "Locomotion",
       "Constraint geometry",
@@ -248,7 +248,7 @@ export const publications = [
       "label": "2GO",
       "theme": "blue"
     },
-    "bibtex": "@misc{he2026twogo,\n  title = {Model-Based Geometry-Aware Generative Optimization for Constrained Locomotion Planning},\n  author = {Zhilin He and Xinyuan Wang and Changliu Liu},\n  year = {2026},\n  note = {In submission · RA-L 2026},\n  eprint = {2610.07772},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.48550/arXiv.2610.07772},\n  url = {https://arxiv.org/abs/2610.07772}\n}",
+    "bibtex": "@misc{he2026twogo,\n  title = {Model-Based Geometry-Aware Generative Optimization for Constrained Locomotion Planning},\n  author = {Zhilin He and Xinyuan Wang and Changliu Liu},\n  year = {2026},\n  note = {Under review},\n  eprint = {2610.07772},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.RO},\n  doi = {10.48550/arXiv.2610.07772},\n  url = {https://arxiv.org/abs/2610.07772}\n}",
     "method": {
       "type": "image",
       "src": "./assets/publications/methods/twogo.png",

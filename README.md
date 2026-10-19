@@ -174,7 +174,7 @@ The research renderer follows al-folio’s publication model: authors and self h
 
 Resources are conditional: PDF, code, website, video, blog, HTML, poster, slides, supplement, DOI, arXiv and HAL. Awards and badges display only when explicitly supplied. Badge values are curated data, not a live Altmetric/Dimensions/Scholar integration. This is a custom publication interface, not a migration of every al-folio plugin or its Jekyll CMS.
 
-Six records follow the supplied CV: MGA and 2GO submissions; FedGuide (CoRL Spotlight), MD-COAS (IROS), MDOC (RSS), and antivirus routing (ACC). Submission status stays distinct from accepted venues. Citation counts are not displayed. The About section links to the owner-provided Google Scholar profile. Paper figure and demo source records live in `public/assets/publications/`.
+Six records follow the supplied CV: MGA and 2GO (Under review); FedGuide (CoRL Spotlight), MD-COAS (IROS), MDOC (RSS), and antivirus routing (ACC). Submission status stays distinct from accepted venues. Citation counts are not displayed. The About section links to the owner-provided Google Scholar profile. Paper figure and demo source records live in `public/assets/publications/`.
 
 ### Personal portraits and Scene performer
 
